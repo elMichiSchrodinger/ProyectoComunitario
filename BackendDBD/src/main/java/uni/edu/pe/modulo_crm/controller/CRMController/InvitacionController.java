@@ -33,16 +33,16 @@ public class InvitacionController {
         return ResponseEntity.ok(requerimiento);
     }
 
-    @GetMapping("/requerimientos/{id_invitacion}")
-    public List<MostrarRequerimientos> obtenerRequerimientosCliente(@PathVariable String id_invitacion){
-        return service.requerimientosInvitacion(id_invitacion);
+    @GetMapping("/mostrarreq/{id_invitacion}")
+    public List<MostrarRequerimientos> obtenerrequerimientos(@PathVariable String id_invitacion){
+        return service.requerimientosinvitacion(id_invitacion);
     }
     @GetMapping("/mostrarinv/{id_invitacion}")
-    public MostrarInvitacion obtenerInvitacion(@PathVariable String id_invitacion){
-        return service.obtenerInvitacion(id_invitacion);
+    public MostrarInvitacion obtenerinvitacion(@PathVariable String id_invitacion){
+        return service.obtenerinvitacion(id_invitacion);
     }
     @PutMapping("/actualizarinv")
-    public ResponseEntity<?> updateInvitacion(@RequestBody ActualizarInvitacion invitacion){
+    public ResponseEntity<?> updateinvitacion(@RequestBody ActualizarInvitacion invitacion){
         try{
             invitacion = service.actualizarinvitacion(invitacion);
             return ResponseEntity.ok().body(invitacion);

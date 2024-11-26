@@ -51,4 +51,16 @@ public class PropuestaController {
             return new ResponseEntity<>("Error en la actualización de la propuesta", HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("/mostrarpro/{id_presentacion_propuesta}")
+    public MostrarPropuesta obtenerpropuesta(@PathVariable String id_presentacion_propuesta){
+        return service.obtenerpropuesta(id_presentacion_propuesta);
+    }
+    @GetMapping("/mostrarga/{id_presentacion_propuesta}")
+    public List<MostrarGarantias> obtenergarantias(@PathVariable String id_presentacion_propuesta){
+        return service.garantiaspropuesta(id_presentacion_propuesta);
+    }
+    @GetMapping("/mostrarbe/{id_presentacion_propuesta}")
+    public List<MostrarBeneficios> obtenerbeneficios(@PathVariable String id_presentacion_propuesta){
+        return service.beneficiospropuesta(id_presentacion_propuesta);
+    }
 }

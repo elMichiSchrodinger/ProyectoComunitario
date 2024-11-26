@@ -121,4 +121,46 @@ public class PropuestaService {
         int rows = jdbcTemplate.update(sqlUpdate, propuesta.getId_presentacion_propuesta());
         return propuesta;
     }
+
+    public MostrarPropuesta obtenerpropuesta(String id_presentacion_propuesta){
+        String sql="SELECT pro.ID_presentacion_propuesta,\n" +
+                "    pro.Precio_Propuesto, \n" +
+                "    pro.Descripcion_Tecnica, \n" +
+                "    pro.Descripcion_Economica, \n" +
+                "    pro.Calidad_Ofrecida, \n" +
+                "    pro.Seguridad_Ofrecida, \n" +
+                "    pro.Condicion_Pago, \n" +
+                "    pro.Tiempo_Ejecucion, \n" +
+                "    pro.Observacion_Propuesta \n" +
+                "FROM \n" +
+                "    Presentacion_propuesta pro \n" +
+                "LEFT JOIN Revision_tecnica rev ON pro.ID_revision_tecnica = rev.ID_revision_tecnica \n" +
+                "WHERE \n" +
+                "    rev.Estado_Participacion = 'Aceptado' and pro.estado_propuesta = 'No revisado' and pro.ID_presentacion_propuesta=?;";
+        return jdbcTemplate.queryForObject(sql,new Object[]{id_presentacion_propuesta}, new BeanPropertyRowMapper<>(MostrarPropuesta.class));
+    }
+    public List<MostrarGarantias> garantiaspropuesta(String id_presentacion_propuesta){
+        String sql="select ga.ID_garantia, ga.Descrip_garantia from garantia ga left join presentacion_propuesta pro on ga.id_presentacion_propuesta = pro.id_presentacion_propuesta \n" +
+                "LEFT JOIN Revision_tecnica rev ON pro.ID_revision_tecnica = rev.ID_revision_tecnica \n" +
+                "WHERE \n" +
+                "    rev.Estado_Participacion = 'Aceptado' and pro.estado_propuesta = 'No revisado' and pro.ID_presentacion_propuesta=?;";
+        return jdbcTemplate.query(sql, new Object[]{id_presentacion_propuesta}, (rs, rowNum) -> {
+            MostrarGarantias garantia = new MostrarGarantias();
+            garantia.setId_garantia(rs.getString("id_garantia"));
+            garantia.setDescrip_garantia(rs.getString("descrip_garantia"));
+            return garantia;
+        });
+    }
+    public List<MostrarBeneficios> beneficiospropuesta(String id_presentacion_propuesta){
+        String sql="select be.ID_beneficio, be.Descrip_beneficio from beneficio be left join presentacion_propuesta pro on be.id_presentacion_propuesta = pro.id_presentacion_propuesta \n" +
+                "LEFT JOIN Revision_tecnica rev ON pro.ID_revision_tecnica = rev.ID_revision_tecnica \n" +
+                "WHERE \n" +
+                "    rev.Estado_Participacion = 'Aceptado' and pro.estado_propuesta = 'No revisado' and pro.ID_presentacion_propuesta=?;";
+        return jdbcTemplate.query(sql, new Object[]{id_presentacion_propuesta}, (rs, rowNum) -> {
+            MostrarBeneficios beneficio = new MostrarBeneficios();
+            beneficio.setId_beneficio(rs.getString("id_beneficio"));
+            beneficio.setDescrip_beneficio(rs.getString("descrip_beneficio"));
+            return beneficio;
+        });
+    }
 }

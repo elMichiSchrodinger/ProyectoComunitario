@@ -84,7 +84,7 @@ public class InvitacionService {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    public List<MostrarRequerimientos> requerimientosInvitacion(String id_invitacion){
+    public List<MostrarRequerimientos> requerimientosinvitacion(String id_invitacion){
         String sql="SELECT re.ID_requerimiento,re.Descrip_requerimiento from requerimiento re left join \n" +
                 "invitacion inv on re.id_invitacion = inv.id_invitacion WHERE inv.estado_invitacion = 'No revisado' and inv.id_invitacion=?";
         return jdbcTemplate.query(sql, new Object[]{id_invitacion}, (rs, rowNum) -> {
@@ -95,7 +95,7 @@ public class InvitacionService {
         });
     }
 
-    public MostrarInvitacion obtenerInvitacion(String id_invitacion){
+    public MostrarInvitacion obtenerinvitacion(String id_invitacion){
         String sql="select inv.ID_invitacion,\n" +
                 "    cli.Nombre AS Nombre_Cliente,\n" +
                 "    inv.Asunto_Invitacion,\n" +
