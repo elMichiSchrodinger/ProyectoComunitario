@@ -1,4 +1,4 @@
-package uni.edu.pe.modulo_crm.controller.CRM;
+package uni.edu.pe.modulo_crm.controller.CRMController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
