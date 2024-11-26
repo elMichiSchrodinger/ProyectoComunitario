@@ -1,0 +1,22 @@
+<div class="contenedor-padre">
+  <div class="contenedor"></div>
+  <div class="contenedor-mitad">
+    <div class="contenedor-logo">
+      <img src="/imagenes/logo.png" alt="">
+    </div>
+    <div class="contenedor-login">
+      <div class="contenedor-rucdni">
+        <h3>RUC o DNI</h3>
+        <input type="text" placeholder="Ingrese su ruc o dni" [(ngModel)]="ruc_dni">
+      </div>
+      <div class="contenedor-correo">
+        <h3>Correo electrónico</h3>
+        <input type="text" placeholder="example@example.com" [(ngModel)]="correo">
+      </div>
+    </div>
+    <div class="contenedor-botones">
+      <button class="btn-sesion" (click)="obtenerLoginCli()">Iniciar Sesión</button>
+      <button class="btn-crear">Crear Cuenta</button>
+    </div>
+  </div>
+</div>

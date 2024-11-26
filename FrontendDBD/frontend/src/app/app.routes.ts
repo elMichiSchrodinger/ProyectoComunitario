@@ -14,10 +14,16 @@ import {
   PostulacionVacanteComponent
 } from './lista-vacantes/detalle-vacante/postulacion-vacante/postulacion-vacante.component';
 import {MostrarinvitacionComponent} from './componentcrm/mostrarinvitacion/mostrarinvitacion.component';
+import {LogincliComponent} from './logincli/logincli.component';
+import {MenucliComponent} from './componentcrm/menucli/menucli.component';
+import {PreloginComponent} from './prelogin/prelogin.component';
 
 export const routes: Routes = [
   {path:'vacante', component: VacanteComponent},
-  {path:'', component: LoginComponent},
+  {path:'', component: PreloginComponent},
+  {path:'login', component: LoginComponent},
+  {path:'logincli', component: LogincliComponent},
+  {path:'menucli', component: MenucliComponent},
   {path:'postulacion', component: PostulacionComponent},
   {path:'detallePostulacion', component: DetallePostulacionComponent},
   {path:'menu',component: MenuComponent},
