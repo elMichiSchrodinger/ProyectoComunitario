@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uni.edu.pe.modulo_crm.dto.*;
-import uni.edu.pe.modulo_crm.service.InvitacionService;
+import uni.edu.pe.modulo_crm.dto.CRMdto.*;
+import uni.edu.pe.modulo_crm.service.CRMservice.InvitacionService;
 
 import java.util.List;
 

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import uni.edu.pe.modulo_crm.dto.InsertarAdjudicacion;
-import uni.edu.pe.modulo_crm.service.AdjudicacionService;
+import uni.edu.pe.modulo_crm.dto.CRMdto.InsertarAdjudicacion;
+import uni.edu.pe.modulo_crm.service.CRMservice.AdjudicacionService;
 
 @RestController
 @CrossOrigin(origins = "*")
