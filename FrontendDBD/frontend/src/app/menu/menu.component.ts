@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ListaclientesService} from '../services/listaclientes.service';
-import {MostrarLista} from '../models/listaclientes.model';
+import {ListaclientesService} from '../services/servicecrm/listaclientes.service';
+import {MostrarLista} from '../models/modelscrm/listaclientes.model';
 import {MostrarinvitacionService} from '../services/mostrarinvitacion.service';
 
 @Component({
