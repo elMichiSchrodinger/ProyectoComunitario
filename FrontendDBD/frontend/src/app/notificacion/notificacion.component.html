@@ -1,0 +1,134 @@
+<div class="contenedor">
+  <nav class="barra">
+    <button class="flecha"  (click)="backPage()">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_110_12)">
+          <path d="M1.04925 22.793C-0.345843 24.0137 -0.345843 25.9961 1.04925 27.2168L18.9064 42.8418C20.3015 44.0625 22.5671 44.0625 23.9622 42.8418C25.3573 41.6211 25.3573 39.6387 23.9622 38.418L12.1876 28.125H46.4287C48.4042 28.125 50.0001 26.7285 50.0001 25C50.0001 23.2715 48.4042 21.875 46.4287 21.875H12.1988L23.951 11.582C25.3461 10.3613 25.3461 8.37891 23.951 7.1582C22.5559 5.9375 20.2903 5.9375 18.8952 7.1582L1.03809 22.7832L1.04925 22.793Z" fill="white"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_110_12">
+            <rect width="50" height="50" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </button>
+    <div class="titulo-notificacion">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_143_296)">
+          <path d="M46.875 3.12494C46.875 1.86518 46.1133 0.7226 44.9414 0.234318C43.7695 -0.253963 42.4316 0.0194746 41.5332 0.908147L37.2754 5.17572C32.5879 9.86323 26.2305 12.4999 19.5996 12.4999H18.75H15.625H6.25C2.80273 12.4999 0 15.3027 0 18.7499V28.1249C0 31.5722 2.80273 34.3749 6.25 34.3749V46.8749C6.25 48.6035 7.64648 49.9999 9.375 49.9999H15.625C17.3535 49.9999 18.75 48.6035 18.75 46.8749V34.3749H19.5996C26.2305 34.3749 32.5879 37.0117 37.2754 41.6992L41.5332 45.957C42.4316 46.8554 43.7695 47.1191 44.9414 46.6308C46.1133 46.1425 46.875 45.0097 46.875 43.7402V29.3261C48.6914 28.4667 50 26.1523 50 23.4277C50 20.7031 48.6914 18.3886 46.875 17.5292V3.12494ZM40.625 10.6152V23.4374V36.2597C34.8828 31.0351 27.3926 28.1249 19.5996 28.1249H18.75V18.7499H19.5996C27.3926 18.7499 34.8828 15.8398 40.625 10.6152Z" fill="white"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_143_296">
+            <rect width="50" height="50" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+      <h1>Notificar Candidatos</h1>
+    </div>
+    <button class="flecha" (click)="nextPage()">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M48.9508 22.793C50.3458 24.0137 50.3458 25.9961 48.9508 27.2168L31.0936 42.8418C29.6985 44.0625 27.4329 44.0625 26.0378 42.8418C24.6427 41.6211 24.6427 39.6387 26.0378 38.418L37.8124 28.125H3.57129C1.59584 28.125 -0.000139713 26.7285 -0.000139713 25C-0.000139713 23.2715 1.59584 21.875 3.57129 21.875H37.8012L26.049 11.582C24.6539 10.3613 24.6539 8.37891 26.049 7.1582C27.4441 5.9375 29.7097 5.9375 31.1048 7.1582L48.9619 22.7832L48.9508 22.793Z" fill="white"/>
+      </svg>
+    </button>
+  </nav>
+  <div class="contenedor-rechazo" *ngIf="contador==0">
+    <div class="contenido-rechazo">
+      <h3>Mensaje Predeterminado de Rechazo</h3>
+      <div class="contenido">
+        <div class="input">
+          <label for="Asunto">Asunto de la notificación:</label>
+          <input type="text" name="Asunto" id="Asunto" placeholder="Ingresé el asunto">
+        </div>
+        <div class="input">
+          <label for="Mensaje">Mensaje:</label>
+          <textarea name="" id="Mensaje" class="mensaje" placeholder="Ingresé el mensaje"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="btn-rechazo">
+      <button (click)="cambiarEstado('estado')"*ngIf="!estado" >No listo</button>
+      <button (click)="cambiarEstado('estado')" *ngIf="estado">Listo</button>
+    </div>
+  </div>
+  <div class="contenedor-rechazo" *ngIf="contador==0">
+    <div class="contenido-rechazo">
+      <h3>Mensaje Predeterminado de Aceptación</h3>
+      <div class="contenido">
+        <div class="input">
+          <label for="Asunto_aprboado">Asunto de la notificación:</label>
+          <input type="text" name="Asunto" id="Asunto_aprboado" placeholder="Ingresé el asunto">
+        </div>
+        <div class="input">
+          <label for="Mensaje_aprobado">Mensaje:</label>
+          <textarea name="" id="Mensaje_aprobado" class="mensaje" placeholder="Ingresé el mensaje"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="btn-rechazo">
+      <button (click)="cambiarEstado('estadoAprobado')"*ngIf="!estadoAprobado" >No listo</button>
+      <button (click)="cambiarEstado('estadoAprobado')" *ngIf="estadoAprobado">Listo</button>
+    </div>
+  </div>
+  <div class="lista-aprobados" *ngIf="contador==1">
+    <h2>Lista de Candidatos Aprobados</h2>
+    <div class="table">
+      <div class="nombres">
+        <div class="item">
+          <p>Nombre</p>
+        </div>
+        <div class="item" *ngFor="let candidato of notificacionAprobados">
+          <p>{{candidato.nombre}}</p>
+        </div>
+      </div>
+      <div class="correos">
+        <div class="item">
+          <p>Correo</p>
+        </div>
+        <div class="item" *ngFor="let candidato of notificacionAprobados">
+          <p>{{candidato.correo}}</p>
+        </div>
+      </div>
+      <div class="opciones">
+        <div class="item">
+          <p>Opciones</p>
+        </div>
+        <div class="item-btn" *ngFor="let candidato of notificacionAprobados">
+          <button class="personalizar" (click)="personalizarMensaje(candidato.telefono)">Personzalizar</button>
+          <button class="predeterminado">Predeterminado</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="lista-aprobados" *ngIf="contador==2">
+    <h2>Lista de Candidatos Desaprobados</h2>
+    <div class="table">
+      <div class="nombres">
+        <div class="item">
+          <p>Nombre</p>
+        </div>
+        <div class="item" *ngFor="let candidato of notificacionDesaprobados">
+          <p>{{candidato.nombre}}</p>
+        </div>
+      </div>
+      <div class="correos">
+        <div class="item">
+          <p>Correo</p>
+        </div>
+        <div class="item" *ngFor="let candidato of notificacionDesaprobados">
+          <p>{{candidato.correo}}</p>
+        </div>
+      </div>
+      <div class="opciones">
+        <div class="item">
+          <p>Opciones</p>
+        </div>
+        <div class="item-btn" *ngFor="let candidato of notificacionDesaprobados">
+          <button class="personalizar" (click)="personalizarMensaje(candidato.telefono)">Personzalizar</button>
+          <button class="predeterminado">Predeterminado</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

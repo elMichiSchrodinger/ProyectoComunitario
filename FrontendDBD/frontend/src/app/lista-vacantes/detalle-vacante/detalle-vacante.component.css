@@ -1,0 +1,136 @@
+.barra{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+
+}
+.contenedor-full{
+  background: #F0F8FF;
+  height: 100vh;
+}
+
+
+.titulo-postulante{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.titulo-postulante svg{
+  padding: 15px;
+}
+
+.titulo-vacante h1{
+  padding: 5px;
+}
+
+.flecha{
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin:15px;
+  width: 5%;
+}
+
+
+
+
+
+
+.contenedor {
+  margin: 15px auto;
+  width: 80%;
+  height: 570px;
+
+
+  background: radial-gradient(28.22% 50% at 50% 50%, #8772D3 0%, #799FC2 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  text-align: center;
+}
+
+.titulo-puesto{
+  padding-top: 5px;
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 40px;
+
+  color: #FFFFFF;
+
+}
+
+.texto{
+  overflow-y: scroll;
+  height: 360px;
+  width: 95%;
+  scroll-behavior: smooth;
+  margin-left: 5%;
+}
+
+.texto p{
+
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 40px;
+  text-align: start;
+
+  color: #FFFFFF;
+
+
+}
+
+.texto::-webkit-scrollbar {
+  width: 35px; /* Ancho de la barra de desplazamiento */
+  padding: 15px;
+}
+
+
+.texto::-webkit-scrollbar-track {
+  background: #fff; /* Color del fondo de la barra */
+  border-radius: 20px;
+}
+
+.texto::-webkit-scrollbar-thumb {
+  background-color: #DEDEDE; /* Color del "pulgar" o deslizador */
+  border-radius: 20px;
+  border: 5px solid #fff; /* Añadir un borde para el contraste */
+}
+
+.texto::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color al pasar el cursor */
+}
+
+.btn-postular {
+  /* Group 59 */
+  width: 320px;
+  height: 70px;
+  border: none;
+  margin-top: 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  /* identical to box height */
+  color: #8772D3;
+}
+
+.btn-postular:hover{
+  color: #fff;
+  background: #8772D3;
+}

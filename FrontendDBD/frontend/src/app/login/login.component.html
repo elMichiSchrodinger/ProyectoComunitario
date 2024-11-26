@@ -1,0 +1,22 @@
+<div class="contenedor-padre">
+  <div class="contenedor"></div>
+  <div class="contenedor-mitad">
+    <div class="contenedor-logo">
+      <img src="/imagenes/logo.png" alt="">
+    </div>
+    <div class="contenedor-login">
+      <div class="contenedor-correo">
+        <h3>Correo electrónico</h3>
+        <input type="text" placeholder="example@example.com" [(ngModel)]="correo">
+      </div>
+      <div class="contenedor-contraseña">
+        <h3>Contraseña</h3>
+        <input type="password" placeholder="Ingrese su contraseña" [(ngModel)]="password">
+      </div>
+    </div>
+    <div class="contenedor-botones">
+      <button class="btn-sesion" (click)="obtenerEmpleado()">Iniciar Sesión</button>
+      <button class="btn-crear">Crear Cuenta</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<nav class="barra">
+  <button class="flecha" (click)="backPage()">
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_58_124)">
+        <path d="M1.04925 22.793C-0.345843 24.0137 -0.345843 25.9961 1.04925 27.2168L18.9064 42.8418C20.3015 44.0625 22.5671 44.0625 23.9622 42.8418C25.3573 41.6211 25.3573 39.6387 23.9622 38.418L12.1876 28.125H46.4287C48.4042 28.125 50.0001 26.7285 50.0001 25C50.0001 23.2715 48.4042 21.875 46.4287 21.875H12.1988L23.951 11.582C25.3461 10.3613 25.3461 8.37891 23.951 7.1582C22.5559 5.9375 20.2903 5.9375 18.8952 7.1582L1.03809 22.7832L1.04925 22.793Z" fill="white"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_58_124">
+          <rect width="50" height="50" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  </button>
+  <div class="titulo-vacante">
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_58_119)">
+        <path d="M39.6973 39.0234C37.832 34.4629 33.3496 31.25 28.125 31.25H21.875C16.6504 31.25 12.168 34.4629 10.3027 39.0234C6.82617 35.3711 4.6875 30.4395 4.6875 25C4.6875 13.7793 13.7793 4.6875 25 4.6875C36.2207 4.6875 45.3125 13.7793 45.3125 25C45.3125 30.4395 43.1738 35.3711 39.6973 39.0234ZM35.7812 42.2168C32.6562 44.1797 28.9648 45.3125 25 45.3125C21.0352 45.3125 17.3437 44.1797 14.209 42.2168C14.9219 38.6328 18.0859 35.9375 21.875 35.9375H28.125C31.9141 35.9375 35.0781 38.6328 35.791 42.2168H35.7812ZM25 50C31.6304 50 37.9893 47.3661 42.6777 42.6777C47.3661 37.9893 50 31.6304 50 25C50 18.3696 47.3661 12.0107 42.6777 7.32233C37.9893 2.63392 31.6304 0 25 0C18.3696 0 12.0107 2.63392 7.32233 7.32233C2.63392 12.0107 0 18.3696 0 25C0 31.6304 2.63392 37.9893 7.32233 42.6777C12.0107 47.3661 18.3696 50 25 50ZM25 23.4375C23.964 23.4375 22.9704 23.0259 22.2379 22.2934C21.5053 21.5608 21.0938 20.5673 21.0938 19.5312C21.0938 18.4952 21.5053 17.5017 22.2379 16.7691C22.9704 16.0366 23.964 15.625 25 15.625C26.036 15.625 27.0296 16.0366 27.7621 16.7691C28.4947 17.5017 28.9062 18.4952 28.9062 19.5312C28.9062 20.5673 28.4947 21.5608 27.7621 22.2934C27.0296 23.0259 26.036 23.4375 25 23.4375ZM16.4062 19.5312C16.4062 21.8105 17.3117 23.9963 18.9233 25.6079C20.5349 27.2196 22.7208 28.125 25 28.125C27.2792 28.125 29.4651 27.2196 31.0767 25.6079C32.6883 23.9963 33.5938 21.8105 33.5938 19.5312C33.5938 17.252 32.6883 15.0662 31.0767 13.4546C29.4651 11.8429 27.2792 10.9375 25 10.9375C22.7208 10.9375 20.5349 11.8429 18.9233 13.4546C17.3117 15.0662 16.4062 17.252 16.4062 19.5312Z" fill="white"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_58_119">
+          <rect width="50" height="50" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+
+    <h1>Crear Vacante</h1>
+  </div>
+  <button class="flecha" (click)="nextPage()">
+    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M48.9508 22.793C50.3458 24.0137 50.3458 25.9961 48.9508 27.2168L31.0936 42.8418C29.6985 44.0625 27.4329 44.0625 26.0378 42.8418C24.6427 41.6211 24.6427 39.6387 26.0378 38.418L37.8124 28.125H3.57129C1.59584 28.125 -0.000139713 26.7285 -0.000139713 25C-0.000139713 23.2715 1.59584 21.875 3.57129 21.875H37.8012L26.049 11.582C24.6539 10.3613 24.6539 8.37891 26.049 7.1582C27.4441 5.9375 29.7097 5.9375 31.1048 7.1582L48.9619 22.7832L48.9508 22.793Z" fill="white"/>
+    </svg>
+  </button>
+</nav>
+<form (ngSubmit)="f.form.valid && crearVacante(vacante)" #f="ngForm">
+  <div class="contenedor-vacante" *ngIf="contador==0">
+    <h1>Información de la vacante</h1>
+    <div class="dato-contenedor">
+      <div class="dato-item">
+        <p>Título del Puesto</p>
+        <input type="text" name="nombrepuesto" [(ngModel)]="vacante.nombrepuesto" required #nombrepuesto="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Descripción del Puesto</p>
+        <input type="text" name="descripcionpuesto" [(ngModel)]="vacante.descripcionpuesto" required #descripcionpuesto="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Departamento/Área</p>
+        <input type="text" name="area" [(ngModel)]="vacante.area" required #area="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Ubicación</p>
+        <input type="text" name="ubicacion" [(ngModel)]="vacante.ubicacion" required #ubicacion="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Tipo de Contrato</p>
+        <input type="text" name="tipocontrato" [(ngModel)]="vacante.tipocontrato" required #tipocontrato="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Jornada Laboral</p>
+        <input type="text" name="jornadalaboral" [(ngModel)]="vacante.jornadalaboral" required #jornadalaboral="ngModel">
+      </div>
+    </div>
+  </div>
+
+  <div class="contenedor-vacante" *ngIf="contador==1">
+    <h1>Requisitos del candidato</h1>
+    <div class="dato-contenedor">
+      <div class="dato-item">
+        <p>Experiencia Requerida (años)</p>
+        <input type="number" name="experiencia" [(ngModel)]="vacante.experiencia" required min="0" #experiencia="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Nivel Educativo</p>
+        <input type="text" name="niveleducativo" [ngModel]="vacante.niveleducativo" required #niveleducativo="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Habilidad</p>
+        <input type="text" name="habilidad" [(ngModel)]="vacante.habilidad" required #habilidad="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Idioma</p>
+        <input type="text" name="idioma" [(ngModel)]="vacante.idioma" required #idioma="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Certificación</p>
+        <input type="text" name="certificacion" [(ngModel)]="vacante.certificacion" required #certificacion="ngModel">
+      </div>
+    </div>
+  </div>
+
+  <div class="contenedor-vacante" *ngIf="contador==2">
+    <h1>Beneficio y Proceso</h1>
+    <div class="dato-contenedor">
+      <div class="dato-item">
+        <p>Salario Ofrecido</p>
+        <input type="number" name="salario" [(ngModel)]="vacante.salario" required min="0" #salario="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Bono</p>
+        <input type="number" name="bono" [(ngModel)]="vacante.bono" required min="0" #bono="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Beneficio adicional</p>
+        <input type="text" name="beneficio" [(ngModel)]="vacante.beneficio" required #beneficio="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Fecha de Inicio</p>
+        <input type="date" name="fechainicio" [(ngModel)]="vacante.fechainicio" required #fechainicio="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Fecha de Cierre</p>
+        <input type="date" name="fechacierre" [(ngModel)]="vacante.fechacierre" required #fechacierre="ngModel">
+      </div>
+      <div class="dato-item">
+        <p>Modalidad</p>
+        <input type="text" name="modalidad" [(ngModel)]="vacante.modalidad" required #modalidad="ngModel">
+      </div>
+      <button type="submit" [disabled]="f.invalid">Lanzar Vacante</button>
+    </div>
+  </div>
+</form>

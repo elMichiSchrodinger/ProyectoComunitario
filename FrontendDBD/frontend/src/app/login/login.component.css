@@ -1,0 +1,98 @@
+.contenedor-padre {
+  display: flex;
+  height: 100vh;
+}
+
+.contenedor {
+  width: 50vw;
+  height: 100vh;
+  background-image: url("../../../public/imagenes/img.png");
+  background-size: cover;
+}
+
+.contenedor-mitad {
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #706DCE 0%, #121216 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-logo{
+  margin-bottom: 10vh;
+  margin-top: -10vh;
+}
+
+.contenedor-mitad img{
+  width: 20vw;
+}
+
+@media (max-width: 1000px) {
+  .contenedor-mitad img{
+    width: 40vw;
+  }
+}
+
+.contenedor-login{
+  width: 40vw;
+  padding: 0px 50px 0px 0px;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15vh;
+}
+
+.contenedor-login input{
+  width: 40vw;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  padding: 5px 0;
+  font-size: 20px;
+  font-weight: lighter;
+  color: #FFFFFF;
+}
+
+.contenedor-login input::placeholder {
+  color: white;
+  font-weight: 100;
+  opacity: 70%;
+}
+
+.contenedor-botones{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.contenedor-botones button{
+  padding: 10px 30px;
+  font-family:'Newsreader' ;
+  border-radius: 30px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.contenedor-botones .btn-sesion{
+  background: #FFFFFF;
+  font-weight: bold;
+}
+
+.contenedor-botones .btn-crear{
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+  font-weight: bold;
+}
+
+.contenedor-botones .btn-crear:hover{
+  background: #FFFFFF;
+  color: black;
+}
+
+.contenedor-botones .btn-sesion:hover{
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
+}

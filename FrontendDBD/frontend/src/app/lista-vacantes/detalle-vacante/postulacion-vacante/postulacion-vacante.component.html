@@ -1,0 +1,136 @@
+<div class="contenedor">
+  <div class="barra">
+    <button class="flecha" (click)="backPage()">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_148_1623)">
+          <path d="M1.04925 22.793C-0.345843 24.0137 -0.345843 25.9961 1.04925 27.2168L18.9064 42.8418C20.3015 44.0625 22.5671 44.0625 23.9622 42.8418C25.3573 41.6211 25.3573 39.6387 23.9622 38.418L12.1876 28.125H46.4287C48.4042 28.125 50.0001 26.7285 50.0001 25C50.0001 23.2715 48.4042 21.875 46.4287 21.875H12.1988L23.951 11.582C25.3461 10.3613 25.3461 8.37891 23.951 7.1582C22.5559 5.9375 20.2903 5.9375 18.8952 7.1582L1.03809 22.7832L1.04925 22.793Z" fill="white"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_148_1623">
+            <rect width="50" height="50" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </button>
+    <div class="titulo-postulacion">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 0C11.1895 0 0 11.1895 0 25C0 38.8105 11.1895 50 25 50C38.8105 50 50 38.8105 50 25C50 11.1895 38.8105 0 25 0ZM25 9.67742C29.8992 9.67742 33.871 13.6492 33.871 18.5484C33.871 23.4476 29.8992 27.4194 25 27.4194C20.1008 27.4194 16.129 23.4476 16.129 18.5484C16.129 13.6492 20.1008 9.67742 25 9.67742ZM25 44.3548C19.0827 44.3548 13.7802 41.6734 10.2319 37.4798C12.127 33.9113 15.8367 31.4516 20.1613 31.4516C20.4032 31.4516 20.6452 31.4919 20.877 31.5625C22.1875 31.9859 23.5585 32.2581 25 32.2581C26.4415 32.2581 27.8226 31.9859 29.123 31.5625C29.3548 31.4919 29.5968 31.4516 29.8387 31.4516C34.1633 31.4516 37.873 33.9113 39.7681 37.4798C36.2198 41.6734 30.9173 44.3548 25 44.3548Z" fill="#FFEBEB"/>
+      </svg>
+      <h1>Postulación de Vacante</h1>
+    </div>
+    <button class="flecha" (click)="nextPage()">
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M48.9508 22.793C50.3458 24.0137 50.3458 25.9961 48.9508 27.2168L31.0936 42.8418C29.6985 44.0625 27.4329 44.0625 26.0378 42.8418C24.6427 41.6211 24.6427 39.6387 26.0378 38.418L37.8124 28.125H3.57129C1.59584 28.125 -0.000139713 26.7285 -0.000139713 25C-0.000139713 23.2715 1.59584 21.875 3.57129 21.875H37.8012L26.049 11.582C24.6539 10.3613 24.6539 8.37891 26.049 7.1582C27.4441 5.9375 29.7097 5.9375 31.1048 7.1582L48.9619 22.7832L48.9508 22.793Z" fill="white"/>
+      </svg>
+    </button>
+  </div>
+  <form (ngSubmit)="f.form.valid && postular()" #f="ngForm">
+    <div class="contenedor-postulacion" *ngIf="contado==0">
+      <h2>Información Personal</h2>
+      <div class="item">
+        <p>Nombre Completo</p>
+        <input type="text" name="nombre" [(ngModel)]="candidato.nombre" required #nombre="ngModel">
+      </div>
+      <div class="item">
+        <p>Fecha de Nacimiento</p>
+        <input type="date" name="fechanacimiento" [(ngModel)]="candidato.fechanacimiento" required #fechanacimiento="ngModel">
+      </div>
+      <div class="item">
+        <p>Dirección</p>
+        <input type="text" name="direccion" [(ngModel)]="candidato.direccion" required #direccion="ngModel">
+      </div>
+      <div class="item">
+        <p>Telefono</p>
+        <input type="number" name="telefono" [(ngModel)]="candidato.telefono" required #telefono="ngModel">
+      </div>
+    </div>
+    <div class="contenedor-postulacion" *ngIf="contado==1">
+      <h2>Información Personal</h2>
+      <div class="item">
+        <p>Correo Electrónico</p>
+        <input type="text" name="correo" [(ngModel)]="candidato.correo" required #correo="ngModel">
+      </div>
+      <div class="item">
+        <p>Nacionalidad</p>
+        <input type="text" name="nacionalidad" [(ngModel)]="candidato.nacionalidad" required #nacionalidad="ngModel">
+      </div>
+      <div class="item">
+        <p>Documento de Identidad</p>
+        <input type="text" name="documentoidentidad" [(ngModel)]="candidato.documentoidentidad" required #documentoidentidad="ngModel">
+      </div>
+      <div class="item">
+        <p>Red Social</p>
+        <input type="text" name="redsocial" [(ngModel)]="candidato.redsocial" required #redsocial="ngModel">
+      </div>
+    </div>
+    <div class="contenedor-postulacion" *ngIf="contado==2">
+      <h2>Información Educativa</h2>
+      <div class="item">
+        <p>Nivel de estudio</p>
+        <input type="text" name="nivelestudio" [(ngModel)]="candidato.nivelestudio" required #nivelestudio="ngModel">
+      </div>
+      <div class="item">
+        <p>Titulo</p>
+        <input type="text" name="titulo" [(ngModel)]="candidato.titulo" required #titulo="ngModel">
+      </div>
+      <div class="item">
+        <p>Institución Educativa</p>
+        <input type="text" name="institucioneducativa" [(ngModel)]="candidato.institucioneducativa" required #institucioneducativa="ngModel">
+      </div>
+      <div class="item">
+        <p>Certificacion</p>
+        <input type="text" name="certificacion" [(ngModel)]="candidato.certificacion" required #certificacion="ngModel">
+      </div>
+    </div>
+    <div class="contenedor-postulacion" *ngIf="contado==3">
+      <h2>Experiencia Laboral</h2>
+      <div class="item">
+        <p>Empresa</p>
+        <input type="text" name="empresa" [(ngModel)]="candidato.empresa" required #empresa="ngModel">
+      </div>
+      <div class="item">
+        <p>Cargo</p>
+        <input type="text" name="cargo" [(ngModel)]="candidato.cargo" required #cargo="ngModel">
+      </div>
+      <div class="item">
+        <p>Responsabilidad</p>
+        <input type="text" name="responsabilidad" [(ngModel)]="candidato.responsabilidad" required #responsabilidad="ngModel">
+      </div>
+      <div class="item">
+        <p>Referencia Laboral</p>
+        <input type="text" name="referencialaboral" [(ngModel)]="candidato.referencialaboral" required #referencialaboral="ngModel">
+      </div>
+    </div>
+    <div class="contenedor-postulacion" *ngIf="contado==4">
+      <h2>Habilidades</h2>
+      <div class="item">
+        <p>Habilidad Técnia</p>
+        <input type="text" name="habilidadtecnica" [(ngModel)]="candidato.habilidadtecnica" required #habilidadtecnica="ngModel">
+      </div>
+      <div class="item">
+        <p>Idioma</p>
+        <input type="text" name="idioma" [(ngModel)]="candidato.idioma" required #idioma="ngModel">
+      </div>
+      <div class="item">
+        <p>Habilidad Blanda</p>
+        <input type="text" name="habilidadblanda" [(ngModel)]="candidato.habilidadblanda" required #habilidadblanda="ngModel">
+      </div>
+    </div>
+    <div class="contenedor-postulacion" *ngIf="contado==5">
+      <h2>Referencia de Proyecto</h2>
+      <div class="item">
+        <p>Nombre del Proyecto</p>
+        <input type="text" name="nombreproyectoref" [(ngModel)]="candidato.nombreproyectoref" required #nombreproyectoref="ngModel">
+      </div>
+      <div class="item">
+        <p>Descripción</p>
+        <input type="text" name="descripcionproyectoref" [(ngModel)]="candidato.descripcionproyectoref" required #descripcionproyectoref="ngModel">
+      </div>
+      <div class="item">
+        <p>Rol en el proyecto</p>
+        <input type="text" name="rolproyectoref" [(ngModel)]="candidato.rolproyectoref" required #rolproyectoref="ngModel">
+      </div>
+      <button type="submit" [disabled]="f.invalid">Enviar</button>
+    </div>
+  </form>
+</div>
