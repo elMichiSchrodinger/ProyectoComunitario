@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ListaclientesService} from '../services/servicecrm/listaclientes.service';
 import {MostrarLista} from '../models/modelscrm/listaclientes.model';
-import {MostrarinvitacionService} from '../services/mostrarinvitacion.service';
+import {MostrarinvitacionService} from '../services/servicecrm/mostrarinvitacion.service';
 
 @Component({
   selector: 'app-menu',

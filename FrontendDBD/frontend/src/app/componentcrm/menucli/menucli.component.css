@@ -1,0 +1,89 @@
+.contenedor{
+  display: flex;
+}
+
+.contenedor-menu{
+  width: 25vw;
+  height: 100vh;
+
+  background: linear-gradient(180deg, #121216 0%, #706DCE 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.contenedor-menu img{
+  width: 150px;
+  align-self: center;
+}
+
+.contenedor-modulos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contenedor-menu button{
+  border: none;
+  width: 90%;
+  margin: 2vh 0;
+  cursor: pointer;
+  background: none;
+  font-family: 'Newsreader';
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px;
+}
+.contenedor-modulos .activado{
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  padding: 9px;
+}
+
+.contenedor-sesion {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.contenedor-sesion button{
+  display: flex;
+  width: auto;
+  margin: 0 10px
+}
+
+.contenedor-sesion button:hover{
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  padding: 9px;
+}
+
+.contenedor-sesion svg{
+  margin-right: 10px;
+}
+
+.contenido-menu{
+  width: 75vw;
+  height: 100vh;
+  background-color: #F0F8FF;
+  display: flex;
+  justify-content: center;
+}
+
+.contenido-menu button{
+  width: 40%;
+  margin: 10px;
+  padding: 50px 0;
+  text-align: center;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Newsreader';
+  cursor: pointer;
+}
+.contenido-menu button svg{
+  width: 100%;
+  margin-bottom: 20px;
+}
+

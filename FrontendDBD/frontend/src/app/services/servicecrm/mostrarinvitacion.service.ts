@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MostrarInvitacion} from '../models/mostrarinvitacion.model';
+import {MostrarInvitacion} from '../../models/modelscrm/mostrarinvitacion.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
