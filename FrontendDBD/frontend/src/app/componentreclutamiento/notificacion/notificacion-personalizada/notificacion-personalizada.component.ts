@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {NgIf} from '@angular/common';
-import {DetalleCandidatoService} from '../../../services/detalle-candidato.service';
+import {DetalleCandidatoService} from '../../../services/servicereclutamiento/detalle-candidato.service';
 
 @Component({
   selector: 'app-notificacion-personalizada',

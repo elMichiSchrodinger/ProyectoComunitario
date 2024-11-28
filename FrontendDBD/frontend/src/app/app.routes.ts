@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
 import {VacanteComponent} from './componentreclutamiento/vacante/vacante.component';
 import {LoginComponent} from './login/login.component';
-import {PostulacionComponent} from './postulacion/postulacion.component';
-import {DetallePostulacionComponent} from './postulacion/detalle-postulacion/detalle-postulacion.component';
+import {PostulacionComponent} from './componentreclutamiento/postulacion/postulacion.component';
+import {DetallePostulacionComponent} from './componentreclutamiento/postulacion/detalle-postulacion/detalle-postulacion.component';
 import {MenuComponent} from './menu/menu.component';
 import {NotificacionComponent} from './componentreclutamiento/notificacion/notificacion.component';
 import {
   NotificacionPersonalizadaComponent
 } from './componentreclutamiento/notificacion/notificacion-personalizada/notificacion-personalizada.component';
-import {ListaVacantesComponent} from './lista-vacantes/lista-vacantes.component';
-import {DetalleVacanteComponent} from './lista-vacantes/detalle-vacante/detalle-vacante.component';
+import {ListaVacantesComponent} from './componentreclutamiento/lista-vacantes/lista-vacantes.component';
+import {DetalleVacanteComponent} from './componentreclutamiento/lista-vacantes/detalle-vacante/detalle-vacante.component';
 import {
   PostulacionVacanteComponent
-} from './lista-vacantes/detalle-vacante/postulacion-vacante/postulacion-vacante.component';
+} from './componentreclutamiento/lista-vacantes/detalle-vacante/postulacion-vacante/postulacion-vacante.component';
 import {MostrarinvitacionComponent} from './componentcrm/mostrarinvitacion/mostrarinvitacion.component';
 import {LogincliComponent} from './logincli/logincli.component';
 import {MenucliComponent} from './componentcrm/menucli/menucli.component';
