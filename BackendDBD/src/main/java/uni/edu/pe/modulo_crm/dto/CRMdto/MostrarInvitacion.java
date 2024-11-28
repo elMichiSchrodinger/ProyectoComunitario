@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 public class MostrarInvitacion {
     private String id_invitacion;
-    private String Nombre_Cliente;
-    private String Asunto_Invitacion;
-    private int Tiempo_Maximo;
+    private String nombre_cliente;
+    private String asunto_invitacion;
+    private int tiempo_maximo;
     private String direccion_proyecto;
-    private String Comentario;
+    private String comentario;
 }

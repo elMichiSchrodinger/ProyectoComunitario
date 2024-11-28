@@ -10,12 +10,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class InsertarInvitacion {
-    private String id_Invitacion;
-    private String asunto_Invitacion;
-    private Date fecha_Envio;
-    private int tiempo_Maximo;
-    private String direccion_Proyecto;
+    private String id_invitacion;
+    private String asunto_invitacion;
+    private Date fecha_envio;
+    private int tiempo_maximo;
+    private String direccion_proyecto;
     private String comentario;
-    private String estado_Invitacion;
-    private String id_Cliente;
+    private String estado_invitacion;
+    private String id_cliente;
 }

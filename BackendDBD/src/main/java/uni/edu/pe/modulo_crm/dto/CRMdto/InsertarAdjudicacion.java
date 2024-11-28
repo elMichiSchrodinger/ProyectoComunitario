@@ -11,8 +11,8 @@ import java.util.Date;
 @Data
 public class InsertarAdjudicacion {
     private String id_adjudicacion;
-    private Date fecha_Adjudicacion;
-    private String estado_Adjudicacion;
+    private Date fecha_adjudicacion;
+    private String estado_adjudicacion;
     private String id_presentacion_propuesta;
     private String id_cliente;
 }

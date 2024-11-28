@@ -47,7 +47,7 @@ public class RevisionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_revision_tecnica").toString();
         revision.setId_revision_tecnica(idGenerado);
-        revision.setEstado_Participacion("Aceptado");
+        revision.setEstado_participacion("Aceptado");
         return revision;
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -66,7 +66,7 @@ public class RevisionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_revision_tecnica").toString();
         revision.setId_revision_tecnica(idGenerado);
-        revision.setEstado_Participacion("Rechazado");
+        revision.setEstado_participacion("Rechazado");
         return revision;
     }
 }

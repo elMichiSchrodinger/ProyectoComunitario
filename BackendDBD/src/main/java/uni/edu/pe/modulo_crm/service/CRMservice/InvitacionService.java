@@ -45,17 +45,17 @@ public class InvitacionService {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID_invitacion"});
-            ps.setString(1, invitacion.getAsunto_Invitacion());
-            ps.setInt(2, invitacion.getTiempo_Maximo());
-            ps.setString(3, invitacion.getDireccion_Proyecto());
+            ps.setString(1, invitacion.getAsunto_invitacion());
+            ps.setInt(2, invitacion.getTiempo_maximo());
+            ps.setString(3, invitacion.getDireccion_proyecto());
             ps.setString(4, invitacion.getComentario());
-            ps.setString(5, invitacion.getId_Cliente());
+            ps.setString(5, invitacion.getId_cliente());
             return ps;
         }, keyHolder);
 
         String idGenerado = keyHolder.getKeys().get("ID_invitacion").toString();
-        invitacion.setId_Invitacion(idGenerado);
-        invitacion.setEstado_Invitacion("No revisado");
+        invitacion.setId_invitacion(idGenerado);
+        invitacion.setEstado_invitacion("No revisado");
         return invitacion;
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -79,7 +79,7 @@ public class InvitacionService {
         String sqlUpdate = "UPDATE Invitacion\n" +
                 "SET Estado_Invitacion = 'Revisado'\n" +
                 "WHERE ID_Invitacion = ?;";
-        int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_Invitacion());
+        int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
         return invitacion;
     }
 

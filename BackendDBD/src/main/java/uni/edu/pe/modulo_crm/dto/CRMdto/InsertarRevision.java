@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class InsertarRevision {
     private String id_revision_tecnica;
-    private String estado_Participacion;
+    private String estado_participacion;
     private String id_empleado;
     private String id_invitacion;
     private String id_informe_stock;

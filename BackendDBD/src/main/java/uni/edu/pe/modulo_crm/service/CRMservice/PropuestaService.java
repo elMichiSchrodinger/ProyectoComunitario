@@ -62,14 +62,14 @@ public class PropuestaService {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[]{"ID_presentacion_propuesta"});
-            ps.setFloat(1, propuesta.getPrecio_Propuesto());
-            ps.setString(2, propuesta.getDescripcion_Tecnica());
-            ps.setString(3, propuesta.getDescripcion_Economica());
-            ps.setString(4, propuesta.getCalidad_Ofrecida());
-            ps.setString(5, propuesta.getSeguridad_Ofrecida());
-            ps.setString(6, propuesta.getCondicion_Pago());
-            ps.setString(7, propuesta.getTiempo_Ejecucion());
-            ps.setString(8, propuesta.getObservacion_Propuesta());
+            ps.setFloat(1, propuesta.getPrecio_propuesto());
+            ps.setString(2, propuesta.getDescripcion_tecnica());
+            ps.setString(3, propuesta.getDescripcion_economica());
+            ps.setString(4, propuesta.getCalidad_ofrecida());
+            ps.setString(5, propuesta.getSeguridad_ofrecida());
+            ps.setString(6, propuesta.getCondicion_pago());
+            ps.setString(7, propuesta.getTiempo_ejecucion());
+            ps.setString(8, propuesta.getObservacion_propuesta());
             ps.setString(9, propuesta.getId_revision_tecnica());
             ps.setString(10, propuesta.getId_cliente());
             return ps;
@@ -77,7 +77,7 @@ public class PropuestaService {
 
         String idGenerado = keyHolder.getKeys().get("ID_presentacion_propuesta").toString();
         propuesta.setId_presentacion_propuesta(idGenerado);
-        propuesta.setEstado_Propuesta("No revisado");
+        propuesta.setEstado_propuesta("No revisado");
         return propuesta;
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)

@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ActualizarInvitacion {
-    private  String id_Invitacion;
+    private  String id_invitacion;
 }

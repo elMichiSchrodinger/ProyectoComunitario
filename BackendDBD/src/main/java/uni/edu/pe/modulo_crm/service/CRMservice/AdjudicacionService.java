@@ -30,7 +30,7 @@ public class AdjudicacionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_adjudicacion").toString();
         adjudicacion.setId_adjudicacion(idGenerado);
-        adjudicacion.setEstado_Adjudicacion("Aprobada");
+        adjudicacion.setEstado_adjudicacion("Aprobada");
         return adjudicacion;
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
@@ -48,7 +48,7 @@ public class AdjudicacionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_adjudicacion").toString();
         adjudicacion.setId_adjudicacion(idGenerado);
-        adjudicacion.setEstado_Adjudicacion("Rechazada");
+        adjudicacion.setEstado_adjudicacion("Rechazada");
         return adjudicacion;
     }
 }
