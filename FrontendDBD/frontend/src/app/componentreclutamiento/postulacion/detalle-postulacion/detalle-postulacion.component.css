@@ -1,0 +1,123 @@
+.barra{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(90deg, #2E8128 0%, #6DCF50 100%);
+}
+.contenedor{
+  background: #ECFFDE;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.flecha{
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  margin:15px;
+  width: 5%;
+}
+.titulo-postulante{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.titulo-postulante svg{
+  padding: 15px;
+}
+
+.contenedor-postulante{
+  background: #6DCF50;
+  width: 80%;
+  padding: 20px 80px;
+  margin: 20px auto;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  justify-self: center;
+}
+
+.datos-postulante{
+  align-self: start;
+  color:#FFFFFF;
+  font-size: 20px;
+  width: 100%;
+}
+
+.datos-postulante input{
+  margin:20px;
+  border:none;
+  border-radius: 10px;
+  width: 40%;
+  text-align: center;
+  font-family: 'Newsreader';
+  font-size: 20px;
+}
+
+.dato-postulante{
+  display: flex;
+  justify-content:space-between;
+}
+
+.datos-postulante input:focus{
+  outline: none;
+}
+
+.contenedor-postulante h2{
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  font-size: 30px;
+}
+
+.botones{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.botones button{
+  padding: 20px 50px;
+  border:none;
+  cursor: pointer;
+  font-size: 25px;
+  font-family: 'Newsreader';
+  border-radius: 15px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.botones .btn-aprobar{
+  background: #6DCF50;
+  color: #FFFFFF;
+}
+
+.botones .btn-rechazar{
+  background: #CF5050;
+  color: #FFFFFF;
+}
+
+.botones .btn-rechazar:hover{
+  border: 1px solid #CF5050;
+  background: #FFFFFF;
+  color: #CF5050;
+}
+
+
+.botones .btn-aprobar:hover{
+  border: 1px solid #6DCF50;
+  color: #6DCF50;
+  background: #FFFFFF;
+}
+
+

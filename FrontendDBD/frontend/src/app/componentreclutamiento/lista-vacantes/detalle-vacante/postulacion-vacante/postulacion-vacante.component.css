@@ -1,0 +1,80 @@
+.barra {
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.barra .flecha{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  width: 5%;
+}
+
+.titulo-postulacion{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo-postulacion h1{
+  margin-left: 15px;
+}
+
+.contenedor{
+  height: 100vh;
+  background: #F0F8FF;
+}
+
+.flecha svg{
+  width: 100%;
+}
+
+.contenedor-postulacion{
+  width: 80%;
+  background: radial-gradient(28.22% 50% at 50% 50%, #8772D3 0%, #799FC2 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  margin: 10vh auto 0 auto;
+  padding: 30px;
+  align-self: center;
+  color: white;
+  text-align: center;
+}
+
+.item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+}
+.item input{
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: 40%;
+  font-family: 'Newsreader';
+}
+
+.contenedor-postulacion button{
+  border: none;
+  outline: none;
+  width: 50%;
+  font-family: 'Newsreader';
+  font-size: 20px;
+  color: #8772D3;
+  background: #FFFFFF;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.contenedor-postulacion button:hover{
+  border: 3px solid #FFFFFF;
+  background: #8772D3;
+  color: #FFFFFF;
+}
