@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import {VacanteComponent} from './vacante/vacante.component';
+import {VacanteComponent} from './componentreclutamiento/vacante/vacante.component';
 import {LoginComponent} from './login/login.component';
 import {PostulacionComponent} from './postulacion/postulacion.component';
 import {DetallePostulacionComponent} from './postulacion/detalle-postulacion/detalle-postulacion.component';
 import {MenuComponent} from './menu/menu.component';
-import {NotificacionComponent} from './notificacion/notificacion.component';
+import {NotificacionComponent} from './componentreclutamiento/notificacion/notificacion.component';
 import {
   NotificacionPersonalizadaComponent
-} from './notificacion/notificacion-personalizada/notificacion-personalizada.component';
+} from './componentreclutamiento/notificacion/notificacion-personalizada/notificacion-personalizada.component';
 import {ListaVacantesComponent} from './lista-vacantes/lista-vacantes.component';
 import {DetalleVacanteComponent} from './lista-vacantes/detalle-vacante/detalle-vacante.component';
 import {
@@ -17,6 +17,8 @@ import {MostrarinvitacionComponent} from './componentcrm/mostrarinvitacion/mostr
 import {LogincliComponent} from './logincli/logincli.component';
 import {MenucliComponent} from './componentcrm/menucli/menucli.component';
 import {PreloginComponent} from './prelogin/prelogin.component';
+import {MostraradjaComponent} from './componentcrm/mostraradja/mostraradja.component';
+import {MostraradjrComponent} from './componentcrm/mostraradjr/mostraradjr.component';
 
 export const routes: Routes = [
   {path:'vacante', component: VacanteComponent},
@@ -32,5 +34,7 @@ export const routes: Routes = [
   {path:'listaVacantes',component:ListaVacantesComponent},
   {path:'detalleVacante',component:DetalleVacanteComponent},
   {path:'postulacionVacante',component:PostulacionVacanteComponent},
-  {path:'mostrarInvitacion',component:MostrarinvitacionComponent}
+  {path:'mostrarInvitacion',component:MostrarinvitacionComponent},
+  {path:'mostrarAdjA',component:MostraradjaComponent},
+  {path:'mostrarAdjR',component:MostraradjrComponent}
 ];

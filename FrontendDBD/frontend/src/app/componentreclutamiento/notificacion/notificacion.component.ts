@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule, NgClass, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
-import {DetalleCandidatoService} from '../services/detalle-candidato.service';
-import {DetalleCandidato} from '../models/detalleCandidato.model';
+import {DetalleCandidatoService} from '../../services/detalle-candidato.service';
+import {DetalleCandidato} from '../../models/detalleCandidato.model';
 
 @Component({
   selector: 'app-notificacion',

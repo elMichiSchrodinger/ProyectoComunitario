@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {NgIf} from '@angular/common';
 import {Router} from '@angular/router';
-import {Vacante} from '../models/vacante.model';
+import {Vacante} from '../../models/vacante.model';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {VacanteService} from '../services/vacante.service';
-import {EmpleadoService} from '../services/empleado.service';
+import {VacanteService} from '../../services/vacante.service';
+import {EmpleadoService} from '../../services/empleado.service';
 
 @Component({
   selector: 'app-vacante',

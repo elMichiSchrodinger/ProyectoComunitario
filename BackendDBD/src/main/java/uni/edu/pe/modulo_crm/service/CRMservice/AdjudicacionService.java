@@ -18,7 +18,7 @@ public class AdjudicacionService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public InsertarAdjudicacion insertaradjudicaciona(InsertarAdjudicacion adjudicacion) {
         String sql = "INSERT INTO Adjudicacion (Fecha_Adjudicacion, Estado_Adjudicacion, ID_presentacion_propuesta, ID_cliente)\n" +
-                "VALUES (CURRENT_DATE, 'Aceptado', ?, ?) RETURNING ID_adjudicacion;";
+                "VALUES (CURRENT_DATE, 'Aprobada', ?, ?) RETURNING ID_adjudicacion;";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
@@ -30,13 +30,13 @@ public class AdjudicacionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_adjudicacion").toString();
         adjudicacion.setId_adjudicacion(idGenerado);
-        adjudicacion.setEstado_Adjudicacion("Aceptado");
+        adjudicacion.setEstado_Adjudicacion("Aprobada");
         return adjudicacion;
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public InsertarAdjudicacion insertaradjudicacionr(InsertarAdjudicacion adjudicacion) {
         String sql = "INSERT INTO Adjudicacion (Fecha_Adjudicacion, Estado_Adjudicacion, ID_presentacion_propuesta, ID_cliente)\n" +
-                "VALUES (CURRENT_DATE, 'Rechazado', ?, ?) RETURNING ID_adjudicacion;";
+                "VALUES (CURRENT_DATE, 'Rechazada', ?, ?) RETURNING ID_adjudicacion;";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
@@ -48,7 +48,7 @@ public class AdjudicacionService {
 
         String idGenerado = keyHolder.getKeys().get("ID_adjudicacion").toString();
         adjudicacion.setId_adjudicacion(idGenerado);
-        adjudicacion.setEstado_Adjudicacion("Rechazado");
+        adjudicacion.setEstado_Adjudicacion("Rechazada");
         return adjudicacion;
     }
 }

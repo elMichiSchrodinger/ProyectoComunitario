@@ -133,35 +133,20 @@
   font-size: 60px;
 }
 
-.lista-clientes{
-  background: radial-gradient(50% 50% at 50% 50%, #989898 0%, #706DCE 100%);
-  border-radius: 30px;
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
+
+.nuevo-color{
+  background: linear-gradient(180deg, #121216 0%, #706DCE 100%) ;
+}
+
+.contenedor-tabla button{
+  width: 100%;
+
+}
+
+.contenedor-tabla{
   overflow-y: scroll;
-  height: 80vh;
-}
-.lista-clientes button{
-  width: 80%;
-  border: none;
-  outline: none;
-  color: black;
-  font-size: 35px;
-  cursor: pointer;
-  padding: 0;
-  border-radius: 20px;
-
-}
-.lista-clientes svg{
-  max-width: 200px;
-  justify-self: flex-start;
-  margin-bottom: 0px !important;
-  margin-top: 20px !important;
 }
 
-.lista-clientes p{
-  margin-top:10px !important;
+.datos{
+  max-height: 500px;
 }

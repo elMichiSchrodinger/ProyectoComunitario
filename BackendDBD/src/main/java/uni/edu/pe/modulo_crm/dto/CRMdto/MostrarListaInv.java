@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MostrarLista {
+public class MostrarListaInv {
     private String id_cliente;
     private String id_invitacion;
     private String nombre_cliente;
+    private String estado_invitacion;
 }
