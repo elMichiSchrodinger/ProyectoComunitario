@@ -1,1 +1,30 @@
-<p>equipos works!</p>
+<div>
+    <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" placeholder="Buscar equipos..." />
+    <button (click)="nuevoEquipo()">Nuevo</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Última Revisión</th>
+            <th>Próxima Revisión</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let equipo of filteredEquipos">
+            <td>{{ equipo.idEquipo }}</td>
+            <td>{{ equipo.nombre }}</td>
+            <td>{{ equipo.tipo }}</td>
+            <td>{{ equipo.estado }}</td>
+            <td>{{ equipo.ultimaRevision }}</td>
+            <td>{{ equipo.proximaRevision }}</td>
+            <td>
+                <button (click)="masInformacion(equipo.idEquipo)">Más información</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

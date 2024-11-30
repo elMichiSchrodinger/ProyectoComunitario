@@ -23,7 +23,8 @@ import { ElaborarpropuestaComponent } from './componentcrm/elaborarpropuesta/ela
 import { EquiposComponent } from './componentmantenimiento/equipos/equipos.component';
 import { InfraestructuraComponent } from './componentmantenimiento/infraestructura/infraestructura.component';
 import { CronogramasComponent } from './componentmantenimiento/cronogramas/cronogramas.component';
-
+import { DetalleEquipoComponent } from './componentmantenimiento/detalle-equipo/detalle-equipo.component';
+import { NuevoEquipoComoponent } from './componentmantenimiento/nuevo-equipo/nuevo-equipo.component';
 export const routes: Routes = [
   { path: 'vacante', component: VacanteComponent },
   { path: '', component: PreloginComponent },
@@ -44,5 +45,7 @@ export const routes: Routes = [
   { path: 'elaborarpropuesta', component: ElaborarpropuestaComponent },
   { path: 'equipos', component: EquiposComponent },
   { path: 'infraestructura', component: InfraestructuraComponent },
-  { path: 'cronogramas', component: CronogramasComponent }
+  { path: 'cronogramas', component: CronogramasComponent },
+  { path: 'equipos/nuevo', component: NuevoEquipoComoponent },
+  { path: 'equipos/:id', component: DetalleEquipoComponent }
 ];
