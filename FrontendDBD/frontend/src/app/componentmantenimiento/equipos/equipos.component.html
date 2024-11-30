@@ -3,31 +3,35 @@
     <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" placeholder="Buscar equipos..." />
     <button (click)="nuevoEquipo()">Nuevo</button>
 </div>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Fecha de Adquisición</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Última Revisión</th>
-            <th>Próxima Revisión</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let equipo of filteredEquipos">
-            <td>{{ equipo.idEquipo }}</td>
-            <td>{{ equipo.nombre }}</td>
-            <td>{{ equipo.adquisicion }}</td>
-            <td>{{ equipo.tipo }}</td>
-            <td>{{ equipo.estado }}</td>
-            <td>{{ equipo.ultimaRevision }}</td>
-            <td>{{ equipo.proximaRevision }}</td>
-            <td>
-                <button (click)="masInformacion(equipo.idEquipo)">Más información</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de Adquisición</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Ultima Revisión</th>
+                    <th scope="col">Proxima Revisión</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let equipo of equipos">
+                    <td>{{ equipo.idEquipo }}</td>
+                    <td>{{ equipo.nombre }}</td>
+                    <td>{{ equipo.adquisicion| date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ equipo.tipo }}</td>
+                    <td>{{ equipo.estado}}</td>
+                    <td>{{ equipo.ultimaRevision| date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ equipo.proximaRevision| date: 'yyyy-MM-dd' }}</td>
+                    <td>
+                        <button (click)="masInformacion(equipo.idEquipo)">Ver más</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
