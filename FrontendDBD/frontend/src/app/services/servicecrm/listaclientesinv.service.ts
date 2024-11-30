@@ -25,7 +25,7 @@ export class ListaclientesinvService {
     return this.nombre;
   }
   setIdcliente(idcliente:string){
-    this.nombre=idcliente;
+    this.idcliente=idcliente;
   };
   getIdcliente(){
     return this.idcliente;

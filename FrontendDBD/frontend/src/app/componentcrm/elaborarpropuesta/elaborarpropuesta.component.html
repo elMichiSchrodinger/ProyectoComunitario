@@ -2,7 +2,7 @@
   <h2>Insertar Propuesta</h2>
   <p>{{id_pueba}}</p>
   <p>{{id_prueba2}}</p>
-
+  <p class="fw-bold"> Cliente: {{mostrarNombre()}}</p>
   <form (ngSubmit)="f.form.valid && enviarPropuesta()" #f="ngForm">
     <label>Precio Propuesto:</label>
     <input type="number" name="precio" [(ngModel)]="propuesta.precio_propuesto" required #precio="ngModel"/>

@@ -104,4 +104,7 @@ export class MostrarinvitacionComponent implements OnInit {
     });
     this.router.navigate(['menu']);
   }
+  backPage(){
+    this.router.navigate(['menu']);
+  }
 }
