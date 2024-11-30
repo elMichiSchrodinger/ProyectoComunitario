@@ -1,4 +1,5 @@
-<div>
+<div class="container mt-4">
+    <h2 class="text-center">Gestión de Equipos</h2>
     <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" placeholder="Buscar equipos..." />
     <button (click)="nuevoEquipo()">Nuevo</button>
 </div>
@@ -7,6 +8,7 @@
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Fecha de Adquisición</th>
             <th>Tipo</th>
             <th>Estado</th>
             <th>Última Revisión</th>
@@ -18,6 +20,7 @@
         <tr *ngFor="let equipo of filteredEquipos">
             <td>{{ equipo.idEquipo }}</td>
             <td>{{ equipo.nombre }}</td>
+            <td>{{ equipo.adquisicion }}</td>
             <td>{{ equipo.tipo }}</td>
             <td>{{ equipo.estado }}</td>
             <td>{{ equipo.ultimaRevision }}</td>
