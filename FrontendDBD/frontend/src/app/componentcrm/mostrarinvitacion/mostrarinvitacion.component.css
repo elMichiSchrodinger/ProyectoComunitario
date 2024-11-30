@@ -1,0 +1,44 @@
+.barra {
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.barra .flecha{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  width: 5%;
+}
+
+.titulo-invitacion{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor{
+  height: 100vh;
+  background: #F0F8FF;
+}
+
+.flecha svg{
+  width: 100%;
+}
+
+.ncolor1{
+  background: radial-gradient(28.22% 50% at 50% 50%, #8772D3 0%, #799FC2 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+
+.ncolor2{
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+  border-radius: 16px;
+}
+.contenedor1{
+  width: 100%;
+}

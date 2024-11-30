@@ -42,6 +42,11 @@ export class ElaborarpropuestaComponent implements OnInit{
   garantias: string[] = [''];
   beneficios: string[] = [''];
   constructor(private servicio: ElaborarpropuestaService,private servicio1:InsertarrevisionService,private servicio2:ListaclientesinvService) {}
+
+  mostrarNombre(){
+    return this.servicio2.getNombre();
+  }
+
   ngOnInit() {
     this.propuesta.id_revision_tecnica=this.servicio1.getIdrevision();
     this.propuesta.id_cliente=this.servicio2.getIdcliente();
