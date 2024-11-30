@@ -19,6 +19,9 @@ export class MenuComponent {
   contadorModulo=0;
   mostrarListainv:MostrarListaInv[]=[];
   mostrarListaadj:MostrarListaAdj[]=[];
+  mostrarListapro:MostrarListaInv[]=[];
+  nombre!:string;
+  idcliente!:string;
   estadoReclutamiento(){
     this.contadorModulo=5;
   }
@@ -55,12 +58,29 @@ export class MenuComponent {
         console.log('Error al encontrar clientes',err)
       }
     })
+    this.servicioCRM.mostrarlistapro().subscribe({
+      next:data=>{
+        this.mostrarListapro=data;
+      },
+      error:err => {
+        console.log('Error al encontrar clientes',err)
+      }
+    })
   }
-  mostrarinvitacion(id_invitacion:string){
+  mostrarinvitacion(id_invitacion:string,estado:string,nombre:string,idcliente:string){
+
     this.servicioCRM2.setInvitacion(id_invitacion);
-    this.router.navigate(['mostrarInvitacion']);
+    this.servicioCRM.setNombre(nombre);
+    this.servicioCRM.setIdcliente(idcliente);
+    if(estado=='No revisado'){
+      this.router.navigate(['mostrarInvitacion']);
+    }
+    if(estado=='Aceptada'){
+      this.router.navigate(['elaborarpropuesta']);
+    }
   }
-  mostraradjudicacion(estado:string){
+  mostraradjudicacion(estado:string,nombre:string){
+    this.servicioCRM.setNombre(nombre);
     if (estado=='Aprobada'){
       this.router.navigate(['mostrarAdjA']);
     }

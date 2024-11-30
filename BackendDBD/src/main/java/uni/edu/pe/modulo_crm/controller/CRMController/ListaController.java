@@ -23,4 +23,8 @@ public class ListaController {
     public List<MostrarListaAdj> getlistaadj() {
         return service.mostrarlistaadj();
     }
+    @GetMapping("/mostrarlistpro")
+    public List<MostrarListaInv> getlistapro() {
+        return service.mostrarlistapro();
+    }
 }

@@ -19,7 +19,7 @@ public class RevisionService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
-    public List<MostrarStock> mostrarstock(){
+    public MostrarStock mostrarstock(){
         String sql="SELECT inf.ID_informe_stock,\n" +
                 "    inf.stock_real AS Stock_Disponible \n" +
                 "FROM \n" +
@@ -29,7 +29,7 @@ public class RevisionService {
                 "        SELECT MAX(Fecha_generacion) \n" +
                 "        FROM Informe_stock\n" +
                 "    );";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MostrarStock.class));
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(MostrarStock.class));
     }
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public InsertarRevision insertarrevisiona(InsertarRevision revision) {

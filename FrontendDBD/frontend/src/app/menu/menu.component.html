@@ -84,18 +84,21 @@
 
       <div class="container text-center mt-2">
         <div class="row mx-3">
-          <div class="col-4 nuevo-color mx-2 text-light bg-dark">
+          <div class="col-3 nuevo-color mx-2 text-light bg-dark">
             Lista de invitaciones
           </div>
-          <div class="col-4 nuevo-color mx-2 text-light bg-dark">
+          <div class="col-3 nuevo-color mx-2 text-light bg-dark">
             Lista de adjucaciones
+          </div>
+          <div class="col-3 nuevo-color mx-2 text-light bg-dark">
+            Lista de propuestas
           </div>
         </div>
       </div>
       <div class="container text-center mt-2">
         <div class="row mx-3 h-75 datos">
-          <div class="col-5 mx-2 d-flex flex-column contenedor-tabla  overflow-y-auto">
-            <button *ngFor="let cliente of mostrarListainv" (click)="mostrarinvitacion(cliente.id_invitacion)" class="col-12 flex-fill text-dark bg-white">
+          <div class="col-3 mx-2 d-flex flex-column contenedor-tabla  overflow-y-auto">
+            <button *ngFor="let cliente of mostrarListainv" (click)="mostrarinvitacion(cliente.id_invitacion,cliente.estado_invitacion,cliente.nombre_cliente,cliente.id_cliente)" class="col-12 flex-fill text-dark bg-white">
               <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M37 0C16.5605 0 0 16.5605 0 37C0 57.4395 16.5605 74 37 74C57.4395 74 74 57.4395 74 37C74 16.5605 57.4395 0 37 0ZM37 14.3226C44.2508 14.3226 50.129 20.2008 50.129 27.4516C50.129 34.7024 44.2508 40.5806 37 40.5806C29.7492 40.5806 23.871 34.7024 23.871 27.4516C23.871 20.2008 29.7492 14.3226 37 14.3226ZM37 65.6452C28.2423 65.6452 20.3948 61.6766 15.1431 55.4702C17.948 50.1887 23.4383 46.5484 29.8387 46.5484C30.1968 46.5484 30.5548 46.6081 30.898 46.7125C32.8375 47.3391 34.8665 47.7419 37 47.7419C39.1335 47.7419 41.1774 47.3391 43.102 46.7125C43.4452 46.6081 43.8032 46.5484 44.1613 46.5484C50.5617 46.5484 56.052 50.1887 58.8569 55.4702C53.6052 61.6766 45.7577 65.6452 37 65.6452Z" fill="black"/>
               </svg>
@@ -105,14 +108,25 @@
               </p>
             </button>
           </div>
-          <div class="col-5 mx-2 d-flex flex-column contenedor-tabla overflow-y-auto">
-            <button *ngFor="let cliente of mostrarListaadj" (click)="mostraradjudicacion(cliente.estado_adjudicacion)" class="col-12 flex-fill text-dark bg-white">
+          <div class="col-3 mx-2 d-flex flex-column contenedor-tabla overflow-y-auto">
+            <button *ngFor="let cliente of mostrarListaadj" (click)="mostraradjudicacion(cliente.estado_adjudicacion,cliente.nombre_cliente)" class="col-12 flex-fill text-dark bg-white">
               <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M37 0C16.5605 0 0 16.5605 0 37C0 57.4395 16.5605 74 37 74C57.4395 74 74 57.4395 74 37C74 16.5605 57.4395 0 37 0ZM37 14.3226C44.2508 14.3226 50.129 20.2008 50.129 27.4516C50.129 34.7024 44.2508 40.5806 37 40.5806C29.7492 40.5806 23.871 34.7024 23.871 27.4516C23.871 20.2008 29.7492 14.3226 37 14.3226ZM37 65.6452C28.2423 65.6452 20.3948 61.6766 15.1431 55.4702C17.948 50.1887 23.4383 46.5484 29.8387 46.5484C30.1968 46.5484 30.5548 46.6081 30.898 46.7125C32.8375 47.3391 34.8665 47.7419 37 47.7419C39.1335 47.7419 41.1774 47.3391 43.102 46.7125C43.4452 46.6081 43.8032 46.5484 44.1613 46.5484C50.5617 46.5484 56.052 50.1887 58.8569 55.4702C53.6052 61.6766 45.7577 65.6452 37 65.6452Z" fill="black"/>
               </svg>
               <p>
                 {{cliente.nombre_cliente}}
                 {{cliente.estado_adjudicacion}}
+              </p>
+            </button>
+          </div>
+          <div class="col-3 mx-2 d-flex flex-column contenedor-tabla  overflow-y-auto">
+            <button *ngFor="let cliente of mostrarListapro" (click)="mostrarinvitacion(cliente.id_invitacion,cliente.estado_invitacion,cliente.nombre_cliente,cliente.id_cliente)" class="col-12 flex-fill text-dark bg-white">
+              <svg width="74" height="74" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M37 0C16.5605 0 0 16.5605 0 37C0 57.4395 16.5605 74 37 74C57.4395 74 74 57.4395 74 37C74 16.5605 57.4395 0 37 0ZM37 14.3226C44.2508 14.3226 50.129 20.2008 50.129 27.4516C50.129 34.7024 44.2508 40.5806 37 40.5806C29.7492 40.5806 23.871 34.7024 23.871 27.4516C23.871 20.2008 29.7492 14.3226 37 14.3226ZM37 65.6452C28.2423 65.6452 20.3948 61.6766 15.1431 55.4702C17.948 50.1887 23.4383 46.5484 29.8387 46.5484C30.1968 46.5484 30.5548 46.6081 30.898 46.7125C32.8375 47.3391 34.8665 47.7419 37 47.7419C39.1335 47.7419 41.1774 47.3391 43.102 46.7125C43.4452 46.6081 43.8032 46.5484 44.1613 46.5484C50.5617 46.5484 56.052 50.1887 58.8569 55.4702C53.6052 61.6766 45.7577 65.6452 37 65.6452Z" fill="black"/>
+              </svg>
+              <p>
+                {{cliente.nombre_cliente}}
+                {{cliente.estado_invitacion}}
               </p>
             </button>
           </div>

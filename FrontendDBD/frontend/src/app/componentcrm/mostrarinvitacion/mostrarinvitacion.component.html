@@ -1,4 +1,12 @@
-<p>{{invitacion.asunto_invitacion}}</p>
-<p>{{invitacion.comentario}}</p>
-<p>{{invitacion.tiempo_maximo}}</p>
-<p>{{invitacion.direccion_proyecto}}</p>
+<p>{{invitacion?.asunto_invitacion}}</p>
+<p>{{invitacion?.comentario}}</p>
+<p>{{invitacion?.tiempo_maximo}}</p>
+<p>{{invitacion?.direccion_proyecto}}</p>
+<p *ngFor="let requerimiento of requerimiento">{{requerimiento?.descrip_requerimiento}}</p>
+<p>{{stockrev?.stock_disponible}}</p>
+<p>Cliente: {{mostrarNombre()}}</p>
+<button (click)="botonparticipar()">Si se participara</button>
+<button (click)="botonnoparticipar()">No se participara</button>
+<p>{{invitacion?.id_invitacion}}</p>
+<p>{{stockrev?.id_informe_stock}}</p>
+

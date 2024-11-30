@@ -19,6 +19,7 @@ import {MenucliComponent} from './componentcrm/menucli/menucli.component';
 import {PreloginComponent} from './prelogin/prelogin.component';
 import {MostraradjaComponent} from './componentcrm/mostraradja/mostraradja.component';
 import {MostraradjrComponent} from './componentcrm/mostraradjr/mostraradjr.component';
+import {ElaborarpropuestaComponent} from './componentcrm/elaborarpropuesta/elaborarpropuesta.component';
 
 export const routes: Routes = [
   {path:'vacante', component: VacanteComponent},
@@ -36,5 +37,6 @@ export const routes: Routes = [
   {path:'postulacionVacante',component:PostulacionVacanteComponent},
   {path:'mostrarInvitacion',component:MostrarinvitacionComponent},
   {path:'mostrarAdjA',component:MostraradjaComponent},
-  {path:'mostrarAdjR',component:MostraradjrComponent}
+  {path:'mostrarAdjR',component:MostraradjrComponent},
+  {path:'elaborarpropuesta',component:ElaborarpropuestaComponent}
 ];

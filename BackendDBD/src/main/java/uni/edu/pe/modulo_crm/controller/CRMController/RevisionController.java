@@ -15,7 +15,7 @@ public class RevisionController {
     @Autowired
     private RevisionService service;
     @GetMapping("/mostrarstock")
-    public List<MostrarStock> getstock() {
+    public MostrarStock getstock() {
         return service.mostrarstock();
     }
     @PostMapping("/insertreva")

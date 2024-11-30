@@ -82,6 +82,13 @@ public class InvitacionService {
         int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
         return invitacion;
     }
+    public ActualizarInvitacion aceptarinvitacion(ActualizarInvitacion invitacion){
+        String sqlUpdate = "UPDATE Invitacion\n" +
+                "SET Estado_Invitacion = 'Aceptada'\n" +
+                "WHERE ID_Invitacion = ?;";
+        int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
+        return invitacion;
+    }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public List<MostrarRequerimientos> requerimientosinvitacion(String id_invitacion){

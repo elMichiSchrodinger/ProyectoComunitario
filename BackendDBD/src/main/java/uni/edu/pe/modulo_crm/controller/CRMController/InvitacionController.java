@@ -51,4 +51,14 @@ public class InvitacionController {
             return new ResponseEntity<>("Error en la actualización de la invitacion", HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/aceptarinv")
+    public ResponseEntity<?> aceptarinvitacion(@RequestBody ActualizarInvitacion invitacion){
+        try{
+            invitacion = service.aceptarinvitacion(invitacion);
+            return ResponseEntity.ok().body(invitacion);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Error en la actualización de la invitacion", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
