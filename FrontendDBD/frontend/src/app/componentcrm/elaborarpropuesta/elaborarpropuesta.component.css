@@ -33,3 +33,15 @@
   background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
   border-radius: 16px;
 }
+.nradius{
+  border-radius: 16px;
+}
+.ncolor1{
+  background: radial-gradient(28.22% 50% at 50% 50%, #8772D3 0%, #799FC2 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+}
+.scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}

@@ -27,14 +27,47 @@
   <div class="container text-center">
     <div class="row">
       <div class="col-7 mx-2">
-        <div class="card ncolor1 border-0" style="width: 18rem;">
-          <div class="card-body ">
-            <div class="card-text">
+        <div class="card ncolor1 border-0 scroll" style="width: 18rem;">
+          <div class="card-text text-white">
+            Asunto de la invitacion:
+          </div>
+          <div class="card border-0">
+            <div>
               <p>{{invitacion.asunto_invitacion}}</p>
-              <p>{{invitacion.comentario}}</p>
+            </div>
+          </div>
+          <div class="card-text text-white">
+            Requerimientos de la invitacion:
+          </div>
+          <div class="card border-0">
+            <div>
+              <p *ngFor="let requerimiento of requerimiento">
+                {{requerimiento.descrip_requerimiento}}
+              </p>
+            </div>
+          </div>
+          <div class="card-text text-white">
+            Tiempo requerido maximo:
+          </div>
+          <div class="card border-0">
+            <div>
               <p>{{invitacion.tiempo_maximo}}</p>
+            </div>
+          </div>
+          <div class="card-text text-white">
+            Dirección del lugar del proyecto:
+          </div>
+          <div class="card border-0">
+            <div>
               <p>{{invitacion.direccion_proyecto}}</p>
-              <p *ngFor="let requerimiento of requerimiento">{{requerimiento.descrip_requerimiento}}</p>
+            </div>
+          </div>
+          <div class="card-text text-white">
+            Comentario adicional:
+          </div>
+          <div class="card border-0">
+            <div>
+              <p>{{invitacion.comentario}}</p>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-export interface InsertarpropuestaModel {
+export interface Insertarpropuesta {
   id_presentacion_propuesta: string;
   precio_propuesto: number;
   descripcion_tecnica: string;

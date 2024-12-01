@@ -24,4 +24,7 @@ export class LogincliService {
   getidLoginCli(){
     return this.logincli.id_cliente;
   }
+  getnombreLoginCli(){
+    return this.logincli.nombre;
+  }
 }

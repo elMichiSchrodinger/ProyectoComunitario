@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {InsertarrevisionModel} from '../../models/modelscrm/insertarrevision.model';
+import {Insertarrevision} from '../../models/modelscrm/insertarrevision.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -16,11 +16,11 @@ export class InsertarrevisionService {
 
   constructor(private http: HttpClient) {}
 
-  aceptarRevision(revision: InsertarrevisionModel): Observable<InsertarrevisionModel> {
-    return this.http.post<InsertarrevisionModel>(this.apiUrl, revision);
+  aceptarRevision(revision: Insertarrevision): Observable<Insertarrevision> {
+    return this.http.post<Insertarrevision>(this.apiUrl, revision);
   }
-  rechazarRevision(revision: InsertarrevisionModel): Observable<InsertarrevisionModel> {
-    return this.http.post<InsertarrevisionModel>(this.apiUrl2, revision);
+  rechazarRevision(revision: Insertarrevision): Observable<Insertarrevision> {
+    return this.http.post<Insertarrevision>(this.apiUrl2, revision);
   }
   aceptarInvitacion(id_invitacion: string): Observable<any> {
     const body = { id_invitacion };

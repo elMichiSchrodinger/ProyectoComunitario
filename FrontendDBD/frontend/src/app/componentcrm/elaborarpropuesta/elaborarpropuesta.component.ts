@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {InsertarpropuestaModel} from '../../models/modelscrm/insertarpropuesta.model';
+import {Insertarpropuesta} from '../../models/modelscrm/insertarpropuesta.model';
 import {ElaborarpropuestaService} from '../../services/servicecrm/elaborarpropuesta.service';
-import {InsertargarantiasModel} from '../../models/modelscrm/insertargarantias.model';
-import {InsertarbeneficiosModel} from '../../models/modelscrm/insertarbeneficios.model';
+import {Insertargarantias} from '../../models/modelscrm/insertargarantias.model';
+import {Insertarbeneficios} from '../../models/modelscrm/insertarbeneficios.model';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {InsertarrevisionService} from '../../services/servicecrm/insertarrevision.service';
@@ -18,7 +18,7 @@ import {MostrarinvitacionService} from '../../services/servicecrm/mostrarinvitac
   styleUrl: './elaborarpropuesta.component.css'
 })
 export class ElaborarpropuestaComponent implements OnInit{
-  propuesta: InsertarpropuestaModel = {
+  propuesta: Insertarpropuesta = {
     id_presentacion_propuesta: '',
     precio_propuesto: 0,
     descripcion_tecnica: '',
@@ -31,11 +31,11 @@ export class ElaborarpropuestaComponent implements OnInit{
     id_revision_tecnica: '',
     id_cliente: ''
   };
-  garantia: InsertargarantiasModel = {
+  garantia: Insertargarantias = {
     descrip_garantia: '',
     id_presentacion_propuesta: '',
   };
-  beneficio: InsertarbeneficiosModel = {
+  beneficio: Insertarbeneficios = {
     descrip_beneficio: '',
     id_presentacion_propuesta: '',
   };
@@ -78,7 +78,7 @@ export class ElaborarpropuestaComponent implements OnInit{
       next: (response) => {
         console.log('Respuesta del servidor:', response);
         this.garantias.forEach((descripcionGarantia) => {
-          const garantia: InsertargarantiasModel = {
+          const garantia: Insertargarantias = {
             descrip_garantia: descripcionGarantia,
             id_presentacion_propuesta: response.id_presentacion_propuesta
           };
@@ -93,7 +93,7 @@ export class ElaborarpropuestaComponent implements OnInit{
           });
         });
         this.beneficios.forEach((descripcionBefenecio) => {
-          const beneficio: InsertarbeneficiosModel = {
+          const beneficio: Insertarbeneficios = {
             descrip_beneficio: descripcionBefenecio,
             id_presentacion_propuesta: response.id_presentacion_propuesta
           };
@@ -110,7 +110,7 @@ export class ElaborarpropuestaComponent implements OnInit{
         alert('Se inserto propuesta');
       },
       error: (error) => {
-        console.error('Error del servidor:', error);
+        console.error('Error de generar propuesta:', error);
       }
     });
     this.servicio1.completarInvitacion(this.servicio3.getInvitacion()).subscribe({

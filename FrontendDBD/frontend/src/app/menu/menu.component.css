@@ -135,18 +135,31 @@
 
 
 .nuevo-color{
+  border-radius: 16px;
   background: linear-gradient(180deg, #121216 0%, #706DCE 100%) ;
 }
 
-.contenedor-tabla button{
+.card-body button{
   width: 100%;
-
+  border-radius: 30px;
 }
-
+.ncolor1 {
+  background: radial-gradient(50% 50% at 50% 50%, #989898 0%, #706DCE 100%);
+  border-radius: 30px;
+}
 .contenedor-tabla{
   overflow-y: scroll;
 }
 
 .datos{
   max-height: 500px;
+}
+.scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.listcli {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

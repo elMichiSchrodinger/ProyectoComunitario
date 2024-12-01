@@ -70,20 +70,23 @@
   display: flex;
   justify-content: center;
 }
-
-.contenido-menu button{
-  width: 40%;
-  margin: 10px;
-  padding: 50px 0;
-  text-align: center;
-  border: none;
-  color: white;
-  font-size: 20px;
-  font-family: 'Newsreader';
-  cursor: pointer;
+.nradius{
+  border-radius: 16px;
 }
-.contenido-menu button svg{
-  width: 100%;
-  margin-bottom: 20px;
+.scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.ncolor1 {
+  background: radial-gradient(50% 50% at 50% 50%, #989898 0%, #706DCE 100%);
+  border-radius: 30px;
+}
+.ncolor2 {
+  background: linear-gradient(90deg, #121216 0%, #706DCE 100%);
+  border-radius: 16px;
+}
+.ncolor3 {
+  background: radial-gradient(49.74% 141.18% at 50.26% 50%, #706DCE 0%, #989898 100%);
+  border-radius: 16px;
 }
 
