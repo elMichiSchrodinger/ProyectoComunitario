@@ -8,7 +8,7 @@ import {LoginCli} from '../models/logincli.model';
 })
 export class LogincliService {
   private apiUrl = 'http://localhost:8080/logcliente';
-  private logincli!: LoginCli
+  private logincli!: LoginCli;
   constructor(private http: HttpClient) {}
   obtenerLoginCli(ruc_dni: string, correo: string): Observable<LoginCli> {
     let params = new HttpParams()

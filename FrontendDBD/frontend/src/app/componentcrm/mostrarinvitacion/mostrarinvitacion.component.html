@@ -19,10 +19,9 @@
       <div class="h4 mx-3 my-4">
         <p class="fw-bold">Cliente: {{mostrarNombre()}}</p>
       </div>
-
     </div>
   </div>
-  <div class="text-center h2 my-3">
+  <div class="text-center fw-bold h2 my-3">
     Invitacion del cliente
   </div>
   <div class="container text-center">
@@ -31,11 +30,11 @@
         <div class="card ncolor1 border-0" style="width: 18rem;">
           <div class="card-body ">
             <div class="card-text">
-              <p>{{invitacion?.asunto_invitacion}}</p>
-              <p>{{invitacion?.comentario}}</p>
-              <p>{{invitacion?.tiempo_maximo}}</p>
-              <p>{{invitacion?.direccion_proyecto}}</p>
-              <p *ngFor="let requerimiento of requerimiento">{{requerimiento?.descrip_requerimiento}}</p>
+              <p>{{invitacion.asunto_invitacion}}</p>
+              <p>{{invitacion.comentario}}</p>
+              <p>{{invitacion.tiempo_maximo}}</p>
+              <p>{{invitacion.direccion_proyecto}}</p>
+              <p *ngFor="let requerimiento of requerimiento">{{requerimiento.descrip_requerimiento}}</p>
             </div>
           </div>
         </div>
@@ -44,7 +43,7 @@
         <div class="card ncolor1 border-0" style="width: 18rem;">
           <div class="card-text1">
             <p class="text-center text-light my-3 fw-bold">Cantidad de stock y/o inventario:</p>
-            <p class="text-center text-light my-3 fw-bold">{{stockrev?.stock_disponible}}</p>
+            <p class="text-center text-light my-3 fw-bold">{{stockrev.stock_disponible}}</p>
           </div>
         </div>
       </div>
@@ -54,7 +53,7 @@
     <button class="ncolor2 text-light border-0 mx-md-5" (click)="botonparticipar()">Si se participara</button>
     <button class="ncolor2 text-light border-0 mx-md-5" (click)="botonnoparticipar()">No se participara</button>
   </div>
-
+  <p>{{invitacion.id_invitacion}}</p>
 </div>
 
 

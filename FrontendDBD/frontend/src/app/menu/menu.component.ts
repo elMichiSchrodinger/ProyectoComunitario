@@ -7,6 +7,8 @@ import {MostrarListaInv} from '../models/modelscrm/listaclientesinv.model';
 import {MostrarinvitacionService} from '../services/servicecrm/mostrarinvitacion.service';
 import {MostrarListaAdj} from '../models/modelscrm/listaclientesadj.model';
 import {ListaclientesadjService} from '../services/servicecrm/listaclientesadj.service';
+import {InsertarrevisionService} from '../services/servicecrm/insertarrevision.service';
+import {EmpleadoService} from '../services/empleado.service';
 
 @Component({
   selector: 'app-menu',
@@ -21,12 +23,11 @@ export class MenuComponent {
   mostrarListaadj:MostrarListaAdj[]=[];
   mostrarListapro:MostrarListaInv[]=[];
   nombre!:string;
-  idcliente!:string;
   estadoReclutamiento(){
     this.contadorModulo=5;
   }
   constructor(private router: Router, private servicioCRM: ListaclientesinvService, private servicioCRM2: MostrarinvitacionService,
-              private servicioCRM3: ListaclientesadjService) {
+              private servicioCRM3: ListaclientesadjService, private servicioCRM4: InsertarrevisionService, private ser:EmpleadoService) {
   }
   crearVacante(){
     this.router.navigate(['vacante']);
@@ -67,11 +68,12 @@ export class MenuComponent {
       }
     })
   }
-  mostrarinvitacion(id_invitacion:string,estado:string,nombre:string,idcliente:string){
+  mostrarinvitacion(id_invitacion:string,estado:string,nombre:string,idcliente:string,idrevision:string){
 
     this.servicioCRM2.setInvitacion(id_invitacion);
     this.servicioCRM.setNombre(nombre);
     this.servicioCRM.setIdcliente(idcliente);
+    this.servicioCRM4.setIdrevision(idrevision);
     if(estado=='No revisado'){
       this.router.navigate(['mostrarInvitacion']);
     }

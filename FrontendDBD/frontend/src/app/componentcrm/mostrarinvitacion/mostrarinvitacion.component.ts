@@ -9,7 +9,7 @@ import {MostrarStockRev} from '../../models/modelscrm/mostrarstockrev.model';
 import {MostrarstockrevService} from '../../services/servicecrm/mostrarstockrev.service';
 import {ListaclientesinvService} from '../../services/servicecrm/listaclientesinv.service';
 import {InsertarrevisionService} from '../../services/servicecrm/insertarrevision.service';
-import {InsertarRevision} from '../../models/modelscrm/insertarrevision';
+import {InsertarrevisionModel} from '../../models/modelscrm/insertarrevision.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ export class MostrarinvitacionComponent implements OnInit {
   invitacion!:MostrarInvitacion;
   requerimiento!:MostrarRequerimientos[];
   stockrev!:MostrarStockRev;
-  revision: InsertarRevision = {
+  revision: InsertarrevisionModel = {
     id_revision_tecnica:'',
     id_invitacion:'',
     id_informe_stock: ''
@@ -66,8 +66,7 @@ export class MostrarinvitacionComponent implements OnInit {
   }
   botonparticipar(){
     this.servicio4.aceptarRevision(this.revision).subscribe({
-      next: data => {
-        this.servicio4.setIdrevision(data.id_revision_tecnica);
+      next: () => {
         alert('Exito al aceptar la invitacion')
       },
       error: error => {
@@ -86,8 +85,7 @@ export class MostrarinvitacionComponent implements OnInit {
   }
   botonnoparticipar(){
     this.servicio4.rechazarRevision(this.revision).subscribe({
-      next: data => {
-        this.servicio4.setIdrevision(data.id_revision_tecnica);
+      next: () => {
         alert('Exito al rechazar la invitacion')
       },
       error: error => {

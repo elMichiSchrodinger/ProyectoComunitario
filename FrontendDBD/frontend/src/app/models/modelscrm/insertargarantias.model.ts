@@ -1,4 +1,4 @@
-export interface InsertarGarantias {
+export interface InsertargarantiasModel {
   descrip_garantia: string;
   id_presentacion_propuesta: string;
 }

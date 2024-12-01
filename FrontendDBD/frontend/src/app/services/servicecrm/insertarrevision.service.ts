@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {InsertarRevision} from '../../models/modelscrm/insertarrevision';
+import {InsertarrevisionModel} from '../../models/modelscrm/insertarrevision.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -11,15 +11,16 @@ export class InsertarrevisionService {
   private apiUrl2 = 'http://localhost:8080/insertrevr';
   private apiUrl1= 'http://localhost:8080';
   private apiUrl3= 'http://localhost:8080';
+  private apiUrl4= 'http://localhost:8080';
   private idrevision!:string;
 
   constructor(private http: HttpClient) {}
 
-  aceptarRevision(revision: InsertarRevision): Observable<InsertarRevision> {
-    return this.http.post<InsertarRevision>(this.apiUrl, revision);
+  aceptarRevision(revision: InsertarrevisionModel): Observable<InsertarrevisionModel> {
+    return this.http.post<InsertarrevisionModel>(this.apiUrl, revision);
   }
-  rechazarRevision(revision: InsertarRevision): Observable<InsertarRevision> {
-    return this.http.post<InsertarRevision>(this.apiUrl2, revision);
+  rechazarRevision(revision: InsertarrevisionModel): Observable<InsertarrevisionModel> {
+    return this.http.post<InsertarrevisionModel>(this.apiUrl2, revision);
   }
   aceptarInvitacion(id_invitacion: string): Observable<any> {
     const body = { id_invitacion };
@@ -27,7 +28,11 @@ export class InsertarrevisionService {
   }
   rechazarInvitacion(id_invitacion: string): Observable<any> {
     const body = { id_invitacion };
-    return this.http.put(`${this.apiUrl1}/actualizarinv`, body);
+    return this.http.put(`${this.apiUrl1}/rechazarinv`, body);
+  }
+  completarInvitacion(id_invitacion: string): Observable<any> {
+    const body = { id_invitacion };
+    return this.http.put(`${this.apiUrl4}/completarinv`, body);
   }
   setIdrevision(id_revision:string){
     this.idrevision=id_revision;

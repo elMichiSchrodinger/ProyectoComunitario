@@ -1,6 +1,8 @@
 <div class="contenedor">
   <div class="contenedor-menu">
-    <img src="/imagenes/logo.png" alt="Logo de la empresa">
+    <button (click)="volvermenu()" [ngClass]="{'activado':contadorModulo==0}">
+      <img src="/imagenes/logo.png" alt="Logo de la empresa">
+    </button>
     <div class="contenedor-modulos">
       <button (click)="solicitarservicio()" [ngClass]="{'activado':contadorModulo==1}">
         Solicitar Servicio
@@ -24,5 +26,19 @@
         Cerrar Sesión
       </button>
     </div>
+  </div>
+  <div class="contenido-menu">
+    <div class="inicio" class="reclutamiento" *ngIf="contadorModulo==0">
+      HOLAAAA
+      <p>{{mostraridcliente()}}</p>
+      <p>{{cteestadoinv}}</p>
+      <p>{{id_invitacion}}</p>
+    </div>
+    <div class="inicio" class="reclutamiento" *ngIf="contadorModulo==1">
+      Solicitando
+    </div>
+  </div>
+  <div>
+
   </div>
 </div>

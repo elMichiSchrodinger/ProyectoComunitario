@@ -1,0 +1,35 @@
+.barra {
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.barra .flecha{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  width: 5%;
+}
+
+.titulo-propuesta{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor{
+  height: 100vh;
+  background: #F0F8FF;
+}
+
+.flecha svg{
+  width: 100%;
+}
+
+.ncolor2{
+  background: linear-gradient(90deg, #799FC2 0%, #8772D3 100%);
+  border-radius: 16px;
+}
