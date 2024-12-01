@@ -41,10 +41,10 @@ public class InvitacionController {
     public MostrarInvitacion obtenerinvitacion(@PathVariable String id_invitacion){
         return service.obtenerinvitacion(id_invitacion);
     }
-    @PutMapping("/actualizarinv")
-    public ResponseEntity<?> updateinvitacion(@RequestBody ActualizarInvitacion invitacion){
+    @PutMapping("/rechazarinv")
+    public ResponseEntity<?> rechazarinvitacion(@RequestBody ActualizarInvitacion invitacion){
         try{
-            invitacion = service.actualizarinvitacion(invitacion);
+            invitacion = service.rechazarinvitacion(invitacion);
             return ResponseEntity.ok().body(invitacion);
         }catch (Exception e){
             e.printStackTrace();
@@ -55,6 +55,16 @@ public class InvitacionController {
     public ResponseEntity<?> aceptarinvitacion(@RequestBody ActualizarInvitacion invitacion){
         try{
             invitacion = service.aceptarinvitacion(invitacion);
+            return ResponseEntity.ok().body(invitacion);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Error en la actualización de la invitacion", HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PutMapping("/completarinv")
+    public ResponseEntity<?> completarinvitacion(@RequestBody ActualizarInvitacion invitacion){
+        try{
+            invitacion = service.completarinvitacion(invitacion);
             return ResponseEntity.ok().body(invitacion);
         }catch (Exception e){
             e.printStackTrace();

@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MostrarListaInv {
-    private String id_cliente;
+public class SeguimientoInv {
     private String id_invitacion;
-    private String nombre_cliente;
     private String estado_invitacion;
-    private String id_revision_tecnica;
 }

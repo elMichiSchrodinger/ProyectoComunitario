@@ -47,15 +47,16 @@ public class ListaService {
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public List<MostrarListaInv> mostrarlistapro(){
         String sql="SELECT \n" +
-                "    cli.ID_cliente,\n" +
+                "    cli.id_cliente,\n" +
                 "    inv.id_invitacion,\n" +
-                "    cli.Nombre AS Nombre_Cliente,\n" +
-                "\tinv.Estado_Invitacion\n" +
+                "    cli.nombre AS nombre_cliente,\n" +
+                "    inv.estado_invitacion,\n" +
+                "    rev.id_revision_tecnica\n" +
                 "FROM \n" +
-                "    Cliente cli\n" +
-                "LEFT JOIN Invitacion inv ON cli.ID_cliente = inv.ID_cliente\n" +
+                "    cliente cli\n" +
+                "LEFT JOIN invitacion inv ON cli.id_cliente = inv.id_cliente left join revision_tecnica rev on rev.id_invitacion=inv.id_invitacion\n" +
                 "WHERE \n" +
-                "    inv.Estado_Invitacion IN ('Aceptada');";
+                "    inv.estado_invitacion IN ('Aceptada');";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MostrarListaInv.class));
     }
 }

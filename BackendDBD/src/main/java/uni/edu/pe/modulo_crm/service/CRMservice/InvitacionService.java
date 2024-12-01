@@ -75,9 +75,9 @@ public class InvitacionService {
         requerimiento.setId_requerimiento(idGenerado);
         return requerimiento;
     }
-    public ActualizarInvitacion actualizarinvitacion(ActualizarInvitacion invitacion){
+    public ActualizarInvitacion rechazarinvitacion(ActualizarInvitacion invitacion){
         String sqlUpdate = "UPDATE Invitacion\n" +
-                "SET Estado_Invitacion = 'Revisado'\n" +
+                "SET Estado_Invitacion = 'Rechazada'\n" +
                 "WHERE ID_Invitacion = ?;";
         int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
         return invitacion;
@@ -85,6 +85,13 @@ public class InvitacionService {
     public ActualizarInvitacion aceptarinvitacion(ActualizarInvitacion invitacion){
         String sqlUpdate = "UPDATE Invitacion\n" +
                 "SET Estado_Invitacion = 'Aceptada'\n" +
+                "WHERE ID_Invitacion = ?;";
+        int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
+        return invitacion;
+    }
+    public ActualizarInvitacion completarinvitacion(ActualizarInvitacion invitacion){
+        String sqlUpdate = "UPDATE Invitacion\n" +
+                "SET Estado_Invitacion = 'Completada'\n" +
                 "WHERE ID_Invitacion = ?;";
         int rows = jdbcTemplate.update(sqlUpdate, invitacion.getId_invitacion());
         return invitacion;
