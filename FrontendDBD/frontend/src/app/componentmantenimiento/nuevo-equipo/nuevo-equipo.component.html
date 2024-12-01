@@ -1,0 +1,62 @@
+<p>nuevo-equipo works!</p>
+<h2>Agregar Nuevo Equipo</h2>
+<form [formGroup]="nuevoEquipoForm" (ngSubmit)="agregarEquipo()">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input id="nombre" formControlName="nombre" required>
+        <div
+            *ngIf="nuevoEquipoForm.get('nombre')?.invalid && (nuevoEquipoForm.get('nombre')?.touched || nuevoEquipoForm.get('nombre')?.dirty)">
+            <small class="error">El nombre es obligatorio.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="tipo">Tipo:</label>
+        <input id="tipo" formControlName="tipo" required>
+        <div
+            *ngIf="nuevoEquipoForm.get('tipo')?.invalid && (nuevoEquipoForm.get('tipo')?.touched || nuevoEquipoForm.get('tipo')?.dirty)">
+            <small class="error">El tipo es obligatorio.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="marca">Marca:</label>
+        <input id="marca" formControlName="marca">
+    </div>
+
+    <div>
+        <label for="modelo">Modelo:</label>
+        <input id="modelo" formControlName="modelo">
+    </div>
+
+    <div>
+        <label for="fechaAdquisicion">Fecha de Adquisición:</label>
+        <input type="date" id="fechaAdquisicion" formControlName="fechaAdquisicion" required>
+        <div
+            *ngIf="nuevoEquipoForm.get('fechaAdquisicion')?.invalid && (nuevoEquipoForm.get('fechaAdquisicion')?.touched || nuevoEquipoForm.get('fechaAdquisicion')?.dirty)">
+            <small class="error">La fecha de adquisición es obligatoria.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="estado">Estado:</label>
+        <input id="estado" formControlName="estado" required>
+        <div
+            *ngIf="nuevoEquipoForm.get('estado')?.invalid && (nuevoEquipoForm.get('estado')?.touched || nuevoEquipoForm.get('estado')?.dirty)">
+            <small class="error">El estado es obligatorio.</small>
+        </div>
+    </div>
+
+    <div>
+        <label for="ubicacion">Ubicación:</label>
+        <input id="ubicacion" formControlName="ubicacion">
+    </div>
+
+    <button type="submit" [disabled]="nuevoEquipoForm.invalid">Agregar Equipo</button>
+</form>
+<style>
+    .error {
+        color: red;
+        font-size: 0.8em;
+    }
+</style>
