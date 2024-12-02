@@ -36,6 +36,16 @@ export class EquiposComponent implements OnInit {
     );
   }
 
+  filtrarOperativos(): void {
+    this.filteredEquipos = this.equipos.filter(equipo => equipo.estado === 'Operativo');
+  }
+
+  filtrarMantenimiento(): void {
+    this.filteredEquipos = this.equipos.filter(equipo => equipo.estado === 'Mantenimiento');
+  }
+  restablecerFiltro(): void {
+    this.filteredEquipos = this.equipos;
+  }
   masInformacion(id: string): void {
     this.router.navigate(['/equipos', id]);
   }

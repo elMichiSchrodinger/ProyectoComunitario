@@ -1,7 +1,16 @@
 <div class="container mt-4">
     <h2 class="text-center">Gestión de Equipos</h2>
-    <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" placeholder="Buscar equipos..." />
-    <button (click)="nuevoEquipo()">Nuevo</button>
+    <div class="input-group mx-3 my-2">
+        <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" class="form-control"
+            placeholder="Buscar equipos..." />
+    </div>
+
+    <div class="btn-group mb-3" role="group" aria-label="Botones de filtro">
+        <button class="btn btn-success mx-2" (click)="filtrarOperativos()">Operativo</button>
+        <button class="btn btn-warning mx-2" (click)="filtrarMantenimiento()">En Mantenimiento</button>
+        <button class="btn btn-secondary mx-2" (click)="restablecerFiltro()">Reset Filtro</button>
+        <button class="btn btn-primary mx-2" (click)="nuevoEquipo()">Nuevo</button>
+    </div>
 </div>
 
 <div class="row">
@@ -16,19 +25,20 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Ultima Revisión</th>
                     <th scope="col">Proxima Revisión</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let equipo of filteredEquipos">
                     <td>{{ equipo.idEquipo }}</td>
                     <td>{{ equipo.nombre }}</td>
-                    <td>{{ equipo.adquisicion| date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ equipo.adquisicion | date: 'yyyy-MM-dd' }}</td>
                     <td>{{ equipo.tipo }}</td>
-                    <td>{{ equipo.estado}}</td>
-                    <td>{{ equipo.ultimaRevision| date: 'yyyy-MM-dd' }}</td>
-                    <td>{{ equipo.proximaRevision| date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ equipo.estado }}</td>
+                    <td>{{ equipo .ultimaRevision | date: 'yyyy-MM-dd' }}</td>
+                    <td>{{ equipo.proximaRevision | date: 'yyyy-MM-dd' }}</td>
                     <td>
-                        <button (click)="masInformacion(equipo.idEquipo)">Ver más</button>
+                        <button class="btn btn-info" (click)="masInformacion(equipo.idEquipo)">Ver más</button>
                     </td>
                 </tr>
             </tbody>
