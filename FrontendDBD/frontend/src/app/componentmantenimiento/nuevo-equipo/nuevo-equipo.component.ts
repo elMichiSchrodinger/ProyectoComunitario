@@ -33,7 +33,7 @@ export class NuevoEquipoComponent {
     this.equiposService.agregarNuevoEquipo(this.nuevoEquipo).subscribe({
       next: (data) => {
         alert('Equipo agregado exitosamente');
-        this.router.navigate(['/equipos']); // Redirigir a la lista de equipos
+        this.router.navigate(['/equipos']);
       },
       error: (error) => {
         console.error('Error al agregar el equipo', error);
@@ -43,6 +43,6 @@ export class NuevoEquipoComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/equipos']); // Redirigir a la lista de equipos
+    this.router.navigate(['/equipos']);
   }
 }
