@@ -41,6 +41,9 @@ export class MenuComponent {
   volverInicio(){
     this.router.navigate(['']);
   }
+  volvermenu(){
+    this.contadorModulo=0;
+  }
   estadoCRM(){
     this.contadorModulo=7;
     this.servicioCRM.mostrarlistainv().subscribe({

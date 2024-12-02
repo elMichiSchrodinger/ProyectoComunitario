@@ -1,6 +1,8 @@
 <div class="contenedor">
   <div class="contenedor-menu">
-    <img src="/imagenes/logo.png" alt="Logo de la empresa">
+    <button (click)="volvermenu()" [ngClass]="{'activado':contadorModulo==0}">
+      <img src="/imagenes/logo.png" alt="Logo de la empresa">
+    </button>
     <div class="contenedor-modulos">
       <button>
         Inspeccion de Calidad
@@ -43,6 +45,24 @@
   </div>
 
   <div class="contenido-menu">
+    <div class="menuinicio" *ngIf="contadorModulo==0">
+      <div class="cont0 p-5 m-5" style="width: 70vw">
+        <div class="textcastro fw-bold pt-5 fs-1 text-center mt-5">
+          Bienvenido
+        </div>
+        <div class="textcastro fw-bold p-3 fs-1 text-center my-0">
+          a
+        </div>
+        <div class="textcastro fw-bold pb-5 fs-1 text-center mb-3">
+          Castro Contratistas
+        </div>
+        <div class="userlogo  justify-content-center d-flex">
+          <svg width="227" height="227" viewBox="0 0 227 227" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M113.5 0C50.8004 0 0 50.8004 0 113.5C0 176.2 50.8004 227 113.5 227C176.2 227 227 176.2 227 113.5C227 50.8004 176.2 0 113.5 0ZM113.5 43.9355C135.742 43.9355 153.774 61.9673 153.774 84.2097C153.774 106.452 135.742 124.484 113.5 124.484C91.2577 124.484 73.2258 106.452 73.2258 84.2097C73.2258 61.9673 91.2577 43.9355 113.5 43.9355ZM113.5 201.371C86.6353 201.371 62.5623 189.197 46.4526 170.158C55.0567 153.957 71.8986 142.79 91.5323 142.79C92.6306 142.79 93.729 142.973 94.7817 143.294C100.731 145.216 106.955 146.452 113.5 146.452C120.045 146.452 126.315 145.216 132.218 143.294C133.271 142.973 134.369 142.79 135.468 142.79C155.101 142.79 171.943 153.957 180.547 170.158C164.438 189.197 140.365 201.371 113.5 201.371Z" fill="black"/>
+          </svg>
+        </div>
+      </div>
+    </div>
     <div class="reclutamiento" *ngIf="contadorModulo==5">
       <button class="btn-crear" (click)="crearVacante()">
         <svg width="149" height="149" viewBox="0 0 149 149" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +115,6 @@
                   </svg>
                   <p>
                     {{cliente.nombre_cliente}}
-                    {{cliente.estado_invitacion}}
                   </p>
                 </button>
               </div>
@@ -113,8 +132,6 @@
                   </svg>
                   <p>
                     {{cliente.nombre_cliente}}
-                    {{cliente.estado_invitacion}}
-                    {{cliente.id_revision_tecnica}}
                   </p>
                 </button>
               </div>
@@ -132,7 +149,6 @@
                   </svg>
                   <p>
                     {{cliente.nombre_cliente}}
-                    {{cliente.estado_adjudicacion}}
                   </p>
                 </button>
               </div>
