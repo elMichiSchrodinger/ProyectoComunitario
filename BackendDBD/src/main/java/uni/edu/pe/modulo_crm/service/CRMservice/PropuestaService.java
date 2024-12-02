@@ -122,7 +122,7 @@ public class PropuestaService {
         return propuesta;
     }
 
-    public MostrarPropuesta obtenerpropuesta(String id_presentacion_propuesta){
+    public MostrarPropuesta obtenerpropuesta(String id_cliente){
         String sql="SELECT pro.ID_presentacion_propuesta,\n" +
                 "    pro.Precio_Propuesto, \n" +
                 "    pro.Descripcion_Tecnica, \n" +
@@ -133,11 +133,15 @@ public class PropuestaService {
                 "    pro.Tiempo_Ejecucion, \n" +
                 "    pro.Observacion_Propuesta \n" +
                 "FROM \n" +
-                "    Presentacion_propuesta pro \n" +
+                "    Presentacion_propuesta pro left join cliente cli on pro.id_cliente = cli.id_cliente \n" +
                 "LEFT JOIN Revision_tecnica rev ON pro.ID_revision_tecnica = rev.ID_revision_tecnica \n" +
-                "WHERE \n" +
-                "    rev.Estado_Participacion = 'Aceptado' and pro.estado_propuesta = 'No revisado' and pro.ID_presentacion_propuesta=?;";
-        return jdbcTemplate.queryForObject(sql,new Object[]{id_presentacion_propuesta}, new BeanPropertyRowMapper<>(MostrarPropuesta.class));
+                "WHERE CAST(SUBSTRING(pro.id_presentacion_propuesta FROM 3) AS INTEGER) = (\n" +
+                "    SELECT MAX(CAST(SUBSTRING(p.id_presentacion_propuesta FROM 3) AS INTEGER))\n" +
+                "    FROM presentacion_propuesta p\n" +
+                "    WHERE p.id_cliente = cli.id_cliente\n" +
+                ") and rev.Estado_Participacion = 'Aceptado' and pro.estado_propuesta = 'No revisado'\n" +
+                "and cli.id_cliente =?;";
+        return jdbcTemplate.queryForObject(sql,new Object[]{id_cliente}, new BeanPropertyRowMapper<>(MostrarPropuesta.class));
     }
     public List<MostrarGarantias> garantiaspropuesta(String id_presentacion_propuesta){
         String sql="select ga.ID_garantia, ga.Descrip_garantia from garantia ga left join presentacion_propuesta pro on ga.id_presentacion_propuesta = pro.id_presentacion_propuesta \n" +

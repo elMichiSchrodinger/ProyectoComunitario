@@ -17,5 +17,4 @@ public class MostrarPropuesta {
     private String condicion_pago;
     private String tiempo_ejecucion;
     private String observacion_propuesta;
-
 }

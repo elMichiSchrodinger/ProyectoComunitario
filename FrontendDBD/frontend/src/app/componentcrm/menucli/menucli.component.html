@@ -234,8 +234,26 @@
       </div>
       <div class="card ncolor1 border-0" style="width: 18rem;">
         <div class="card-body ">
-          propuesta
+          <p>{{propuesta.id_presentacion_propuesta}}</p>
+          <p>{{propuesta.calidad_ofrecida}}</p>
+          <p>{{propuesta.condicion_pago}}</p>
+          <p>{{propuesta.descripcion_economica}}</p>
+          <p>{{propuesta.descripcion_tecnica}}</p>
+          <p>{{propuesta.observacion_propuesta}}</p>
+          <p>{{propuesta.precio_propuesto}}</p>
+          <p>{{propuesta.seguridad_ofrecida}}</p>
+          <p>{{propuesta.tiempo_ejecucion}}</p>
+          <p *ngFor="let garantia of garantia1">
+            {{garantia.descrip_garantia}}
+          </p>
+          <p *ngFor="let beneficio of beneficio1">
+            {{beneficio.descrip_beneficio}}
+          </p>
         </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-center">
+        <button class="ncolor3 text-light border-0 mx-md-5" (click)="botonaceptar()">Aceptar propuesta</button>
+        <button class="ncolor3 text-light border-0 mx-md-5" (click)="botonrechazar()">Rechazar propuesta</button>
       </div>
     </div>
   </div>
