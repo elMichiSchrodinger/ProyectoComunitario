@@ -19,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let equipo of equipos">
+                <tr *ngFor="let equipo of filteredEquipos">
                     <td>{{ equipo.idEquipo }}</td>
                     <td>{{ equipo.nombre }}</td>
                     <td>{{ equipo.adquisicion| date: 'yyyy-MM-dd' }}</td>

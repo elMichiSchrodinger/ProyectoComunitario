@@ -26,14 +26,13 @@ export class EquiposComponent implements OnInit {
     this.equiposService.obtenerEquipos().subscribe(data => {
       this.equipos = data;
       this.filteredEquipos = data;
-      console.log(this.equipos);
     });
   }
 
   buscarEquipos(): void {
+    console.log(this.searchTerm);
     this.filteredEquipos = this.equipos.filter(equipo =>
-      equipo.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      equipo.tipo.toLowerCase().includes(this.searchTerm.toLowerCase())
+      equipo.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
