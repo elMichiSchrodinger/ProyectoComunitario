@@ -8,6 +8,14 @@ import {ElaborarinvitacionService} from '../../services/servicecrm/elaborarinvit
 import {Insertarinvitacion} from '../../models/modelscrm/insertarinvitacion.model';
 import {Insertarrequerimientos} from '../../models/modelscrm/insertarrequerimientos.model';
 import {Insertargarantias} from '../../models/modelscrm/insertargarantias.model';
+import {MostrarPropuesta} from '../../models/modelscrm/mostrarpropuesta.model';
+import {MostrarGarantias} from '../../models/modelscrm/mostrargarantias';
+import {MostrarBeneficios} from '../../models/modelscrm/mostrarbeneficios';
+import {MostrarpropuestaService} from '../../services/servicecrm/mostrarpropuesta.service';
+import {MostrarbeneficiosService} from '../../services/servicecrm/mostrarbeneficios.service';
+import {MostrargarantiasService} from '../../services/servicecrm/mostrargarantias.service';
+import {InsertaradjudicacionService} from '../../services/servicecrm/insertaradjudicacion.service';
+import {InsertarAdjudicacion} from '../../models/modelscrm/insertaradjudicacion.model';
 
 @Component({
   selector: 'app-menucli',
@@ -34,7 +42,17 @@ export class MenucliComponent implements OnInit{
   };
   requerimientos: string[] = [''];
   id_prueba='';
-  constructor(private router: Router,private servicio:LogincliService,private servicio1:SeguimientoinvService, private servicio2: ElaborarinvitacionService) {
+  propuesta!: MostrarPropuesta;
+  garantia1!: MostrarGarantias[];
+  beneficio1!: MostrarBeneficios[];
+  cteidpropuesta!: string;
+  adjudicacion: InsertarAdjudicacion = {
+    id_presentacion_propuesta:'',
+    id_cliente:''
+  }
+  constructor(private router: Router,private servicio:LogincliService,private servicio1:SeguimientoinvService, private servicio2: ElaborarinvitacionService,
+              private servicio3: MostrarpropuestaService, private servicio4: MostrarbeneficiosService, private servicio5: MostrargarantiasService,
+              private servicio6: InsertaradjudicacionService) {
   }
   ngOnInit() {
     this.invitacion.id_cliente=this.servicio.getidLoginCli();
@@ -43,6 +61,31 @@ export class MenucliComponent implements OnInit{
       next: data=>{
         this.cteestadoinv=data.estado_invitacion;
         this.id_invitacion=data.id_invitacion;
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+    this.servicio3.obtenerPropuesta(this.servicio.getidLoginCli()).subscribe({
+      next: data => {
+        this.propuesta=data;
+        this.cteidpropuesta=this.propuesta.id_presentacion_propuesta;
+        this.servicio5.obtenerGarantias(this.propuesta.id_presentacion_propuesta).subscribe({
+          next: data => {
+            this.garantia1=data;
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
+        this.servicio4.obtenerBeneficios(this.propuesta.id_presentacion_propuesta).subscribe({
+          next: data => {
+            this.beneficio1=data;
+          },
+          error: error => {
+            console.log(error);
+          }
+        })
       },
       error: error => {
         console.log(error);
@@ -83,12 +126,74 @@ export class MenucliComponent implements OnInit{
       }
     });
     this.contadorModulo=0;
+    this.servicio1.obtenerSeguimientoinv(this.servicio.getidLoginCli()).subscribe({
+      next: data=>{
+        this.cteestadoinv=data.estado_invitacion;
+        this.id_invitacion=data.id_invitacion;
+        alert('comprobación de actualizacion')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
   trackByIndex(index: number, obj: any): any {
     return index;
   }
+  botonaceptar(){
+    this.adjudicacion.id_presentacion_propuesta=this.cteidpropuesta;
+    this.adjudicacion.id_cliente=this.servicio.getidLoginCli();
+    this.servicio6.aceptarAdjudicacion(this.adjudicacion).subscribe({
+      next: () => {
+        alert('Exito al aceptar la propuesta')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+    this.servicio6.actualizarPropuesta(this.cteidpropuesta).subscribe({
+      next: ()=> {
+        alert('Se reviso la propuesta')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+    this.contadorModulo=0;
+  }
+  botonrechazar(){
+    this.adjudicacion.id_presentacion_propuesta=this.cteidpropuesta;
+    this.adjudicacion.id_cliente=this.servicio.getidLoginCli();
+    this.servicio6.rechazarAdjudicacion(this.adjudicacion).subscribe({
+      next: () => {
+        alert('Exito al rechazar la propuesta')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+    this.servicio6.actualizarPropuesta(this.cteidpropuesta).subscribe({
+      next: ()=> {
+        alert('Se reviso la propuesta')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
+    this.contadorModulo=0;
+  }
   volvermenu(){
     this.contadorModulo=0;
+    this.servicio1.obtenerSeguimientoinv(this.servicio.getidLoginCli()).subscribe({
+      next: data=>{
+        this.cteestadoinv=data.estado_invitacion;
+        this.id_invitacion=data.id_invitacion;
+        alert('comprobación de actualizacion')
+      },
+      error: error => {
+        console.log(error);
+      }
+    });
   }
   solicitarservicio(){
     this.contadorModulo=1;
