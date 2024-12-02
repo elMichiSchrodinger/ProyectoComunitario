@@ -1,1 +1,53 @@
-<p>cronogramas works!</p>
+<div class="container my-2 py-2 bg-light border rounded">
+    <h2 class="text-center text-warning">Cronogramas</h2>
+    <div class="input-group mb-3">
+        <input type="text" [(ngModel)]="searchTerm" (input)="buscarCronogramas()"
+            class="form-control border border-warning" placeholder="Buscar Cronogramas..." />
+    </div>
+
+    <div class="d-flex justify-content-center" role="group" aria-label="Botones de filtro">
+        <button class="btn btn-warning mx-2 rounded" (click)="filtrarCompletados()">
+            <i class="fas fa-check-circle"></i> Completados
+        </button>
+        <button class="btn btn-warning mx-2 rounded" (click)="filtrarPendientes()">
+            <i class="fas fa-tools"></i> Pendientes
+        </button>
+        <button class="btn btn-secondary mx-2 rounded" (click)="restablecerFiltro()">
+            <i class="fas fa-undo"></i> Reset Filtro
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-warning">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de Inicio</th>
+                        <th scope="col">Fecha de Cierre</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cronograma of filteredCronogramas">
+                        <td>{{ cronograma.idCronograma}}</td>
+                        <td>{{ cronograma.nombreEquipoInfraestructura }}</td>
+                        <td>{{ cronograma.fechaInicio| date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ cronograma.fechaFin| date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ cronograma.estado }}</td>
+                        <td>{{ cronograma.descripcion }}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="masInformacion(cronograma.idCronograma)">Ver
+                                más</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

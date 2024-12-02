@@ -20,7 +20,7 @@ public class EquipoController {
 
     @GetMapping("/equipos")
     public List<ListaEquipos> obtenerEquipos() {
-        return equipoService.obtenerEquipos(); // Devuelve una lista de ListaEquipos
+        return equipoService.obtenerEquipos();
     }
 
     @GetMapping("equipos/{id}")
@@ -32,7 +32,7 @@ public class EquipoController {
     @PostMapping("/solicitar-mantenimiento")
     public ResponseEntity<String> crearSolicitudMantenimiento(@RequestBody ListaSolicitudMantenimiento solicitud) {
         equipoService.solicitarMantenimiento(solicitud);
-        return ResponseEntity.ok("Solicitud de mantenimiento creada exitosamente.");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Solicitud de mantenimiento creada exitosamente.");
     }
 
     @PostMapping("/equipos")

@@ -33,3 +33,31 @@
         </div>
     </div>
 </div>
+
+<!-- Botón para abrir el modal -->
+<button class="btn btn-danger" (click)="abrirModal()">Reportar Falla</button>
+
+<!-- Modal -->
+<div class="modal" *ngIf="modalAbierto">
+    <div class="modal-content">
+        <span class="close" (click)="cerrarModal()">&times;</span>
+        <h5>Reportar Falla</h5>
+        <form (ngSubmit)="reportarFalla()">
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción de la Falla</label>
+                <textarea id="descripcion" class="form-control" [(ngModel)]="falla.descripcion" name="descripcion"
+                    required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="urgencia" class="form-label">Urgencia</label>
+                <select id="urgencia" class="form-select" [(ngModel)]="falla.urgencia" name="urgencia" required>
+                    <option value="Baja">A</option>
+                    <option value="Media">B</option>
+                    <option value="Alta">C</option>
+                </select>
+            </div>
+            <input type="hidden" [(ngModel)]="falla.idEquipo" name="idEquipo" />
+            <button type="submit" class="btn btn-primary">Enviar Reporte</button>
+        </form>
+    </div>
+</div>

@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cronogramas {
+public class Cronograma {
     private String idCronograma;
     private String nombreEquipoInfraestructura;
     private Date fechaInicio;
     private Date fechaFin;
     private String estado;
     private String descripcion;
+    private String idSolicitud;
 }
