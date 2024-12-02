@@ -1,8 +1,11 @@
 package uni.edu.pe.modulo_crm.controller.MantenimientoController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Equipo;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Infraestructura;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.ListaInfraestructuras;
 import uni.edu.pe.modulo_crm.service.Mantenimientoservice.InfraestructuraService;
@@ -25,5 +28,13 @@ public class InfraestructuraController {
     public ResponseEntity<Infraestructura> obtenerInfraestructuraPorId(@PathVariable String id) {
         Infraestructura infraestructura = infraestructuraService.obtenerInfraestructuraPorId(id);
         return ResponseEntity.ok(infraestructura);
+    }
+
+    @PostMapping("/infraestructuras")
+    public ResponseEntity<Infraestructura> agregarNuevaInfraestructura(
+            @RequestBody Infraestructura nuevaInfraestructura) {
+        Infraestructura infraestructuraCreada = infraestructuraService
+                .agregarNuevaInfraestructura(nuevaInfraestructura);
+        return ResponseEntity.status(HttpStatus.CREATED).body(infraestructuraCreada);
     }
 }
