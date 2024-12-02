@@ -24,5 +24,7 @@ export class EquiposService {
   }
   reportarFalla(falla: Falla, id: string): Observable<Falla> {
     return this.http.post<Falla>(`${this.apiUrl}/${id}/reportar-falla`, falla);
+    console.log(falla);
+    console.log(this.http);
   }
 }
