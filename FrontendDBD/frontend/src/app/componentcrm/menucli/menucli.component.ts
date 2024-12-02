@@ -66,31 +66,7 @@ export class MenucliComponent implements OnInit{
         console.log(error);
       }
     });
-    this.servicio3.obtenerPropuesta(this.servicio.getidLoginCli()).subscribe({
-      next: data => {
-        this.propuesta=data;
-        this.cteidpropuesta=this.propuesta.id_presentacion_propuesta;
-        this.servicio5.obtenerGarantias(this.propuesta.id_presentacion_propuesta).subscribe({
-          next: data => {
-            this.garantia1=data;
-          },
-          error: error => {
-            console.log(error);
-          }
-        });
-        this.servicio4.obtenerBeneficios(this.propuesta.id_presentacion_propuesta).subscribe({
-          next: data => {
-            this.beneficio1=data;
-          },
-          error: error => {
-            console.log(error);
-          }
-        })
-      },
-      error: error => {
-        console.log(error);
-      }
-    });
+
   }
   agregarRequerimiento() {
     this.requerimientos.push('');
@@ -210,6 +186,31 @@ export class MenucliComponent implements OnInit{
     }
     if(this.cteestadoinv=='Completada'){
       this.contadorModulo=5;
+      this.servicio3.obtenerPropuesta(this.servicio.getidLoginCli()).subscribe({
+        next: data => {
+          this.propuesta=data;
+          this.cteidpropuesta=this.propuesta.id_presentacion_propuesta;
+          this.servicio5.obtenerGarantias(this.propuesta.id_presentacion_propuesta).subscribe({
+            next: data => {
+              this.garantia1=data;
+            },
+            error: error => {
+              console.log(error);
+            }
+          });
+          this.servicio4.obtenerBeneficios(this.propuesta.id_presentacion_propuesta).subscribe({
+            next: data => {
+              this.beneficio1=data;
+            },
+            error: error => {
+              console.log(error);
+            }
+          })
+        },
+        error: error => {
+          console.log(error);
+        }
+      });
     }
   }
   volverInicio(){
