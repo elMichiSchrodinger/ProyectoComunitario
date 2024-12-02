@@ -1,12 +1,12 @@
-<div class="container mt-4">
-    <h2 class="text-center">Gestión de Equipos</h2>
+<div class="container my-2 py-2 bg-light border rounded">
+    <h2 class="text-center text-warning">Gestión de Equipos</h2>
     <div class="input-group mb-3">
-        <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" class="form-control"
+        <input type="text" [(ngModel)]="searchTerm" (input)="buscarEquipos()" class="form-control border border-warning"
             placeholder="Buscar equipos..." />
     </div>
 
-    <div class="d-flex justify-content-center mb-3" role="group" aria-label="Botones de filtro">
-        <button class="btn btn-success mx-2 rounded" (click)="filtrarOperativos()">
+    <div class="d-flex justify-content-center" role="group" aria-label="Botones de filtro">
+        <button class="btn btn-warning mx-2 rounded" (click)="filtrarOperativos()">
             <i class="fas fa-check-circle"></i> Operativo
         </button>
         <button class="btn btn-warning mx-2 rounded" (click)="filtrarMantenimiento()">
@@ -15,7 +15,7 @@
         <button class="btn btn-secondary mx-2 rounded" (click)="restablecerFiltro()">
             <i class="fas fa-undo"></i> Reset Filtro
         </button>
-        <button class="btn btn-primary mx-2 rounded" (click)="nuevoEquipo()">
+        <button class="btn btn-warning mx-2 rounded" (click)="nuevoEquipo()">
             <i class="fas fa-plus"></i> Nuevo
         </button>
     </div>
@@ -23,33 +23,35 @@
 
 <div class="row">
     <div class="col-md-10 offset-md-1">
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Fecha de Adquisición</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Ultima Revisión</th>
-                    <th scope="col">Proxima Revisión</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let equipo of filteredEquipos">
-                    <td>{{ equipo.idEquipo }}</td>
-                    <td>{{ equipo.nombre }}</td>
-                    <td>{{ equipo.adquisicion | date: 'yyyy-MM-dd' }}</td>
-                    <td>{{ equipo.tipo }}</td>
-                    <td>{{ equipo.estado }}</td>
-                    <td>{{ equipo.ultimaRevision | date: 'yyyy-MM-dd' }}</td>
-                    <td>{{ equipo.proximaRevision | date: 'yyyy-MM-dd' }}</td>
-                    <td>
-                        <button class="btn btn-info" (click)="masInformacion(equipo.idEquipo)">Ver más</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-warning">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha de Adquisición</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Ultima Revisión</th>
+                        <th scope="col">Proxima Revisión</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let equipo of filteredEquipos">
+                        <td>{{ equipo.idEquipo }}</td>
+                        <td>{{ equipo.nombre }}</td>
+                        <td>{{ equipo.adquisicion | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ equipo.tipo }}</td>
+                        <td>{{ equipo.estado }}</td>
+                        <td>{{ equipo.ultimaRevision | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ equipo.proximaRevision | date: 'yyyy-MM-dd' }}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="masInformacion(equipo.idEquipo)">Ver más</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
