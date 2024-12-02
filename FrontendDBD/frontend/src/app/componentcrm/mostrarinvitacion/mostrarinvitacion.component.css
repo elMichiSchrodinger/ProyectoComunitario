@@ -42,9 +42,12 @@
   border-radius: 16px;
 }
 .scroll {
-  max-height: 400px;
+  max-height: 100%;
   overflow-y: auto;
 }
 .contenedor1{
   width: 100%;
+}
+.nradius{
+  border-radius: 16px;
 }
