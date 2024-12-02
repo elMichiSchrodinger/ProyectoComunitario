@@ -29,8 +29,8 @@ public class EquipoController {
         return ResponseEntity.ok(equipo);
     }
 
-    @PostMapping("/solicitar-mantenimiento")
-    public ResponseEntity<String> crearSolicitudMantenimiento(@RequestBody ListaSolicitudMantenimiento solicitud) {
+    @PostMapping("equipos/{id}/reportar-falla")
+    public ResponseEntity<String> solicitarMantenimiento(@RequestBody ListaSolicitudMantenimiento solicitud) {
         equipoService.solicitarMantenimiento(solicitud);
         return ResponseEntity.status(HttpStatus.CREATED).body("Solicitud de mantenimiento creada exitosamente.");
     }

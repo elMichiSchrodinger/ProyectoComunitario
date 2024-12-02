@@ -5,6 +5,7 @@ import { EquiposService } from '../../services/servicemantenimiento/equipos.serv
 import { Equipo } from '../../models/modelsmantenimiento/equipo';
 import { Falla } from '../../models/modelsmantenimiento/falla';
 import { FormsModule } from '@angular/forms';
+import { EmpleadoService } from '../../services/empleado.service';
 @Component({
   selector: 'app-detalle-equipo',
   standalone: true,
@@ -28,10 +29,13 @@ export class DetalleEquipoComponent implements OnInit {
   constructor(
     private equiposService: EquiposService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private empleadoService: EmpleadoService
   ) { }
 
   ngOnInit(): void {
+    console.log('id: ');
+    console.log(this.empleadoService.getidEmpleado());
     this.idEquipo = this.route.snapshot.paramMap.get('id')!;
     this.cargarEquipo();
   }
@@ -56,11 +60,20 @@ export class DetalleEquipoComponent implements OnInit {
   }
 
   reportarFalla(): void {
-    this.falla.idEquipo = this.idEquipo; // Asigna el ID del equipo
-    this.equiposService.reportarFalla(this.falla, this.falla.idEquipo).subscribe({
+    const idEmpleado = this.empleadoService.getidEmpleado();
+    if (!idEmpleado) {
+      console.error('No se puede reportar la falla, id_empleado no está disponible');
+      alert('No se puede reportar la falla. Por favor, asegúrate de que has iniciado sesión correctamente.');
+      return;
+    }
+    this.falla.idEmpleado = idEmpleado;
+    this.falla.idEquipo = this.idEquipo;
+    console.log(this.falla);
+    console.log(this.falla.idEquipo);
+    this.equiposService.reportarFalla(this.falla, this.idEquipo).subscribe({
       next: () => {
         alert('Falla reportada exitosamente.');
-        this.cerrarModal(); // Cerrar el modal después de enviar el reporte
+        this.cerrarModal();
         this.falla = {
           idSolicitud: '',
           fechaSolicitud: null,

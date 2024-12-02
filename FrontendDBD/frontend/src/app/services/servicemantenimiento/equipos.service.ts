@@ -23,6 +23,6 @@ export class EquiposService {
     return this.http.post<Equipo>(this.apiUrl, equipo);
   }
   reportarFalla(falla: Falla, id: string): Observable<Falla> {
-    return this.http.post<Falla>(`${this.apiUrl}/${id}/reportarFalla`, falla);
+    return this.http.post<Falla>(`${this.apiUrl}/${id}/reportar-falla`, falla);
   }
 }
