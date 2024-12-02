@@ -30,7 +30,6 @@ export class EquiposComponent implements OnInit {
   }
 
   buscarEquipos(): void {
-    console.log(this.searchTerm);
     this.filteredEquipos = this.equipos.filter(equipo =>
       equipo.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
