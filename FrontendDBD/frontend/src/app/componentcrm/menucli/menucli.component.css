@@ -74,7 +74,7 @@
   border-radius: 16px;
 }
 .scroll {
-  max-height: 400px;
+  max-height: 75vh;
   overflow-y: auto;
 }
 .ncolor1 {
@@ -89,4 +89,5 @@
   background: radial-gradient(49.74% 141.18% at 50.26% 50%, #706DCE 0%, #989898 100%);
   border-radius: 16px;
 }
+
 

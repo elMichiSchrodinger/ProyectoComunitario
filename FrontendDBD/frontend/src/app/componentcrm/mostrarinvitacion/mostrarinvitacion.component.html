@@ -24,69 +24,66 @@
   <div class="text-center fw-bold h2 my-3">
     Invitacion del cliente
   </div>
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-7 mx-2">
-        <div class="card ncolor1 border-0 scroll" style="width: 18rem;">
-          <div class="card-text text-white">
+  <div class="container-fluid text-center mx-0" style="height: 60vh">
+    <div class="row" style="height: 100%">
+      <div class="col-9 p-3" style="height: 100%">
+        <div class="card ncolor1 border-0 scroll px-3 pt-0 pb-2" style="width: 100% !important;">
+          <div class="card-text text-white fs-5 my-2 text-start">
             Asunto de la invitacion:
           </div>
-          <div class="card border-0">
+          <div class="card border-0 nradius">
             <div>
               <p>{{invitacion.asunto_invitacion}}</p>
             </div>
           </div>
-          <div class="card-text text-white">
+          <div class="card-text text-white fs-5 my-2 text-start">
             Requerimientos de la invitacion:
           </div>
-          <div class="card border-0">
-            <div>
-              <p *ngFor="let requerimiento of requerimiento">
+          <div class="card border-0 my-2 nradius" *ngFor="let requerimiento of requerimiento">
+              <p >
                 {{requerimiento.descrip_requerimiento}}
               </p>
-            </div>
           </div>
-          <div class="card-text text-white">
+          <div class="card-text text-white fs-5 my-2 text-start">
             Tiempo requerido maximo:
           </div>
-          <div class="card border-0">
+          <div class="card border-0 nradius">
             <div>
               <p>{{invitacion.tiempo_maximo}}</p>
             </div>
           </div>
-          <div class="card-text text-white">
+          <div class="card-text text-white fs-5 my-2 text-start">
             Dirección del lugar del proyecto:
           </div>
-          <div class="card border-0">
+          <div class="card border-0 nradius">
             <div>
               <p>{{invitacion.direccion_proyecto}}</p>
             </div>
           </div>
-          <div class="card-text text-white">
+          <div class="card-text text-white fs-5 my-2 text-start">
             Comentario adicional:
           </div>
-          <div class="card border-0">
+          <div class="card border-0 nradius">
             <div>
               <p>{{invitacion.comentario}}</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4 mx-2 my-5">
-        <div class="card ncolor1 border-0" style="width: 18rem;">
+      <div class="col-3 p-3 align-content-center">
+        <div class="card ncolor1 border-0" style="width: 100%;">
           <div class="card-text1">
-            <p class="text-center text-light my-3 fw-bold">Cantidad de stock y/o inventario:</p>
-            <p class="text-center text-light my-3 fw-bold">{{stockrev.stock_disponible}}</p>
+            <p class="text-center text-light my-3 fs-2 fw-bold">Cantidad de stock y/o inventario:</p>
+            <p class="text-center text-light my-3 fs-2 fw-bold">{{stockrev.stock_disponible}}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center align-items-center">
-    <button class="ncolor2 text-light border-0 mx-md-5" (click)="botonparticipar()">Si se participara</button>
-    <button class="ncolor2 text-light border-0 mx-md-5" (click)="botonnoparticipar()">No se participara</button>
+  <div class="d-flex justify-content-center align-items-center p-3 mt-5">
+    <button class="ncolor2 fs-3 text-light border-0 mx-md-5" (click)="botonparticipar()">Si se participara</button>
+    <button class="ncolor2 fs-3 text-light border-0 mx-md-5" (click)="botonnoparticipar()">No se participara</button>
   </div>
-  <p>{{invitacion.id_invitacion}}</p>
 </div>
 
 
