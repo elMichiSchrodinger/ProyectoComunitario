@@ -19,8 +19,8 @@ public class Equipo {
     private Date fechaAdquisicion;
     private String estado;
     private String ubicacion;
-    private String frecuencia;
+    private Integer frecuencia;
     private String descripcion;
-    private String ultimaRevision;
-    private String proximaRevision;
+    private Date ultimaRevision;
+    private Date proximaRevision;
 }

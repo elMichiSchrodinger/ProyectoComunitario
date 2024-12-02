@@ -28,9 +28,6 @@ export class DetalleEquipoComponent implements OnInit {
   cargarEquipo(): void {
     this.equiposService.obtenerEquipoPorId(this.idEquipo).subscribe(data => {
       this.equipo = data;
-      this.equipo.fechaAdquisicion = new Date(this.equipo.fechaAdquisicion);
-      this.equipo.ultimaRevision = new Date(this.equipo.ultimaRevision);
-      this.equipo.proximaRevision = new Date(this.equipo.proximaRevision);
     });
   }
 
