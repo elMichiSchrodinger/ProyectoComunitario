@@ -1,0 +1,75 @@
+<div class="card container border-primary mt-5 px-0">
+    <div class="card-header text-center fw-bold bg-primary">
+        <h2>Agregar Nueva Infraestructura</h2>
+    </div>
+    <div class="card-body">
+        <form (ngSubmit)="agregarInfraestructura()">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" class="form-control border border-primary" id="nombre"
+                            [(ngModel)]="nuevaInfraestructura.nombre" name="nombre" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fechaAdquisicion" class="form label fw-bold">Fecha de Adquisición</label>
+                        <input type="date" class="form-control border border-primary" id="fechaAdquisicion"
+                            [(ngModel)]="nuevaInfraestructura.fechaAdquisicion" name="fechaAdquisicion" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ubicacion" class="form label fw-bold">Ubicación</label>
+                        <input type="text" class="form-control border border-primary" id="ubicacion"
+                            [(ngModel)]="nuevaInfraestructura.ubicacion" name="ubicacion" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estado" class="form label fw-bold">Estado</label>
+                        <input type="text" class="form-control border border-primary" id="estado"
+                            [(ngModel)]="nuevaInfraestructura.estado" name="estado" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tipo" class="form label fw-bold">Tipo</label>
+                        <input type="text" class="form-control border border-primary" id="tipo"
+                            [(ngModel)]="nuevaInfraestructura.tipo" name="tipo" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="responsable" class="form label fw-bold">Responsable</label>
+                        <input type="text" class="form-control border border-primary" id="responsable"
+                            [(ngModel)]="nuevaInfraestructura.responsable" name="responsable" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="frecuenciaMantenimiento" class="form label fw-bold">Frecuencia de Mantenimiento
+                            (días)</label>
+                        <input type="number" class="form-control border border-primary" id="frecuenciaMantenimiento"
+                            [(ngModel)]="nuevaInfraestructura.frecuenciaMantenimiento" name="frecuenciaMantenimiento"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Agregar otro campo aquí si es necesario -->
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary fw-bold">Agregar Infraestructura</button>
+            <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+        </form>
+    </div>
+</div>

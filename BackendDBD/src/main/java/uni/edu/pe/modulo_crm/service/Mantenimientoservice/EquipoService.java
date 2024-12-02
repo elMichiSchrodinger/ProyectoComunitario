@@ -56,7 +56,7 @@ public class EquipoService {
                 String sqlCronograma = "UPDATE Cronograma__de_mantenimiento SET fecha_inicio = CURRENT_DATE, " +
                                 "descripcion = 'Mantenimiento correctivo programado', ID_solicitud_mantenimiento = ? " +
                                 "WHERE id_cronograma = (SELECT id_cronograma FROM Cronograma__de_mantenimiento WHERE id_equipo = ? ORDER BY id_cronograma DESC LIMIT 1);";
-                jdbcTemplate.update(sqlCronograma, idSolicitud, solicitud.getIdSolicitud());
+                jdbcTemplate.update(sqlCronograma, idSolicitud, solicitud.getIdEquipo());
         }
 
         @Transactional

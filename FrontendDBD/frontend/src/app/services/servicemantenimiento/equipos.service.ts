@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Equipo } from '../../models/modelsmantenimiento/equipo';
 import { ListaEquipos } from '../../models/modelsmantenimiento/lista-equipos';
+import { Falla } from '../../models/modelsmantenimiento/falla';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,5 +21,8 @@ export class EquiposService {
 
   agregarNuevoEquipo(equipo: Equipo): Observable<Equipo> {
     return this.http.post<Equipo>(this.apiUrl, equipo);
+  }
+  reportarFalla(falla: Falla, id: string): Observable<Falla> {
+    return this.http.post<Falla>(`${this.apiUrl}/${id}/reportar-falla`, falla);
   }
 }

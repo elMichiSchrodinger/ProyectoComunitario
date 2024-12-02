@@ -1,0 +1,32 @@
+<div class="container mt-5" *ngIf="infraestructura">
+    <div class="card border-primary">
+        <div class="card-header bg-primary">
+            <h2>Detalles de la Infraestructura</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>ID:</strong> {{ infraestructura.idInfraestructura}}</p>
+                    <p><strong>Nombre:</strong> {{ infraestructura.nombre }}</p>
+                    <p><strong>Tipo:</strong> {{ infraestructura.tipo }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Ubicación:</strong> {{ infraestructura.ubicacion }}</p>
+                    <p><strong>Estado:</strong> {{ infraestructura.estado }}</p>
+                    <p><strong>Responsable:</strong> {{ infraestructura.responsable}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Fecha de Adquisición:</strong> {{ infraestructura.fechaAdquisicion | date}}</p>
+                    <p><strong>Frecuencia de Mantenimiento:</strong> {{ infraestructura.frecuenciaMantenimiento}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Última Revisión:</strong> {{ infraestructura.ultimoMantenimiento| date }}</p>
+                    <p><strong>Próxima Revisión:</strong> {{ infraestructura.proximoMantenimiento| date }}</p>
+                </div>
+            </div>
+            <button class="btn btn-primary" (click)="volver()">Volver</button>
+        </div>
+    </div>
+</div>

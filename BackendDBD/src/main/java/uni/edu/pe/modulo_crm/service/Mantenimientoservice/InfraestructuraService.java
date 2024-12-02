@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Equipo;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Infraestructura;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.ListaInfraestructuras;
 
@@ -34,5 +36,24 @@ public class InfraestructuraService {
                 + "WHERE i.ID_infraestructura = ?;";
         return jdbcTemplate.queryForObject(sql, new Object[] { idInfraestructura },
                 new BeanPropertyRowMapper<>(Infraestructura.class));
+    }
+
+    @Transactional
+    public Infraestructura agregarNuevaInfraestructura(Infraestructura nuevaInfraestructura) {
+        String sql = "INSERT INTO infraestructura (nombre,fecha_adquisicion, ubicacion, estado, tipo, id_empleado, Frecuencia_mantenimiento) "
+                +
+                "VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING ID_infraestructura;";
+        String idInfraestructura = jdbcTemplate.queryForObject(sql, new Object[] {
+                nuevaInfraestructura.getNombre(),
+                nuevaInfraestructura.getFechaAdquisicion(),
+                nuevaInfraestructura.getUbicacion(),
+                nuevaInfraestructura.getEstado(),
+                nuevaInfraestructura.getTipo(),
+                nuevaInfraestructura.getResponsable(),
+                nuevaInfraestructura.getFrecuenciaMantenimiento()
+        }, String.class);
+
+        nuevaInfraestructura.setIdInfraestructura(idInfraestructura);
+        return nuevaInfraestructura;
     }
 }

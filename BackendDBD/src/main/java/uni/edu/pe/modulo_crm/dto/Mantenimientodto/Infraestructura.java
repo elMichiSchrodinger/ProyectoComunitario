@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 public class Infraestructura {
     private String idInfraestructura;
     private String nombre;
-    private String fechaAdquisicion;
+    private Date fechaAdquisicion;
     private String ubicacion;
     private String estado;
     private String tipo;
     private String responsable;
-    private String frecuenciaMantenimiento;
+    private Integer frecuenciaMantenimiento;
     private Date ultimoMantenimiento;
     private Date proximoMantenimiento;
 }

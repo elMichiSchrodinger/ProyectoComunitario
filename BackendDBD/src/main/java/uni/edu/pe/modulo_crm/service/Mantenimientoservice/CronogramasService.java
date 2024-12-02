@@ -5,22 +5,23 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Cronogramas;
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Cronograma;
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.ListaCronogramas;
 
 import java.util.List;
 
 @Service
-public class CronogramaService {
+public class CronogramasService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Transactional(readOnly = true)
-    public List<Cronogramas> obtenerCronogramas() {
+    public List<ListaCronogramas> obtenerCronogramas() {
         String sql = "SELECT cm.ID_cronograma AS idCronograma, COALESCE(e.Nombre, i.Nombre) AS nombreEquipoInfraestructura, cm.fecha_inicio AS fechaInicio, cm.fecha_fin AS fechaFin, "
                 +
                 "cm.estado AS estado, cm.descripcion AS descripcion FROM cronograma__de_mantenimiento cm LEFT JOIN equipo e ON cm.ID_equipo=e.ID_equipo "
                 +
                 "LEFT JOIN infraestructura i ON cm.ID_infraestructura=i.ID_infraestructura ORDER BY cm.fecha_inicio DESC;";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Cronogramas.class));
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ListaCronogramas.class));
     }
 }
