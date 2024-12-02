@@ -8,11 +8,11 @@ export interface Equipo {
     modelo?: string;
     serie?: string;
     ubicacion?: string;
-    fechaAdquisicion: Date;
+    fechaAdquisicion: Date | null;
     estado: string;
-    frecuencia?: string;
+    frecuencia?: number;
     descripcion?: string;
-    ultimaRevision: Date;
-    proximaRevision: Date;
+    ultimaRevision: Date | null;
+    proximaRevision: Date | null;
 
 }

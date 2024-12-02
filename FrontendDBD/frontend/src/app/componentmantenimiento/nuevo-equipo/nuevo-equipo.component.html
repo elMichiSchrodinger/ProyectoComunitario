@@ -1,62 +1,91 @@
-<p>nuevo-equipo works!</p>
-<h2>Agregar Nuevo Equipo</h2>
-<form [formGroup]="nuevoEquipoForm" (ngSubmit)="agregarEquipo()">
-    <div>
-        <label for="nombre">Nombre:</label>
-        <input id="nombre" formControlName="nombre" required>
-        <div
-            *ngIf="nuevoEquipoForm.get('nombre')?.invalid && (nuevoEquipoForm.get('nombre')?.touched || nuevoEquipoForm.get('nombre')?.dirty)">
-            <small class="error">El nombre es obligatorio.</small>
-        </div>
+<div class="card container border-warning mt-5 px-0">
+    <div class="card-header text-center fw-bold bg-warning">
+        <h2>Agregar Nuevo Equipo</h2>
     </div>
-
-    <div>
-        <label for="tipo">Tipo:</label>
-        <input id="tipo" formControlName="tipo" required>
-        <div
-            *ngIf="nuevoEquipoForm.get('tipo')?.invalid && (nuevoEquipoForm.get('tipo')?.touched || nuevoEquipoForm.get('tipo')?.dirty)">
-            <small class="error">El tipo es obligatorio.</small>
-        </div>
+    <div class="card-body">
+        <form (ngSubmit)="agregarEquipo()">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" class="form-control border border-warning" id="nombre"
+                            [(ngModel)]="nuevoEquipo.nombre" name="nombre" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tipo" class="form label fw-bold">Tipo</label>
+                        <input type="text" class="form-control border border-warning" id="tipo"
+                            [(ngModel)]="nuevoEquipo.tipo" name="tipo" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="marca" class="form label fw-bold">Marca</label>
+                        <input type="text" class="form-control border border-warning" id="marca"
+                            [(ngModel)]="nuevoEquipo.marca" name="marca" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="modelo" class="form label fw-bold">Modelo</label>
+                        <input type="text" class="form-control border border-warning" id="modelo"
+                            [(ngModel)]="nuevoEquipo.modelo" name="modelo" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="serie" class="form label fw-bold">Número de Serie</label>
+                        <input type="text" class="form-control border border-warning" id="serie"
+                            [(ngModel)]="nuevoEquipo.serie" name="serie" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fechaAdquisicion" class="form label fw-bold">Fecha de Adquisición</label>
+                        <input type="date" class="form-control border border-warning" id="fechaAdquisicion"
+                            [(ngModel)]="nuevoEquipo.fechaAdquisicion" name="fechaAdquisicion" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="estado" class="form label fw-bold">Estado</label>
+                        <input type="text" class="form-control border border-warning" id="estado"
+                            [(ngModel)]="nuevoEquipo.estado" name="estado" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ubicacion" class="form label fw-bold">Ubicación</label>
+                        <input type="text" class="form-control border border-warning" id="ubicacion"
+                            [(ngModel)]="nuevoEquipo.ubicacion" name="ubicacion" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="frecuencia" class="form label fw-bold">Frecuencia de Mantenimiento (días)</label>
+                        <input type="number" class="form-control border border-warning" id="frecuencia"
+                            [(ngModel)]="nuevoEquipo.frecuencia" name="frecuencia" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="descripcion" class="form label fw-bold">Descripción</label>
+                        <textarea class="form-control border border-warning" id="descripcion"
+                            [(ngModel)]="nuevoEquipo.descripcion" name="descripcion" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning fw-bold">Agregar Equipo</button>
+            <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+        </form>
     </div>
-
-    <div>
-        <label for="marca">Marca:</label>
-        <input id="marca" formControlName="marca">
-    </div>
-
-    <div>
-        <label for="modelo">Modelo:</label>
-        <input id="modelo" formControlName="modelo">
-    </div>
-
-    <div>
-        <label for="fechaAdquisicion">Fecha de Adquisición:</label>
-        <input type="date" id="fechaAdquisicion" formControlName="fechaAdquisicion" required>
-        <div
-            *ngIf="nuevoEquipoForm.get('fechaAdquisicion')?.invalid && (nuevoEquipoForm.get('fechaAdquisicion')?.touched || nuevoEquipoForm.get('fechaAdquisicion')?.dirty)">
-            <small class="error">La fecha de adquisición es obligatoria.</small>
-        </div>
-    </div>
-
-    <div>
-        <label for="estado">Estado:</label>
-        <input id="estado" formControlName="estado" required>
-        <div
-            *ngIf="nuevoEquipoForm.get('estado')?.invalid && (nuevoEquipoForm.get('estado')?.touched || nuevoEquipoForm.get('estado')?.dirty)">
-            <small class="error">El estado es obligatorio.</small>
-        </div>
-    </div>
-
-    <div>
-        <label for="ubicacion">Ubicación:</label>
-        <input id="ubicacion" formControlName="ubicacion">
-    </div>
-
-    <button type="submit" [disabled]="nuevoEquipoForm.invalid">Agregar Equipo</button>
-</form>
-<style>
-    .error {
-        color: red;
-        font-size: 0.8em;
-    }
-</style>
+</div>

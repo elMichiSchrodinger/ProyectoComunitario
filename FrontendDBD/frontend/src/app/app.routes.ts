@@ -24,7 +24,7 @@ import { EquiposComponent } from './componentmantenimiento/equipos/equipos.compo
 import { InfraestructuraComponent } from './componentmantenimiento/infraestructura/infraestructura.component';
 import { CronogramasComponent } from './componentmantenimiento/cronogramas/cronogramas.component';
 import { DetalleEquipoComponent } from './componentmantenimiento/detalle-equipo/detalle-equipo.component';
-import { NuevoEquipoComoponent } from './componentmantenimiento/nuevo-equipo/nuevo-equipo.component';
+import { NuevoEquipoComponent } from './componentmantenimiento/nuevo-equipo/nuevo-equipo.component';
 export const routes: Routes = [
   { path: 'vacante', component: VacanteComponent },
   { path: '', component: PreloginComponent },
@@ -46,6 +46,6 @@ export const routes: Routes = [
   { path: 'equipos', component: EquiposComponent },
   { path: 'infraestructura', component: InfraestructuraComponent },
   { path: 'cronogramas', component: CronogramasComponent },
-  { path: 'equipos/nuevo', component: NuevoEquipoComoponent },
+  { path: 'equipos/nuevo', component: NuevoEquipoComponent },
   { path: 'equipos/:id', component: DetalleEquipoComponent }
 ];

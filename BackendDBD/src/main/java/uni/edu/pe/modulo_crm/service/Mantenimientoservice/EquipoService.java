@@ -32,12 +32,11 @@ public class EquipoService {
         @Transactional(readOnly = true)
         public Equipo obtenerEquipoPorId(String idEquipo) {
                 String sql = "SELECT e.ID_equipo AS idEquipo, e.nombre AS nombre, e.tipo AS tipo, e.marca AS marca, e.modelo AS modelo, "
-                                +
-                                "e.numero_serie AS numeroSerie, e.fecha_adquisicion AS fechaAdquisicion, e.estado AS estado, "
-                                +
-                                "e.ubicacion AS ubicacion, e.frecuencia_mantenimiento AS frecuencia, e.descripcion AS descripcion "
-                                +
-                                "FROM Equipo e WHERE e.ID_equipo = ?;";
+                                + "e.numero_serie AS serie, e.fecha_adquisicion AS fechaAdquisicion, e.estado AS estado, "
+                                + "e.ubicacion AS ubicacion, e.frecuencia_mantenimiento AS frecuencia, e.descripcion AS descripcion, "
+                                + "COALESCE((SELECT cm.fecha_fin FROM Cronograma__de_mantenimiento cm WHERE cm.id_equipo = e.ID_equipo AND cm.fecha_fin IS NOT NULL ORDER BY cm.id_cronograma DESC LIMIT 1), e.fecha_adquisicion) AS ultimaRevision, "
+                                + "(SELECT cm.fecha_inicio FROM Cronograma__de_mantenimiento cm WHERE cm.id_equipo = e.ID_equipo ORDER BY cm.id_cronograma DESC LIMIT 1) AS proximaRevision "
+                                + "FROM Equipo e WHERE e.ID_equipo = ?;";
                 return jdbcTemplate.queryForObject(sql, new Object[] { idEquipo },
                                 new BeanPropertyRowMapper<>(Equipo.class));
         }
@@ -58,5 +57,27 @@ public class EquipoService {
                                 "descripcion = 'Mantenimiento correctivo programado', ID_solicitud_mantenimiento = ? " +
                                 "WHERE id_cronograma = (SELECT id_cronograma FROM Cronograma__de_mantenimiento WHERE id_equipo = ? ORDER BY id_cronograma DESC LIMIT 1);";
                 jdbcTemplate.update(sqlCronograma, idSolicitud, solicitud.getIdSolicitud());
+        }
+
+        @Transactional
+        public Equipo agregarNuevoEquipo(Equipo nuevoEquipo) {
+                String sql = "INSERT INTO Equipo (nombre, tipo, marca, modelo, numero_serie, fecha_adquisicion, estado, ubicacion, frecuencia_mantenimiento, descripcion) "
+                                +
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING ID_equipo;";
+                String idEquipo = jdbcTemplate.queryForObject(sql, new Object[] {
+                                nuevoEquipo.getNombre(),
+                                nuevoEquipo.getTipo(),
+                                nuevoEquipo.getMarca(),
+                                nuevoEquipo.getModelo(),
+                                nuevoEquipo.getSerie(),
+                                nuevoEquipo.getFechaAdquisicion(),
+                                nuevoEquipo.getEstado(),
+                                nuevoEquipo.getUbicacion(),
+                                nuevoEquipo.getFrecuencia(),
+                                nuevoEquipo.getDescripcion()
+                }, String.class);
+
+                nuevoEquipo.setIdEquipo(idEquipo);
+                return nuevoEquipo;
         }
 }

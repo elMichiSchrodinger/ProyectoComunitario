@@ -1,17 +1,35 @@
-<p>detalle-equipo works!</p>
-<div *ngIf="equipo">
-    <h2>Detalles del Equipo</h2>
-    <p><strong>Nombre:</strong> {{ equipo.nombre }}</p>
-    <p><strong>Tipo:</strong> {{ equipo.tipo }}</p>
-    <p><strong>Marca:</strong> {{ equipo.marca }}</p>
-    <p><strong>Modelo:</strong> {{ equipo.modelo }}</p>
-    <p><strong>Número de Serie:</strong> {{ equipo.serie }}</p>
-    <p><strong>Fecha de Adquisición:</strong> {{ equipo.fechaAdquisicion | date }}</p>
-    <p><strong>Estado:</strong> {{ equipo.estado }}</p>
-    <p><strong>Ubicación:</strong> {{ equipo.ubicacion }}</p>
-    <p><strong>Frecuencia de Mantenimiento:</strong> {{ equipo.frecuencia }}</p>
-    <p><strong>Descripción:</strong> {{ equipo.descripcion }}</p>
-    <p><strong>Última Revisión:</strong> {{ equipo.ultimaRevision | date }}</p>
-    <p><strong>Próxima Revisión:</strong> {{ equipo.proximaRevision | date }}</p>
-    <button (click)="volver()">Volver</button>
+<div class="container mt-5" *ngIf="equipo">
+    <div class="card border-warning">
+        <div class="card-header bg-warning">
+            <h2>Detalles del Equipo</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>ID:</strong> {{ equipo.idEquipo }}</p>
+                    <p><strong>Nombre:</strong> {{ equipo.nombre }}</p>
+                    <p><strong>Tipo:</strong> {{ equipo.tipo }}</p>
+                    <p><strong>Marca:</strong> {{ equipo.marca }}</p>
+                    <p><strong>Modelo:</strong> {{ equipo.modelo }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Número de Serie:</strong> {{ equipo.serie }}</p>
+                    <p><strong>Fecha de Adquisición:</strong> {{ equipo.fechaAdquisicion | date }}</p>
+                    <p><strong>Estado:</strong> {{ equipo.estado }}</p>
+                    <p><strong>Ubicación:</strong> {{ equipo.ubicacion }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Frecuencia de Mantenimiento:</strong> {{ equipo.frecuencia }}</p>
+                    <p><strong>Descripción:</strong> {{ equipo.descripcion }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Última Revisión:</strong> {{ equipo.ultimaRevision | date }}</p>
+                    <p><strong>Próxima Revisión:</strong> {{ equipo.proximaRevision | date }}</p>
+                </div>
+            </div>
+            <button class="btn btn-warning" (click)="volver()">Volver</button>
+        </div>
+    </div>
 </div>

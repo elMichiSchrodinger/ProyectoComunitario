@@ -26,17 +26,26 @@ export class EquiposComponent implements OnInit {
     this.equiposService.obtenerEquipos().subscribe(data => {
       this.equipos = data;
       this.filteredEquipos = data;
-      console.log(this.equipos);
     });
   }
 
   buscarEquipos(): void {
+    console.log(this.searchTerm);
     this.filteredEquipos = this.equipos.filter(equipo =>
-      equipo.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      equipo.tipo.toLowerCase().includes(this.searchTerm.toLowerCase())
+      equipo.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
+  filtrarOperativos(): void {
+    this.filteredEquipos = this.equipos.filter(equipo => equipo.estado === 'Operativo');
+  }
+
+  filtrarMantenimiento(): void {
+    this.filteredEquipos = this.equipos.filter(equipo => equipo.estado === 'Mantenimiento');
+  }
+  restablecerFiltro(): void {
+    this.filteredEquipos = this.equipos;
+  }
   masInformacion(id: string): void {
     this.router.navigate(['/equipos', id]);
   }

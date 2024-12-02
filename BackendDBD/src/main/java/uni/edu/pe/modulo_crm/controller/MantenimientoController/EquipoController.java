@@ -1,6 +1,7 @@
 package uni.edu.pe.modulo_crm.controller.MantenimientoController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Equipo;
@@ -32,5 +33,11 @@ public class EquipoController {
     public ResponseEntity<String> crearSolicitudMantenimiento(@RequestBody ListaSolicitudMantenimiento solicitud) {
         equipoService.solicitarMantenimiento(solicitud);
         return ResponseEntity.ok("Solicitud de mantenimiento creada exitosamente.");
+    }
+
+    @PostMapping("/equipos")
+    public ResponseEntity<Equipo> agregarNuevoEquipo(@RequestBody Equipo nuevoEquipo) {
+        Equipo equipoCreado = equipoService.agregarNuevoEquipo(nuevoEquipo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(equipoCreado);
     }
 }
