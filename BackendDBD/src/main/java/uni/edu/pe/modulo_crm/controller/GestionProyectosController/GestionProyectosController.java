@@ -9,14 +9,14 @@ import uni.edu.pe.modulo_crm.service.GestionProyectosservice.GestionProyectosSer
 
 import java.util.List;
 
-//@RestController
-//@RequestMapping("/proyectos")
+@RestController
+@RequestMapping("/proyectos")
 public class GestionProyectosController {
-    //@Autowired
-    //private GestionProyectosService service;
+    @Autowired
+    private GestionProyectosService service;
 
-    /*@GetMapping
+    @GetMapping
     public List<GestionProyectoDTO> obtenerProyectos() {
         return service.mostrarProyectos();
-    }*/
+    }
 }
