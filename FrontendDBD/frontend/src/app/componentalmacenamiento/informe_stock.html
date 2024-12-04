@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Stock</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/filtros.css">
+</head>
+<body>
+<div class="header-bar informe-stock" style="background-color: #ff007f;"> <!-- Color rosado fuerte -->
+    <a href="/" class="back-icon" aria-label="Volver al inicio">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_informe_stock.png" alt="Icono Informe de Stock" class="title-icon">
+        <h1>Informe de Stock</h1>
+    </div>
+</div>
+
+<div class="informe-stock-container">
+    <!-- Contenedor de búsqueda y filtro -->
+    <div class="search-filter-container informe-stock" style="margin-top: 60px;">
+        <input type="text" id="searchInput" placeholder="Buscar por ID de informe, mes, etc.">
+        <button class="search-btn" onclick="searchTable()">
+            <span class="icon-search">&#128269;</span> <!-- Icono de lupa -->
+            Buscar
+        </button>
+        <button class="filter-btn" onclick="openModal()">
+            <span class="icon-filter">&#128209;</span> <!-- Icono de filtro -->
+            Filtrar
+        </button>
+    </div>
+
+    <div class="informe content-box rosa-suave">
+        <table>
+            <thead>
+            <tr>
+                <th>ID de Informe</th>
+                <th>Mes</th>
+                <th>Año</th>
+                <th>Fecha de Generación</th>
+                <th>Estado</th>
+                <th class="accion-column" style="display: none;">Acción</th>
+            </tr>
+            </thead>
+            <tbody id="informe-stock-table">
+            <!-- Iteramos sobre la lista de informes utilizando Thymeleaf -->
+            <tr th:each="informe : ${informes}" th:data-id="${informe.idInformeStock}" onclick="redirectToDetail(this)">
+                <td th:text="${informe.idInformeStock}"></td>
+                <td th:text="${informe.mesInforme}"></td>
+                <td th:text="${informe.añoInforme}"></td>
+                <td th:text="${informe.fechaGeneracion}"></td>
+                <td th:text="${informe.estadoInforme}"></td>
+                <td class="accion-column" style="display: none;">
+                    <button class="delete-btn" onclick="deleteRow(this)">Eliminar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Modal de filtro -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Filtros</h2>
+            </div>
+            <table class="filter-table">
+                <thead>
+                <tr>
+                    <th>Aplicar a</th>
+                    <th>Orden</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody id="filterTableBody">
+                <tr>
+                    <td>
+                        <select class="filter-field" onchange="updateOrderOptions(this)">
+                            <option value="id">ID de Informe</option>
+                            <option value="mes">Mes</option>
+                            <option value="año">Año</option>
+                            <option value="fecha">Fecha de Generación</option>
+                            <option value="estado">Estado</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="order-option" id="orderSelect">
+                            <option value="asc">Ascendente</option>
+                            <option value="desc">Descendente</option>
+                        </select>
+                    </td>
+                    <td><button class="btn-action" onclick="removeRow(this)">Borrar</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="btn-add" onclick="addRow()">Agregar</button>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-accept" onclick="applyFilters()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteMode = false;
+
+    function toggleDeleteMode() {
+        deleteMode = !deleteMode;
+        const deleteButtons = document.querySelectorAll(".accion-column");
+        document.getElementById("toggle-delete").innerText = deleteMode ? "Cancelar" : "Eliminar";
+        document.getElementById("new-btn").style.display = deleteMode ? "none" : "block";
+        document.getElementById("save-btn").style.display = deleteMode ? "block" : "none";
+
+        deleteButtons.forEach(button => {
+            button.style.display = deleteMode ? "table-cell" : "none";
+        });
+    }
+
+    function deleteRow(button) {
+        const row = button.closest("tr");
+        row.remove();
+    }
+
+    function saveChanges() {
+        if (confirm("¿Guardar los cambios?")) {
+            toggleDeleteMode();
+            window.location.href = "/informe_stock";
+        }
+    }
+
+    function searchTable() {
+        resetRows();
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#informe-stock-table tr');
+
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            row.style.display = rowText.includes(searchTerm) ? '' : 'none';
+        });
+        showDeleteButtonsIfActive();
+    }
+
+    function openModal() {
+        document.getElementById("modalOverlay").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+    }
+
+    function addRow() {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>
+                <select class="filter-field" onchange="updateOrderOptions(this)">
+                    <option value="id">ID de Informe</option>
+                    <option value="mes">Mes</option>
+                    <option value="año">Año</option>
+                    <option value="fecha">Fecha de Generación</option>
+                    <option value="estado">Estado</option>
+                </select>
+            </td>
+            <td>
+                <select class="order-option" id="orderSelect">
+                    <option value="asc">Ascendente</option>
+                    <option value="desc">Descendente</option>
+                </select>
+            </td>
+            <td><button class="btn-action" onclick="removeRow(this)">Borrar</button></td>
+        `;
+        document.getElementById("filterTableBody").appendChild(row);
+    }
+
+    function updateOrderOptions(select) {
+        const orderSelect = select.closest("tr").querySelector(".order-option");
+        if (select.value === "estado") {
+            orderSelect.innerHTML = `
+                <option value="Finalizado">Finalizado</option>
+                <option value="En Proceso">En Proceso</option>
+                <option value="Generado">Generado</option>
+            `;
+        } else {
+            orderSelect.innerHTML = `
+                <option value="asc">Ascendente</option>
+                <option value="desc">Descendente</option>
+            `;
+        }
+    }
+
+    function removeRow(button) {
+        button.parentElement.parentElement.remove();
+    }
+
+    function resetRows() {
+        const rows = Array.from(document.querySelectorAll("#informe-stock-table tr"));
+        rows.forEach(row => row.style.display = "");
+    }
+
+    function applyFilters() {
+        resetRows();
+        const rows = Array.from(document.querySelectorAll("#informe-stock-table tr"));
+        const filters = Array.from(document.querySelectorAll("#filterTableBody tr"));
+
+        filters.forEach(filterRow => {
+            const field = filterRow.querySelector(".filter-field").value;
+            const order = filterRow.querySelector(".order-option").value;
+
+            if (field === "estado") {
+                rows.forEach(row => {
+                    row.style.display = row.cells[4].innerText === order ? '' : 'none';
+                });
+            } else {
+                rows.sort((a, b) => {
+                    const textA = a.cells[field === "id" ? 0 : field === "mes" ? 1 : field === "año" ? 2 : field === "fecha" ? 3 : 4].innerText.toLowerCase();
+                    const textB = b.cells[field === "id" ? 0 : field === "mes" ? 1 : field === "año" ? 2 : field === "fecha" ? 3 : 4].innerText.toLowerCase();
+                    return order === "asc" ? textA.localeCompare(textB) : textB.localeCompare(textA);
+                });
+            }
+        });
+
+        const tableBody = document.getElementById("informe-stock-table");
+        tableBody.innerHTML = "";
+        rows.forEach(row => tableBody.appendChild(row.cloneNode(true)));
+        closeModal();
+        showDeleteButtonsIfActive();
+    }
+
+    function showDeleteButtonsIfActive() {
+        if (deleteMode) {
+            const deleteButtons = document.querySelectorAll(".accion-column");
+            deleteButtons.forEach(button => {
+                button.style.display = "table-cell";
+            });
+        }
+    }
+
+    function redirectToDetail(row) {
+        if (!deleteMode) {
+            const id = row.getAttribute("data-id");
+            window.location.href = `/detalle_informe_stock?id=${id}`;
+        }
+    }
+
+    // Al cargar la página, reemplazamos los números de mes con los nombres de los meses
+    document.addEventListener('DOMContentLoaded', function() {
+        const meses = [
+            "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+        ];
+
+        // Iterar sobre las filas de la tabla y actualizar el mes
+        const rows = document.querySelectorAll('#informe-stock-table tr');
+        rows.forEach(row => {
+            const mesCell = row.querySelector('td:nth-child(2)'); // Suponiendo que la columna "Mes" es la segunda
+            if (mesCell) {
+                const mesNumber = mesCell.textContent.trim();
+                const mesName = meses[parseInt(mesNumber) - 1]; // Convertir el número del mes a nombre
+                mesCell.textContent = mesName; // Actualizar la celda con el nombre del mes
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
