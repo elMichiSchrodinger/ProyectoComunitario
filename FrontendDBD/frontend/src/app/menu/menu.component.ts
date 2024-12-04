@@ -23,6 +23,10 @@ export class MenuComponent {
   mostrarListaadj:MostrarListaAdj[]=[];
   mostrarListapro:MostrarListaInv[]=[];
   nombre!:string;
+  irVistaProyecto(){
+    this.contadorModulo = 2;
+    this.router.navigate(['Proyectos']);
+  }
   estadoReclutamiento(){
     this.contadorModulo=5;
   }

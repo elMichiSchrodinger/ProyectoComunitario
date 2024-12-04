@@ -1,0 +1,98 @@
+.gestion-proyecto-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .title {
+    color: #333;
+  }
+  
+  .create-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .create-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .proyectos-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .proyecto-item {
+    margin-bottom: 20px;
+  }
+  
+  .proyecto-card {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .proyecto-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .proyecto-card h2 {
+    margin: 0 0 10px;
+    color: #007bff;
+  }
+  
+  .proyecto-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .buttons {
+    margin-top: 10px;
+  }
+  
+  .update-button,
+  .delete-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+  }
+  
+  .update-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  .no-projects-message {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+  
