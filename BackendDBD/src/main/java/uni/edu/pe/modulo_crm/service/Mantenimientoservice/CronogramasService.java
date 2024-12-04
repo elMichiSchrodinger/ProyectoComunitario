@@ -5,6 +5,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Cronograma;
+
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Cronograma;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.ListaCronogramas;
 
 import java.util.List;
@@ -22,5 +25,11 @@ public class CronogramasService {
                 +
                 "LEFT JOIN infraestructura i ON cm.ID_infraestructura=i.ID_infraestructura ORDER BY cm.fecha_inicio DESC;";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ListaCronogramas.class));
+    }
+
+    @Transactional
+    public int actualizarEstado(String idCronograma) {
+        String sql = "UPDATE cronograma__de_mantenimiento SET estado = 'C' WHERE id_cronograma = ?";
+        return jdbcTemplate.update(sql, idCronograma);
     }
 }

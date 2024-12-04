@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cmms")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class CronogramaController {
     @Autowired
     private CronogramasService cronogramasService;
@@ -20,5 +20,11 @@ public class CronogramaController {
     @GetMapping("/cronogramas")
     public List<ListaCronogramas> obtenerCronogramas() {
         return cronogramasService.obtenerCronogramas();
+    }
+
+    @PutMapping("/cronogramas/{id}") // Ruta para actualizar el estado
+    public ResponseEntity<String> actualizarEstado(@PathVariable String id) {
+        cronogramasService.actualizarEstado(id);
+        return ResponseEntity.ok("Cambiado a Completado ");
     }
 }
