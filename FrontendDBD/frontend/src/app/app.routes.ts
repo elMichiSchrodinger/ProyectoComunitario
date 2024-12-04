@@ -27,8 +27,6 @@ import { DetalleEquipoComponent } from './componentmantenimiento/detalle-equipo/
 import { NuevoEquipoComponent } from './componentmantenimiento/nuevo-equipo/nuevo-equipo.component';
 import { DetalleInfraestructuraComponent } from './componentmantenimiento/detalle-infraestructura/detalle-infraestructura.component';
 import { NuevaInfraestructuraComponent } from './componentmantenimiento/nueva-infraestructura/nueva-infraestructura.component';
-import {ProyectosComponent} from './componentgestionproyectos/proyectos/proyectos.component';
-import {ModalComponent} from './componentgestionproyectos/modal/modal.component';
 export const routes: Routes = [
   { path: 'vacante', component: VacanteComponent },
   { path: '', component: PreloginComponent },
@@ -38,8 +36,6 @@ export const routes: Routes = [
   { path: 'postulacion', component: PostulacionComponent },
   { path: 'detallePostulacion', component: DetallePostulacionComponent },
   { path: 'menu', component: MenuComponent },
-  {path:'Proyectos',component: ProyectosComponent},
-  {path:'Proyectos/modal',component: ModalComponent},
   { path: 'notificacion', component: NotificacionComponent },
   { path: 'personalizar', component: NotificacionPersonalizadaComponent },
   { path: 'listaVacantes', component: ListaVacantesComponent },

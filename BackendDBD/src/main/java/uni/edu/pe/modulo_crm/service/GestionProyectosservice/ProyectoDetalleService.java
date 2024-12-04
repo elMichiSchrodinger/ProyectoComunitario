@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import uni.edu.pe.modulo_crm.dto.GestionProyectosdto.GestionProyectoDTO;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class ProyectoDetalleService {
@@ -15,17 +14,6 @@ public class ProyectoDetalleService {
 
     public ProyectoDetalleService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public List<GestionProyectoDTO> mostrarProyectos() {
-        String sql = "SELECT id_proyecto, nombre_proyecto, fecha_inicio, fecha_fin, id_estado FROM proyecto";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new GestionProyectoDTO(
-                rs.getString("id_proyecto"),
-                rs.getString("nombre_proyecto"),
-                rs.getDate("fecha_inicio").toLocalDate(),
-                rs.getDate("fecha_fin").toLocalDate(),
-                rs.getInt("id_estado")
-        ));
     }
 
     // Método para obtener un proyecto por su ID
