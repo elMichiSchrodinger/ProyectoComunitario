@@ -50,8 +50,19 @@ export class CronogramasComponent implements OnInit {
     this.router.navigate(['/cronogramas', id]);
   }
   completarCronograma(id: string): void {
-    this.cronogramasService.completarCronograma(id).subscribe(() => {
-      this.cargarCronogramas();
+    this.cronogramasService.completarCronograma(id).subscribe({
+      next: () => {
+        // Si la solicitud fue exitosa, recargamos los cronogramas
+        this.cargarCronogramas();
+      },
+      error: (err) => {
+        // Manejo de errores
+        console.error('Error al completar el cronograma:', err);
+        // Aquí puedes mostrar un mensaje al usuario o realizar alguna acción adicional
+      }
     });
+  }
+  regresarAlMenu() {
+    this.router.navigate(['/menu']);
   }
 }

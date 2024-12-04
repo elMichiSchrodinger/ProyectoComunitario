@@ -18,7 +18,8 @@ export class CronogramasService {
     obtenerCronogramaPorId(id: string): Observable<Cronograma> {
         return this.http.get<Cronograma>(`${this.apiUrl}/${id}`);
     }
-    completarCronograma(idCronograma: string): Observable<void> {
-        return this.http.put<void>(`${this.apiUrl}/completar/${idCronograma}`, null);
+    completarCronograma(idCronograma: string): Observable<any> {
+        return this.http.put(`${this.apiUrl}/${idCronograma}`, null, { responseType: 'text' });
     }
+
 }
