@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uni.edu.pe.modulo_crm.dto.GestionProyectosdto.GestionProyectoDTO;
+import uni.edu.pe.modulo_crm.service.GestionProyectosservice.GestionProyectosService;
 import uni.edu.pe.modulo_crm.service.GestionProyectosservice.ProyectoDetalleService;
+
+import java.util.List;
 
 
 @RestController
@@ -15,6 +18,11 @@ public class ProyectoDetalleController {
 
     @Autowired
     private ProyectoDetalleService service;
+
+    @GetMapping
+    public List<GestionProyectoDTO> obtenerProyectos() {
+        return service.mostrarProyectos();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerProyectoPorId(@PathVariable String id) {
@@ -30,7 +38,7 @@ public class ProyectoDetalleController {
     public ResponseEntity<?> crearProyecto(@RequestBody GestionProyectoDTO proyecto) {
         try {
             service.crearProyecto(proyecto);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Proyecto creado exitosamente");
+            return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\": \"Proyecto creado exitosamente\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el proyecto: " + e.getMessage());
         }
@@ -40,7 +48,7 @@ public class ProyectoDetalleController {
     public ResponseEntity<?> actualizarProyecto(@PathVariable String id, @RequestBody GestionProyectoDTO proyecto) {
         try {
             service.actualizarProyecto(id, proyecto);
-            return ResponseEntity.ok("Proyecto actualizado correctamente");
+            return ResponseEntity.ok("{\"message\": \"Proyecto actualizado correctamente\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error al actualizar el proyecto: " + e.getMessage());
         }
@@ -50,7 +58,7 @@ public class ProyectoDetalleController {
     public ResponseEntity<?> eliminarProyecto(@PathVariable String id) {
         try {
             service.eliminarProyecto(id);
-            return ResponseEntity.ok("Proyecto eliminado exitosamente");
+            return ResponseEntity.ok("{\"message\": \"Proyecto eliminado exitosamente\"}");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error al eliminar el proyecto: " + e.getMessage());
         }
