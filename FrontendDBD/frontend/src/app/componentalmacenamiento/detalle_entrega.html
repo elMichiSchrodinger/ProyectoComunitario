@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Entrega</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="header-bar entregas">
+    <a href="/entregas" class="back-icon" onclick="redirectToDetalle()" aria-label="Cancelar">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_entregas.png" alt="Icono Entrega" class="title-icon">
+        <h1>Detalle de Entrega</h1>
+    </div>
+</div>
+
+<div class="detalle-container" style="margin-top: 80px; display: flex; justify-content: center;">
+    <div class="content-box" style="width: 80%; padding-bottom: 20px; background-color: #e0f7e0;">
+        <div class="detalle-header">
+            <h2 id="detalle-id"></h2>
+        </div>
+        <div class="informacion-recepcion" style="margin-top: 20px;">
+            <p><strong>ID:</strong> <span id="detalle-id-text"></span></p>
+            <p><strong>Entidad Origen/Destino:</strong> <span id="detalle-entidad"></span></p>
+            <p><strong>Tipo de Operación:</strong> <span id="detalle-tipo-operacion"></span></p>
+            <p><strong>Estado:</strong> <span id="detalle-estado"></span></p>
+            <p><strong>Fecha Programada:</strong> <span id="detalle-fecha-programada"></span></p>
+            <p><strong>Fecha Efectiva:</strong> <span id="detalle-fecha-efectiva"></span></p>
+            <p><strong>Documento Origen:</strong> <span id="detalle-doc-origen"></span></p>
+            <p><strong>ID del Empleado:</strong> <span id="detalle-id-empleado"></span></p>
+        </div>
+
+        <!-- Tabla editable sin título, pero con encabezado -->
+        <div class="table-box" style="margin-top: 20px; text-align: center;">
+            <table style="width: 100%; text-align: center;">
+                <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Cantidad Producto</th>
+                    <th>Nombre del Recurso</th>
+                    <th>Cantidad Recurso</th>
+                    <th>Demanda</th>
+                </tr>
+                </thead>
+                <tbody id="detalle-guia">
+                <!-- Aquí se insertará el detalle de la guía en modo de edición -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-center-container" style="text-align: center; margin-top: 20px;">
+            <button class="new-btn" onclick="editDetail()">Editar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para obtener parámetros de la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    function convertirTextoTipoOperacion(tipo) {
+        return tipo === "1" ? "Recepción" : tipo === "2" ? "Entrega" : "Desconocido";
+    }
+
+    function convertirTextoEstado(estado) {
+        return estado === "1" ? "Listo" : estado === "2" ? "En Proceso" : "Desconocido";
+    }
+
+    async function cargarDetalleEditable() {
+        const guiaId = getQueryParam('id'); // Obtener el ID de la guía
+        if (!guiaId) {
+            alert("No se encontró el ID de la guía.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/guias/detalle?id=${guiaId}`); // Usar el servicio para obtener los detalles de la guía
+            if (response.ok) {
+                const data = await response.json();
+
+                // Rellenar los campos con los detalles de la guía
+                document.getElementById('detalle-id').innerText = data.idGuiaRemision || '';
+                document.getElementById('detalle-id-text').innerText = data.idGuiaRemision || '';
+                document.getElementById('detalle-entidad').innerText = data.entidadOrigendestino || '';
+                document.getElementById('detalle-tipo-operacion').innerText = convertirTextoTipoOperacion(data.codTipoGuia);
+                document.getElementById('detalle-estado').innerText = convertirTextoEstado(data.codEstadoGuia);
+                document.getElementById('detalle-fecha-programada').innerText = data.fechaProgramada || '';
+                document.getElementById('detalle-fecha-efectiva').innerText = data.fechaEfectiva || '';
+                document.getElementById('detalle-doc-origen').innerText = data.documentoOrigen || '';
+                document.getElementById('detalle-id-empleado').innerText = data.idEmpleado?.idEmpleado || '';
+
+                const detalleGuiaTable = document.getElementById('detalle-guia');
+                detalleGuiaTable.innerHTML = '';
+
+                // Llenar la tabla con los detalles de la guía
+                data.detalleGuias.forEach(detalle => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                            <td>${detalle.productos[0]?.nombreProducto || ''}</td>
+                            <td>${detalle.cantidadProducto || ''}</td>
+                            <td>${detalle.recursos[0]?.nombre || ''}</td>
+                            <td>${detalle.cantidadRecurso || ''}</td>
+                            <td>${detalle.demanda || ''}</td>
+                        `;
+                    detalleGuiaTable.appendChild(row);
+                });
+            } else {
+                alert("Error al cargar los detalles.");
+            }
+        } catch (error) {
+            console.error("Error al cargar la guía:", error);
+            alert("Error al cargar los detalles.");
+        }
+    }
+
+    function redirectToDetalle() {
+        window.location.href = "/entregas"; // Redireccionar a la lista de entregas
+    }
+
+    function editDetail() {
+        const guiaId = getQueryParam('id');
+        window.location.href = `/editar_entrega?id=${guiaId}`; // Redireccionar al formulario de edición
+    }
+
+    window.onload = cargarDetalleEditable;
+</script>
+</body>
+</html>
