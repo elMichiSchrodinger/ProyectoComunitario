@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uni.edu.pe.modulo_crm.dto.Mantenimientodto.Cronograma;
 import uni.edu.pe.modulo_crm.dto.Mantenimientodto.ListaCronogramas;
 
 import java.util.List;
