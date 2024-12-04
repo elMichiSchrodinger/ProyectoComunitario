@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Reabastecimiento</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="header-bar reabastecimiento">
+    <a href="/reabastecimiento" class="back-icon" aria-label="Volver al inicio">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_solicitud_reabastecimiento.png" alt="Icono Reabastecimiento" class="title-icon">
+        <h1>Editar Reabastecimiento</h1>
+        <h2 id="detalle-recurso-id"></h2> <!-- Título con ID del Recurso -->
+    </div>
+</div>
+
+<div class="detalle-container" style="margin-top: 80px;">
+    <div class="content-box azul-suave" style="width: 100%;">
+
+        <div class="detalle-header">
+            <h2 id="detalle-id"></h2>
+        </div>
+
+        <div class="informacion-reabastecimiento" style="margin-top: 20px;">
+            <!-- Información del recurso (Ahora los campos son editables) -->
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>ID del Recurso:</strong></p>
+                <input id="detalle-id-text" type="text" disabled>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Nombre:</strong></p>
+                <input id="detalle-nombre" type="text">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Descripción:</strong></p>
+                <input id="detalle-descripcion" type="text">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Costo Unitario (S/.):</strong></p>
+                <input id="detalle-costo" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Peso:</strong></p>
+                <input id="detalle-peso" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Volumen:</strong></p>
+                <input id="detalle-volumen" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Plazo de Entrega:</strong></p>
+                <input id="detalle-plazo" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Estado del Recurso:</strong></p>
+                <select id="detalle-estado">
+                    <option value="A">Activo</option>
+                    <option value="I">Inactivo</option>
+                </select>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Fecha de Registro:</strong></p>
+                <input id="detalle-fecha" type="date">
+            </div>
+
+            <!-- Nuevas filas para mostrar el stock, disponible, minimo, maximo y pedido -->
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Stock:</strong></p>
+                <input id="detalle-stock" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Disponible:</strong></p>
+                <input id="detalle-disponible" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Minimo:</strong></p>
+                <input id="detalle-minimo" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Maximo:</strong></p>
+                <input id="detalle-maximo" type="number">
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>A Pedir:</strong></p>
+                <input id="detalle-pedido" type="number">
+            </div>
+        </div>
+
+        <!-- Tabla de detalle de guías de remisión -->
+        <div class="table-box" style="margin-top: 20px;">
+            <table style="width: 100%; border: 1px solid #ddd;">
+                <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                </tr>
+                </thead>
+                <tbody id="detalle-recepcion">
+                <!-- Aquí se insertará el detalle de la recepción según el ID del recurso -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-center-container" style="margin-top: 20px;">
+            <button class="new-btn" onclick="guardarRecurso()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para obtener el ID de la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Función para cargar los datos del recurso y las guías de remisión
+    async function cargarDetalle() {
+        const recursoId = getQueryParam('id');
+
+        // Obtener los detalles del recurso
+        try {
+            const recursoResponse = await fetch(`/reabastecimiento/recurso/${recursoId}`);
+            if (recursoResponse.ok) {
+                const recurso = await recursoResponse.json();
+                document.getElementById('detalle-id').innerText = recurso.idRecurso || '';
+                document.getElementById('detalle-id-text').value = recurso.idRecurso || '';  // El campo ID está bloqueado
+                document.getElementById('detalle-nombre').value = recurso.nombre || '';
+                document.getElementById('detalle-descripcion').value = recurso.descripcion || '';
+                document.getElementById('detalle-costo').value = recurso.costoUnitario || '';
+                document.getElementById('detalle-peso').value = recurso.peso || '';
+                document.getElementById('detalle-volumen').value = recurso.volumen || '';
+                document.getElementById('detalle-plazo').value = recurso.plazoEntrega || '';
+                document.getElementById('detalle-estado').value = recurso.codEstadoRecurso || 'A';
+                document.getElementById('detalle-fecha').value = recurso.fechaRegistro || '';
+                document.getElementById('detalle-stock').value = recurso.stock || '';
+                document.getElementById('detalle-disponible').value = recurso.disponible || '';
+                document.getElementById('detalle-minimo').value = recurso.minimo || '';
+                document.getElementById('detalle-maximo').value = recurso.maximo || '';
+                document.getElementById('detalle-pedido').value = recurso.pedido || '';
+            } else {
+                alert("Recurso no encontrado.");
+            }
+        } catch (error) {
+            console.error("Error al cargar los detalles del recurso:", error);
+            alert("Error al cargar los detalles del recurso.");
+        }
+
+        // Obtener las guías de remisión asociadas al recurso
+        try {
+            const guiaResponse = await fetch(`/reabastecimiento/guias_recurso/${recursoId}`);
+            if (guiaResponse.ok) {
+                const guias = await guiaResponse.json();
+                const detalleRecepcionTable = document.getElementById('detalle-recepcion');
+                guias.forEach(guia => {
+                    const row = document.createElement('tr');
+                    const [documento, cantidad, fecha] = guia.split(", ");
+                    row.innerHTML = `
+                        <td>${documento.split(": ")[1]}</td>
+                        <td>${cantidad.split(": ")[1]}</td>
+                        <td>${fecha.split(": ")[1]}</td>
+                    `;
+                    detalleRecepcionTable.appendChild(row);
+                });
+            } else {
+                alert("No se encontraron guías de remisión.");
+            }
+        } catch (error) {
+            console.error("Error al cargar las guías de remisión:", error);
+            alert("Error al cargar las guías de remisión.");
+        }
+    }
+
+    window.onload = cargarDetalle;
+
+    // Función para guardar los cambios realizados al recurso
+    async function guardarRecurso() {
+        const recursoId = getQueryParam('id');
+        const recursoData = {
+            nombre: document.getElementById('detalle-nombre').value,
+            descripcion: document.getElementById('detalle-descripcion').value,
+            costoUnitario: parseFloat(document.getElementById('detalle-costo').value),
+            peso: parseFloat(document.getElementById('detalle-peso').value),
+            volumen: parseFloat(document.getElementById('detalle-volumen').value),
+            plazoEntrega: parseInt(document.getElementById('detalle-plazo').value),
+            codEstadoRecurso: document.getElementById('detalle-estado').value,
+            stock: parseInt(document.getElementById('detalle-stock').value),
+            disponible: parseInt(document.getElementById('detalle-disponible').value),
+            minimo: parseInt(document.getElementById('detalle-minimo').value),
+            maximo: parseInt(document.getElementById('detalle-maximo').value),
+            pedido: parseInt(document.getElementById('detalle-pedido').value)
+        };
+
+        // Asegúrate de que todos los valores obligatorios estén presentes
+        if (!recursoData.nombre || !recursoData.descripcion || isNaN(recursoData.costoUnitario)) {
+            alert("Por favor, completa todos los campos requeridos.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`/reabastecimiento/recurso/${recursoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(recursoData)
+            });
+
+            if (response.ok) {
+                alert("Recurso actualizado correctamente.");
+                window.location.href = `/detalle_reabastecimiento?id=${recursoId}`; // Redirigir al detalle del recurso
+            } else {
+                const errorData = await response.json();
+                alert(`Error al actualizar el recurso: ${errorData.message || 'Intente nuevamente'}`);
+            }
+        } catch (error) {
+            console.error("Error al intentar actualizar el recurso:", error);
+            alert("Error al actualizar el recurso.");
+        }
+    }
+
+</script>
+</body>
+</html>

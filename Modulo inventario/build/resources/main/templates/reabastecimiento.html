@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reabastecimiento</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/filtros.css">
+</head>
+<body>
+<div class="header-bar reabastecimiento">
+    <a href="/" class="back-icon" aria-label="Volver al inicio">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_solicitud_reabastecimiento.png" alt="Icono Reabastecimiento" class="title-icon">
+        <h1>Reabastecimiento</h1>
+    </div>
+</div>
+
+<div class="reabastecimiento-container">
+    <!-- Contenedor de búsqueda y filtro -->
+    <div class="search-filter-container reabastecimiento" style="margin-top: 60px;">
+        <input type="text" id="searchInput" placeholder="Buscar por producto, pronóstico, etc.">
+        <button class="search-btn" onclick="searchTable()">
+            <span class="icon-search">&#128269;</span> <!-- Ícono de lupa -->
+            Buscar
+        </button>
+        <button class="filter-btn" onclick="openModal()">
+            <span class="icon-filter">&#128209;</span> <!-- Ícono de filtro -->
+            Filtrar
+        </button>
+    </div>
+
+    <div class="reabastecimiento content-box azul-suave"> <!-- Aplicar estilo de azul suave -->
+        <table>
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Stock</th>
+                <th>Disponible</th>
+                <th>Mínimo</th>
+                <th>Máximo</th>
+                <th>A pedir</th>
+                <th class="accion-column" style="display: none;">Acción</th>
+            </tr>
+            </thead>
+            <tbody id="reabastecimiento-table">
+            <!-- Iteramos sobre la lista de recursos utilizando Thymeleaf -->
+            <tr th:each="recurso : ${recursos}" th:data-id="${recurso.idRecurso}" onclick="rowClickHandler(event)">
+                <td th:text="${recurso.nombre}"></td>
+                <td th:text="${recurso.stock}"></td>
+                <td th:text="${recurso.disponible}"></td>
+                <td th:text="${recurso.minimo}"></td>
+                <td th:text="${recurso.maximo}"></td>
+                <td th:text="${recurso.pedido}"></td>
+                <td class="accion-column" style="display: none;">
+                    <button class="delete-btn" onclick="deleteRow(event, this)">Eliminar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal de filtro -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Filtros</h2>
+            </div>
+            <table class="filter-table">
+                <thead>
+                <tr>
+                    <th>Aplicar a</th>
+                    <th>Orden</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody id="filterTableBody">
+                <tr>
+                    <td>
+                        <select class="filter-field" onchange="updateOrderOptions(this)">
+                            <option value="producto">Producto</option>
+                            <option value="stock">Stock</option>
+                            <option value="disponible">Disponible</option>
+                            <option value="minimo">Mínimo</option>
+                            <option value="maximo">Máximo</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="order-option">
+                            <option value="asc">Ascendente</option>
+                            <option value="desc">Descendente</option>
+                        </select>
+                    </td>
+                    <td><button class="btn-action" onclick="removeRow(this)">Borrar</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="btn-add" onclick="addRow()">Agregar</button>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-accept" onclick="applyFilters()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let deleteMode = false;
+
+    function toggleDeleteMode() {
+        deleteMode = !deleteMode;
+        const deleteButtons = document.querySelectorAll(".accion-column");
+        document.getElementById("toggle-delete").innerText = deleteMode ? "Cancelar" : "Eliminar";
+        document.getElementById("new-btn").style.display = deleteMode ? "none" : "block";
+        document.getElementById("save-btn").style.display = deleteMode ? "block" : "none";
+
+        deleteButtons.forEach(button => {
+            button.style.display = deleteMode ? "table-cell" : "none";
+        });
+    }
+
+    function deleteRow(event, button) {
+        event.stopPropagation();
+        const row = button.closest("tr");
+        row.remove();
+    }
+
+    function rowClickHandler(event) {
+        // Verificar si no estamos en el modo de eliminación
+        if (!deleteMode) {
+            const id = event.currentTarget.getAttribute("data-id");
+            console.log("Clicked ID:", id); // Verifica el ID clicado
+            if (id) {
+                window.location.href = `/detalle_reabastecimiento?id=${id}`;  // Redirige al detalle del recurso
+            }
+        }
+    }
+
+    function saveChanges() {
+        if (confirm("¿Guardar los cambios?")) {
+            toggleDeleteMode();
+            window.location.href = "/reabastecimiento";
+        }
+    }
+
+    function searchTable() {
+        resetRows();
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#reabastecimiento-table tr');
+
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            row.style.display = rowText.includes(searchTerm) ? '' : 'none';
+        });
+    }
+
+    function openModal() {
+        document.getElementById("modalOverlay").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+    }
+
+    function resetRows() {
+        const rows = document.querySelectorAll("#reabastecimiento-table tr");
+        rows.forEach(row => row.style.display = "");
+    }
+
+    function applyFilters() {
+        // Obtén todas las filas de datos originales
+        const rows = Array.from(document.querySelectorAll("#reabastecimiento-table tr"));
+        const filters = Array.from(document.querySelectorAll("#filterTableBody tr"));
+
+        // Resetea las filas
+        resetRows();
+
+        // Aplica los filtros seleccionados
+        filters.forEach(filterRow => {
+            const field = filterRow.querySelector(".filter-field").value;
+            const order = filterRow.querySelector(".order-option").value;
+
+            // Aplica el filtro y orden según el campo seleccionado
+            rows.sort((a, b) => {
+                let valueA, valueB;
+
+                // Determina el índice de la columna según el campo
+                if (field === "producto") {
+                    valueA = a.cells[0].innerText.toLowerCase();
+                    valueB = b.cells[0].innerText.toLowerCase();
+                } else if (field === "stock") {
+                    valueA = parseFloat(a.cells[1].innerText);
+                    valueB = parseFloat(b.cells[1].innerText);
+                } else if (field === "disponible") {
+                    valueA = parseFloat(a.cells[2].innerText);
+                    valueB = parseFloat(b.cells[2].innerText);
+                } else if (field === "minimo") {
+                    valueA = parseFloat(a.cells[3].innerText);
+                    valueB = parseFloat(b.cells[3].innerText);
+                } else if (field === "maximo") {
+                    valueA = parseFloat(a.cells[4].innerText);
+                    valueB = parseFloat(b.cells[4].innerText);
+                } else if (field === "apedir") {
+                    valueA = parseFloat(a.cells[5].innerText);
+                    valueB = parseFloat(b.cells[5].innerText);
+                }
+
+                // Compara según el orden seleccionado
+                if (order === "asc") {
+                    return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
+                } else {
+                    return valueA > valueB ? -1 : valueA < valueB ? 1 : 0;
+                }
+            });
+        });
+
+        // Vacía la tabla y vuelve a llenarla con los datos filtrados y ordenados
+        const tableBody = document.getElementById("reabastecimiento-table");
+        tableBody.innerHTML = ""; // Limpia el contenido actual
+
+        rows.forEach(row => {
+            tableBody.appendChild(row); // Agrega cada fila ordenada
+        });
+
+        closeModal(); // Cierra el modal de filtros
+        showDeleteButtonsIfActive(); // Muestra botones de eliminación si están activos
+    }
+</script>
+</body>
+</html>

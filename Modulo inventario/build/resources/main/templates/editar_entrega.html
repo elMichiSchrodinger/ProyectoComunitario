@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Entrega</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="header-bar entregas">
+    <a href="#" class="back-icon" onclick="redirectToDetalle()" aria-label="Cancelar">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_entregas.png" alt="Icono Entregas" class="title-icon">
+        <h1>Editar Entrega</h1>
+    </div>
+</div>
+
+<div class="detalle-container" style="margin-top: 80px;">
+    <div class="content-box" style="width: 100%; padding-bottom: 20px;background-color: #e0f7e0;">
+        <div class="detalle-header">
+            <h2 id="detalle-id"></h2>
+        </div>
+        <div class="informacion-recepcion" style="margin-top: 20px;">
+            <p><strong>ID:</strong> <input type="text" id="detalle-id-text" disabled></p>
+            <p><strong>Recibir de:</strong> <input type="text" id="detalle-entidad"></p>
+            <p><strong>Tipo de Operación:</strong>
+                <select id="detalle-tipo-operacion">
+                    <option value="1">Recepción</option>
+                    <option value="2">Entrega</option>
+                </select>
+            </p>
+            <p><strong>Estado:</strong>
+                <select id="detalle-estado">
+                    <option value="1">Listo</option>
+                    <option value="2">En Proceso</option>
+                </select>
+            </p>
+            <p><strong>Fecha Programada:</strong> <input type="date" id="detalle-fecha-programada"></p>
+            <p><strong>Fecha Efectiva:</strong> <input type="date" id="detalle-fecha-efectiva"></p>
+            <p><strong>Documento Origen:</strong> <input type="text" id="detalle-doc-origen"></p>
+            <p><strong>ID del Empleado:</strong> <input type="text" id="detalle-id-empleado"></p>
+        </div>
+
+        <div class="table-box" style="margin-top: 20px;">
+            <table style="width: 100%; border: 1px solid #ddd;">
+                <thead>
+                <tr>
+                    <th>ID Detalle</th>
+                    <th>Nombre del Producto</th>
+                    <th>Cantidad Producto</th>
+                    <th>Nombre del Recurso</th>
+                    <th>Cantidad Recurso</th>
+                    <th>Demanda</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody id="detalle-guia">
+                <!-- Aquí se insertará el detalle de la guía en modo de edición -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="agregar-btn-container" style="text-align: center; margin-top: 20px;">
+            <button class="new-btn" onclick="addRow()">Agregar</button>
+        </div>
+    </div>
+</div>
+
+<div class="button-center-container" style="display: flex; justify-content: space-between; padding: 0 50px; margin-top: 20px; padding-bottom: 40px;">
+    <button class="delete-btn" onclick="redirectToDetalle()" style="width: 150px;">Cancelar</button>
+    <button class="new-btn" onclick="saveChanges()" style="width: 150px;">Guardar</button>
+</div>
+
+<script>
+    // Función para obtener el ID de la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    async function cargarDetalleEditable() {
+        const guiaId = getQueryParam('id');
+        if (!guiaId || guiaId === "new") {
+            console.log("Creando una nueva guía de remisión.");
+
+            // Inicializa los campos con valores vacíos o predeterminados si es necesario
+            document.getElementById('detalle-id').innerText = "Nuevo"; // Indicamos que es nueva
+            document.getElementById('detalle-id-text').value = "";  // Limpiamos el ID
+            document.getElementById('detalle-entidad').value = "";  // Limpiamos la entidad
+            document.getElementById('detalle-tipo-operacion').value = "";  // Limpiamos tipo de operación
+            document.getElementById('detalle-estado').value = "";  // Limpiamos estado
+            document.getElementById('detalle-fecha-programada').value = "";  // Limpiamos fecha programada
+            document.getElementById('detalle-fecha-efectiva').value = "";  // Limpiamos fecha efectiva
+            document.getElementById('detalle-doc-origen').value = "";  // Limpiamos documento origen
+            document.getElementById('detalle-id-empleado').value = "";  // Limpiamos ID de empleado
+
+            const detalleGuiaTable = document.getElementById('detalle-guia');
+            detalleGuiaTable.innerHTML = ''; // Limpiamos cualquier fila previa
+            return; // Terminar la ejecución aquí
+        }
+
+        try {
+            const response = await fetch(`/api/guias/detalle?id=${guiaId}`);
+            if (response.ok) {
+                const data = await response.json();
+
+                document.getElementById('detalle-id').innerText = data.idGuiaRemision || '';
+                document.getElementById('detalle-id-text').value = data.idGuiaRemision || '';
+                document.getElementById('detalle-entidad').value = data.entidadOrigendestino || '';
+                document.getElementById('detalle-tipo-operacion').value = data.codTipoGuia || '';
+                document.getElementById('detalle-estado').value = data.codEstadoGuia || '';
+                document.getElementById('detalle-fecha-programada').value = data.fechaProgramada || '';
+                document.getElementById('detalle-fecha-efectiva').value = data.fechaEfectiva || '';
+                document.getElementById('detalle-doc-origen').value = data.documentoOrigen || '';
+                document.getElementById('detalle-id-empleado').value = data.idEmpleado?.idEmpleado || '';
+
+                const detalleGuiaTable = document.getElementById('detalle-guia');
+                detalleGuiaTable.innerHTML = '';
+                data.detalleGuias.forEach(detalle => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td><input type="text" value="${detalle.idDetalleGuia || ''}" style="width: 100%;" ${detalle.idDetalleGuia ? 'disabled' : ''}></td>
+                    <td><input type="text" value="${detalle.productos[0]?.nombreProducto || ''}" style="width: 100%;"></td>
+                    <td><input type="number" value="${detalle.cantidadProducto || 0}" style="width: 100%;"></td>
+                    <td><input type="text" value="${detalle.recursos[0]?.nombre || ''}" style="width: 100%;"></td>
+                    <td><input type="number" value="${detalle.cantidadRecurso || 0}" style="width: 100%;"></td>
+                    <td><input type="number" value="${detalle.demanda || 0}" style="width: 100%;"></td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">Borrar</button></td>
+                `;
+                    detalleGuiaTable.appendChild(row);
+                });
+            } else {
+                alert("Error al cargar los detalles.");
+            }
+        } catch (error) {
+            console.error("Error al cargar la guía:", error);
+            alert("Error al cargar los detalles.");
+        }
+    }
+
+    function redirectToDetalle() {
+        const guiaId = getQueryParam('id');
+
+        if (guiaId === "new") {
+            // Si es una nueva guía, redirigimos a la página principal (entregas.html)
+            window.location.href = "/entregas";
+        } else {
+            // Si no es nueva, redirigimos a la vista de detalle de la guía
+            if (confirm("¿Desea cancelar los cambios?")) {
+                window.location.href = `/detalle_entrega?id=${guiaId}`;
+            }
+        }
+    }
+
+    async function saveChanges() {
+        const guiaId = document.getElementById("detalle-id-text").value;
+
+        // Obtener los valores de los campos principales
+        const entidadOrigendestino = document.getElementById("detalle-entidad").value;
+        const codTipoGuia = document.getElementById("detalle-tipo-operacion").value;
+        const codEstadoGuia = document.getElementById("detalle-estado").value;
+        const fechaProgramada = document.getElementById("detalle-fecha-programada").value;
+        const fechaEfectiva = document.getElementById("detalle-fecha-efectiva").value;
+        const documentoOrigen = document.getElementById("detalle-doc-origen").value;
+        const idEmpleado = document.getElementById("detalle-id-empleado").value;
+
+        // Obtener los detalles desde la tabla
+        const detalles = [];
+        const rows = document.querySelectorAll("#detalle-guia tr");
+
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll("input");
+
+            const detalle = {
+                idDetalleGuia: inputs[0]?.value || null,  // Si ID detalle está vacío, es un nuevo detalle
+                productos: [{ nombreProducto: inputs[1]?.value || "" }],
+                cantidadProducto: parseInt(inputs[2]?.value) || 0,
+                recursos: [{ nombre: inputs[3]?.value || "" }],
+                cantidadRecurso: parseInt(inputs[4]?.value) || 0,
+                demanda: parseInt(inputs[5]?.value) || 0
+            };
+
+            // Verificar si el detalle tiene productos y recursos antes de agregarlo
+            if (detalle.productos[0].nombreProducto && detalle.recursos[0].nombre) {
+                detalles.push(detalle);
+            }
+        });
+
+        const guia = {
+            idGuiaRemision: guiaId || null,
+            entidadOrigendestino,
+            codTipoGuia,
+            codEstadoGuia,
+            fechaProgramada,
+            fechaEfectiva,
+            documentoOrigen,
+            idEmpleado: { idEmpleado },
+            detalleGuias: detalles,  // Detalles que se van a crear o actualizar
+            detallesEliminados: [] // Lista de detalles eliminados (si aplica)
+        };
+
+        console.log("Datos enviados al backend:", JSON.stringify(guia, null, 2)); // Verifica la estructura
+
+        try {
+            // Si existe el ID de la guía, la actualizamos
+            const response = await fetch(`/api/guias/editar`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(guia),
+            });
+
+            const responseData = await response.json();  // Leemos la respuesta como JSON
+
+            if (response.ok) {
+                alert("Cambios guardados exitosamente.");
+                window.location.href = `/detalle_entrega?id=${responseData.idGuiaRemision}`;
+            } else {
+                throw new Error(responseData.message || "Error al guardar los cambios.");
+            }
+        } catch (error) {
+            alert(`Error al guardar los cambios: ${error.message}`);
+        }
+    }
+
+
+
+
+
+
+    function addRow() {
+        const table = document.getElementById("detalle-guia");
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+        <td><input type="text" style="width: 100%;" placeholder="ID Detalle" disabled></td>
+        <td><input type="text" style="width: 100%;" placeholder="Nombre del Producto" class="nombreProducto"></td>
+        <td><input type="number" style="width: 100%;" placeholder="Cantidad Producto" class="cantidadProducto"></td>
+        <td><input type="text" style="width: 100%;" placeholder="Nombre del Recurso" class="nombreRecurso"></td>
+        <td><input type="number" style="width: 100%;" placeholder="Cantidad Recurso" class="cantidadRecurso"></td>
+        <td><input type="number" style="width: 100%;" placeholder="Demanda" class="demanda"></td>
+        <td>
+            <button class="delete-btn" onclick="deleteRow(this)">Borrar</button>
+        </td>
+    `;
+        table.appendChild(row);
+    }
+
+    let detallesEliminados = [];
+
+    async function deleteRow(button) {
+        const row = button.parentNode.parentNode;
+        const idDetalle = row.querySelector('td:nth-child(1) input').value.trim();
+
+        if (idDetalle) {
+            detallesEliminados.push(idDetalle);
+        }
+
+        row.remove();
+
+        if (detallesEliminados.length > 0) {
+            try {
+                const response = await fetch('/api/guias/eliminarDetalles', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(detallesEliminados)
+                });
+
+                if (response.ok) {
+                    console.log("Detalles eliminados correctamente.");
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(errorText);
+                }
+            } catch (error) {
+                console.error(`Error al eliminar los detalles: ${error.message}`);
+            }
+        }
+    }
+
+    window.onload = cargarDetalleEditable;
+</script>
+</body>
+</html>

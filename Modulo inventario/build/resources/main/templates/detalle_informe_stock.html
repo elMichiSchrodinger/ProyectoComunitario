@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Informe de Stock</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Estilos personalizados para los colores específicos */
+        .header-bar {
+            background-color: #FF4C87; /* Color rosado fuerte */
+        }
+        .content-box {
+            background-color: #F8C5D6; /* Color rosado suave */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .table-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .table-box th {
+            background-color: #3D3D3D;
+            color: white;
+            padding: 10px;
+        }
+        .table-box td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="header-bar informe-stock">
+    <a href="/informe_stock" class="back-icon" aria-label="Volver">&#x2190;</a>
+    <div class="title-container">
+        <img src="/images/logo_informe_stock.png" alt="Icono Informe de Stock" class="title-icon">
+        <h1>Detalle de Informe de Stock</h1>
+    </div>
+</div>
+
+<div class="detalle-container" style="margin-top: 80px;">
+    <div class="content-box">
+        <div class="detalle-header">
+            <h2 id="detalle-id"></h2>
+        </div>
+        <div class="informacion-informe-stock" style="margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>ID del Informe:</strong></p>
+                <p><span id="detalle-id-text"></span></p>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Mes:</strong></p>
+                <p><span id="detalle-mes"></span></p>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Año:</strong></p>
+                <p><span id="detalle-anio"></span></p>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Fecha de Generación:</strong></p>
+                <p><span id="detalle-fecha-generacion"></span></p>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <p><strong>Estado del Informe:</strong></p>
+                <p><span id="detalle-estado"></span></p>
+            </div>
+        </div>
+
+        <!-- Tabla de detalle de la actividad de informe -->
+        <div class="table-box" style="margin-top: 20px; background-color: #f9c2d1; padding: 0; border: none;">
+            <table style="width: 100%; border-collapse: collapse; margin: 0;">
+                <thead style="background-color: #424242; color: white;">
+                <tr>
+                    <th>ID Detalle Orden</th>
+                    <th>Nombre Recurso</th>
+                    <th>Cantidad Recurso</th>
+                    <th>Nombre Producto</th>
+                    <th>Cantidad Producto</th>
+                    <th>Fecha Creación</th>
+                </tr>
+                </thead>
+                <tbody id="detalle-informe-table">
+                <!-- Aquí se insertará el detalle de la actividad de acuerdo al ID del informe -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-center-container" style="margin-top: 20px;">
+            <a id="editar-link" href="">
+                <button class="new-btn">Editar</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Función para obtener el ID del informe desde la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Función para cargar los datos del informe y de la actividad en el HTML
+    async function cargarDetalleInforme() {
+        const informeId = getQueryParam('id');
+        const detalleInformeUrl = `/api/detalle_informe_stock?id=${informeId}`;
+        const detalleOrdenUrl = `/api/detalle_orden_por_informe_stock?id=${informeId}`;
+
+        try {
+            // Obtener los detalles del informe de stock
+            const responseInforme = await fetch(detalleInformeUrl);
+            const informe = await responseInforme.json();
+
+            if (informe) {
+                // Rellenar los datos del informe
+                document.getElementById('detalle-id').innerText = informe.idInformeStock;
+                document.getElementById('detalle-id-text').innerText = informe.idInformeStock;
+                const meses = [
+                    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ];
+                document.getElementById('detalle-mes').innerText = meses[informe.mesInforme - 1];
+
+                document.getElementById('detalle-anio').innerText = informe.añoInforme;
+                document.getElementById('detalle-fecha-generacion').innerText = informe.fechaGeneracion;
+                document.getElementById('detalle-estado').innerText =
+                    informe.estadoInforme === 'A' ? 'Finalizado' :
+                        informe.estadoInforme === 'B' ? 'En Proceso' :
+                            informe.estadoInforme === 'C' ? 'Generado' : '';
+
+
+                // Actualizar el enlace de edición con el ID actual
+                document.getElementById('editar-link').href = `/editar_informe_stock?id=${informe.idInformeStock}`;
+            } else {
+                alert("Informe no encontrado.");
+            }
+
+            // Obtener los detalles de las órdenes
+            const responseOrden = await fetch(detalleOrdenUrl);
+            const detallesOrden = await responseOrden.json();
+
+            if (detallesOrden && detallesOrden.length > 0) {
+                const tableBody = document.getElementById('detalle-informe-table');
+                tableBody.innerHTML = ''; // Limpiar la tabla antes de insertar los nuevos datos
+
+                detallesOrden.forEach(orden => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                            <td>${orden['ID Detalle Orden']}</td>
+                            <td>${orden['Nombre Recurso']}</td>
+                            <td>${orden['Cantidad Recurso']}</td>
+                            <td>${orden['Nombre Producto']}</td>
+                            <td>${orden['Cantidad Producto']}</td>
+                            <td>${orden['Fecha Creación']}</td>
+                        `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                alert("No se encontraron detalles de orden.");
+            }
+        } catch (error) {
+            console.error('Error al cargar los datos:', error);
+        }
+    }
+
+    // Llama a la función al cargar la página
+    window.onload = cargarDetalleInforme;
+</script>
+</body>
+</html>
