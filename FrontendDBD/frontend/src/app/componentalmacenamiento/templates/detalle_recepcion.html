@@ -1,0 +1,134 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Detalle de Recepción</title>
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+    <div class="header-bar">
+        <a href="/recepciones" class="back-icon" aria-label="Volver">&#x2190;</a>
+        <div class="title-container">
+            <img src="/images/logo_recepciones.png" alt="Icono Recepciones" class="title-icon">
+            <h1>Detalle de Recepción</h1>
+        </div>
+    </div>
+
+    <div class="detalle-container" style="margin-top: 80px;">
+        <div class="content-box" style="width: 100%;">
+            <div class="detalle-header">
+                <h2 id="detalle-id"></h2>
+            </div>
+            <div class="informacion-recepcion" style="margin-top: 20px;">
+                <p><strong>ID:</strong> <span id="detalle-id-text"></span></p>
+                <p><strong>Recibir de:</strong> <span id="detalle-entidad"></span></p>
+                <p><strong>Tipo de Operación:</strong> <span id="detalle-tipo-operacion"></span></p>
+                <p><strong>Estado:</strong> <span id="detalle-estado"></span></p>
+                <p><strong>Fecha Programada:</strong> <span id="detalle-fecha-programada"></span></p>
+                <p><strong>Fecha Efectiva:</strong> <span id="detalle-fecha-efectiva"></span></p>
+                <p><strong>Documento Origen:</strong> <span id="detalle-doc-origen"></span></p>
+                <p><strong>ID del Empleado:</strong> <span id="detalle-id-empleado"></span></p>
+            </div>
+
+            <!-- Tabla con los detalles -->
+            <div class="table-box" style="margin-top: 20px;">
+                <table style="width: 100%;">
+                    <thead>
+                    <tr>
+                        <th>Nombre del Producto</th>
+                        <th>Cantidad Producto</th>
+                        <th>Nombre del Recurso</th>
+                        <th>Cantidad Recurso</th>
+                        <th>Demanda</th>
+                    </tr>
+                    </thead>
+                    <tbody id="detalle-guia">
+                    <!-- Aquí se insertará el detalle de la guía -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-center-container" style="margin-top: 20px;">
+                <a id="editar-link" href="">
+                    <button class="new-btn">Editar</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para obtener el ID de la URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Función para convertir valores numéricos a texto en Tipo de Operación y Estado
+        function convertirTextoTipoOperacion(tipo) {
+            return tipo === "1" ? "Recepción" : tipo === "2" ? "Entrega" : "Desconocido";
+        }
+
+        function convertirTextoEstado(estado) {
+            return estado === "1" ? "Listo" : estado === "2" ? "En Proceso" : "Desconocido";
+        }
+
+        // Función para cargar los datos en el HTML
+        async function cargarDetalle() {
+            const guiaId = getQueryParam('id');
+            if (!guiaId) {
+                alert("ID no proporcionado en la URL.");
+                return;
+            }
+
+            try {
+                // Fetch para obtener los detalles desde el controlador
+                const response = await fetch(`/api/guias/detalle?id=${guiaId}`);
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Actualiza la información principal
+                    document.getElementById('detalle-id').innerText = data.idGuiaRemision || 'N/A';
+                    document.getElementById('detalle-id-text').innerText = data.idGuiaRemision || 'N/A';
+                    document.getElementById('detalle-entidad').innerText = data.entidadOrigendestino || 'N/A';
+                    document.getElementById('detalle-tipo-operacion').innerText = convertirTextoTipoOperacion(data.codTipoGuia);
+                    document.getElementById('detalle-estado').innerText = convertirTextoEstado(data.codEstadoGuia);
+                    document.getElementById('detalle-fecha-programada').innerText = data.fechaProgramada || 'N/A';
+                    document.getElementById('detalle-fecha-efectiva').innerText = data.fechaEfectiva || 'N/A';
+                    document.getElementById('detalle-doc-origen').innerText = data.documentoOrigen || 'N/A';
+                    document.getElementById('detalle-id-empleado').innerText = data.idEmpleado?.idEmpleado || 'N/A';
+
+                    // Actualiza la tabla con los detalles de productos y recursos
+                    const detalleGuiaTable = document.getElementById('detalle-guia');
+                    detalleGuiaTable.innerHTML = ''; // Limpiar tabla
+
+                    // Recorre los detalleGuias y genera las filas
+                    data.detalleGuias.forEach(detalle => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${detalle.productos && detalle.productos.length > 0 ? detalle.productos[0].nombreProducto : 'Sin Producto'}</td>
+                            <td>${detalle.cantidadProducto || 0}</td>
+                            <td>${detalle.recursos && detalle.recursos.length > 0 ? detalle.recursos[0].nombre : 'Sin Recurso'}</td>
+                            <td>${detalle.cantidadRecurso || 0}</td>
+                            <td>${detalle.demanda || 0}</td>
+                        `;
+                        detalleGuiaTable.appendChild(row);
+                    });
+
+                    // Actualiza el enlace de edición
+                    document.getElementById('editar-link').href = `/editar_recepcion?id=${data.idGuiaRemision}`;
+                } else {
+                    console.error("Error al obtener los detalles de la guía:", response.status);
+                    alert("Error al cargar los datos del detalle.");
+                }
+            } catch (error) {
+                console.error("Error en la solicitud del detalle:", error);
+                alert("Error al cargar los datos del detalle.");
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        window.onload = cargarDetalle;
+    </script>
+    </body>
+    </html>
